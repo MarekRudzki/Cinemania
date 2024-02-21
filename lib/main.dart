@@ -1,20 +1,34 @@
+import 'package:cinemania/features/auth/model/auth_repository.dart';
+import 'package:cinemania/features/auth/model/datasources/auth_remote_datasource.dart';
+import 'package:cinemania/features/auth/view/auth_screen.dart';
+import 'package:cinemania/config/firebase_options.dart';
+import 'package:cinemania/features/auth/viewmodel/bloc/auth_bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
-  runApp(const MainApp());
-}
+void main() async {
+  await dotenv.load();
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => AuthBloc(
+            authRepository: AuthRepository(
+              authRemoteDatasource: AuthRemoteDatasource(),
+            ),
+          ),
+        )
+      ],
+      child: const MaterialApp(
+        home: AuthScreen(),
       ),
-    );
-  }
+    ),
+  );
 }
