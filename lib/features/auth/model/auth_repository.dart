@@ -1,25 +1,26 @@
 import 'package:cinemania/features/auth/model/datasources/auth_remote_datasource.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthRepository {
   final AuthRemoteDatasource authRemoteDatasource;
 
   AuthRepository({required this.authRemoteDatasource});
 
-  Future<void> logIn({
+  Future<void> logInWithEmailPassword({
     required String email,
     required String password,
   }) async {
-    await authRemoteDatasource.logIn(
+    await authRemoteDatasource.logInWithEmailPassword(
       email: email,
       password: password,
     );
   }
 
-  Future<void> register({
+  Future<void> registerWithEmailPassword({
     required String email,
     required String password,
   }) async {
-    await authRemoteDatasource.register(
+    await authRemoteDatasource.registerWithEmailPassword(
       email: email,
       password: password,
     );
@@ -30,6 +31,14 @@ class AuthRepository {
   }) async {
     await authRemoteDatasource.resetPassword(
       email: email,
+    );
+  }
+
+  Future<void> signInWithCredential({
+    required AuthCredential credential,
+  }) async {
+    await authRemoteDatasource.signInWithCredential(
+      credential: credential,
     );
   }
 }

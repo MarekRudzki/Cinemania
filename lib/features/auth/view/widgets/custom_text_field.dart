@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class CustomTextField extends StatelessWidget {
+class CustomTextField extends HookWidget {
   const CustomTextField({
     super.key,
     required this.controller,
     required this.labelText,
-    this.obscure = false,
     required this.icon,
     this.inputAction = TextInputAction.next,
   });
 
   final TextEditingController controller;
   final String labelText;
-  final bool obscure;
   final IconData icon;
   final TextInputAction inputAction;
 
   @override
   Widget build(BuildContext context) {
+    final isPasswordVisible = useState(false);
+
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 20,
@@ -34,7 +35,7 @@ class CustomTextField extends StatelessWidget {
           Expanded(
             child: TextField(
               textAlign: TextAlign.center,
-              obscureText: obscure,
+              obscureText: !isPasswordVisible.value && icon == Icons.key,
               controller: controller,
               textInputAction: inputAction,
               cursorColor: Colors.white,
@@ -60,6 +61,18 @@ class CustomTextField extends StatelessWidget {
               ),
             ),
           ),
+          if (icon == Icons.key)
+            IconButton(
+              onPressed: () {
+                isPasswordVisible.value = !isPasswordVisible.value;
+              },
+              icon: Icon(
+                isPasswordVisible.value
+                    ? Icons.visibility_off
+                    : Icons.visibility,
+                color: Colors.white,
+              ),
+            ),
         ],
       ),
     );

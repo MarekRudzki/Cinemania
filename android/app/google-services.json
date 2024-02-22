@@ -1,26 +1,44 @@
 {
   "project_info": {
-    "project_number": "90819574527",
-    "project_id": "cinemania-79810",
-    "storage_bucket": "cinemania-79810.appspot.com"
+    "project_number": "719116842095",
+    "project_id": "logintester-99843",
+    "storage_bucket": "logintester-99843.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:90819574527:android:481f08c3be497762836aca",
+        "mobilesdk_app_id": "1:719116842095:android:413b0f2c7bcc53ad3d499a",
         "android_client_info": {
-          "package_name": "com.example.cinemania"
+          "package_name": "com.marekrudzki.login_tester"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "719116842095-kk8ukmqo4q38larf5f9j8mmseivaqc8r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.marekrudzki.login_tester",
+            "certificate_hash": "29abeff471aa8af28e75477802f6e9ab2a4875ad"
+          }
+        },
+        {
+          "client_id": "719116842095-p84m38vuci2g5ajqrf6boleq1i73k8k9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyDsyMRbu3vMYxo7nLwEqSBCBZjNMcdmSOY"
+          "current_key": "AIzaSyCNXqCy36cNYIj8ie5RP4p3woJ-NTyJJ2k"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "719116842095-p84m38vuci2g5ajqrf6boleq1i73k8k9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

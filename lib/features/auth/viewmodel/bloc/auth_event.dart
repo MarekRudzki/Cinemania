@@ -49,3 +49,7 @@ class PasswordResetPressed extends AuthEvent {
         passwordResetEmail,
       ];
 }
+
+class LoginWithGooglePressed extends AuthEvent {}
+
+class LoginWithFacebookPressed extends AuthEvent {}

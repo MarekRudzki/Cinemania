@@ -50,19 +50,21 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDsyMRbu3vMYxo7nLwEqSBCBZjNMcdmSOY',
-    appId: '1:90819574527:android:481f08c3be497762836aca',
-    messagingSenderId: '90819574527',
-    projectId: 'cinemania-79810',
-    storageBucket: 'cinemania-79810.appspot.com',
+    apiKey: 'AIzaSyAlWO8P2Nb00tlK4dz_bZy_Q9Lk1hFvoh8',
+    appId: '1:127068649620:android:dcf8de2af22ebd458a5c81',
+    messagingSenderId: '127068649620',
+    projectId: 'cinemania-e7a17',
+    storageBucket: 'cinemania-e7a17.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAWzPyvfatCsgxzvTqTXvPP2O8h62cX9qA',
-    appId: '1:90819574527:ios:23f9e5692e139e92836aca',
-    messagingSenderId: '90819574527',
-    projectId: 'cinemania-79810',
-    storageBucket: 'cinemania-79810.appspot.com',
-    iosBundleId: 'com.example.cinemania',
+    apiKey: 'AIzaSyBmEwdEMWC5IwrGJijAX8YnFZtrkXTN_5I',
+    appId: '1:127068649620:ios:a54fbc04ec58cd038a5c81',
+    messagingSenderId: '127068649620',
+    projectId: 'cinemania-e7a17',
+    storageBucket: 'cinemania-e7a17.appspot.com',
+    androidClientId: '127068649620-23rrd75586mtoe6mcivr6f4tlvlp57ff.apps.googleusercontent.com',
+    iosClientId: '127068649620-pg5qjcleqr7caql1n5eujh8l7d56diuq.apps.googleusercontent.com',
+    iosBundleId: 'com.marekrudzki.cinemania',
   );
 }

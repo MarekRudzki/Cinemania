@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 class AuthRemoteDatasource {
   final _auth = FirebaseAuth.instance;
 
-  Future<void> logIn({
+  Future<void> logInWithEmailPassword({
     required String email,
     required String password,
   }) async {
@@ -29,7 +29,7 @@ class AuthRemoteDatasource {
     }
   }
 
-  Future<void> register({
+  Future<void> registerWithEmailPassword({
     required String email,
     required String password,
   }) async {
@@ -69,5 +69,11 @@ class AuthRemoteDatasource {
         throw Exception('Unknown error');
       }
     }
+  }
+
+  Future<void> signInWithCredential({
+    required AuthCredential credential,
+  }) async {
+    await _auth.signInWithCredential(credential);
   }
 }

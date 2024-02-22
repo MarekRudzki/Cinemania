@@ -2,18 +2,24 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CLIENT_ID</key>
+	<string>127068649620-pg5qjcleqr7caql1n5eujh8l7d56diuq.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.127068649620-pg5qjcleqr7caql1n5eujh8l7d56diuq</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>127068649620-23rrd75586mtoe6mcivr6f4tlvlp57ff.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAWzPyvfatCsgxzvTqTXvPP2O8h62cX9qA</string>
+	<string>AIzaSyBmEwdEMWC5IwrGJijAX8YnFZtrkXTN_5I</string>
 	<key>GCM_SENDER_ID</key>
-	<string>90819574527</string>
+	<string>127068649620</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.cinemania</string>
+	<string>com.marekrudzki.cinemania</string>
 	<key>PROJECT_ID</key>
-	<string>cinemania-79810</string>
+	<string>cinemania-e7a17</string>
 	<key>STORAGE_BUCKET</key>
-	<string>cinemania-79810.appspot.com</string>
+	<string>cinemania-e7a17.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:90819574527:ios:23f9e5692e139e92836aca</string>
+	<string>1:127068649620:ios:a54fbc04ec58cd038a5c81</string>
 </dict>
 </plist>
