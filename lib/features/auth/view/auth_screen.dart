@@ -21,13 +21,24 @@ class AuthScreen extends HookWidget {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: const Color.fromARGB(255, 62, 19, 69),
+        backgroundColor: const Color.fromARGB(255, 45, 15, 50),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 14),
           child: BlocListener<AuthBloc, AuthState>(
             listener: (context, state) {
-              if (state is AuthError) {
-                print(state.errorMessage);
+              if (state is AuthLoading) {
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (context) => Dialog.fullscreen(
+                    backgroundColor: Colors.grey.withOpacity(0.4),
+                    child: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+                );
+              } else if (state is AuthError) {
+                Navigator.of(context).pop();
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(
@@ -41,6 +52,7 @@ class AuthScreen extends HookWidget {
                   ),
                 );
               } else if (state is AuthSuccess) {
+                Navigator.of(context).pop();
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => const HomeScreen(),
@@ -56,13 +68,7 @@ class AuthScreen extends HookWidget {
                       SizedBox(
                         height: constraints.maxHeight * 0.07,
                       ),
-                      Text(
-                        isLoginView.value ? 'Log In' : 'Register',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                        ),
-                      ),
+                      Image.asset('assets/auth_icon.png'),
                       SizedBox(
                         height: constraints.maxHeight * 0.07,
                       ),
@@ -81,8 +87,23 @@ class AuthScreen extends HookWidget {
                       const SizedBox(height: 8),
                       LoginRegisterButton(
                         isLoginView: isLoginView.value,
-                        email: emailController.text.trim(),
-                        password: passwordController.text.trim(),
+                        onTap: () {
+                          if (isLoginView.value) {
+                            context.read<AuthBloc>().add(
+                                  LoginButtonPressed(
+                                    email: emailController.text.trim(),
+                                    password: passwordController.text.trim(),
+                                  ),
+                                );
+                          } else {
+                            context.read<AuthBloc>().add(
+                                  RegisterButtonPressed(
+                                    email: emailController.text.trim(),
+                                    password: passwordController.text.trim(),
+                                  ),
+                                );
+                          }
+                        },
                       ),
                       CustomDivider(constraints: constraints),
                       SocialMediaButton(

@@ -18,7 +18,10 @@ dependencies:
   flutter_facebook_auth: ^6.1.1
   flutter_hooks: ^0.20.5
   get_it: ^7.6.7
+  google_nav_bar: ^5.0.6
   google_sign_in: ^6.2.1
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
   injectable: ^2.3.2
   internet_connection_checker: ^1.0.0+1
   provider: ^6.1.1

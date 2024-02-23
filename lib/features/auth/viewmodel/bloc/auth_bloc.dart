@@ -10,6 +10,7 @@ part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository authRepository;
+
   AuthBloc({required this.authRepository}) : super(AuthInitial()) {
     on<LoginButtonPressed>(_onLoginButtonPressed);
     on<RegisterButtonPressed>(_onRegisterButtonPressed);
@@ -22,14 +23,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     LoginButtonPressed event,
     Emitter<AuthState> emit,
   ) async {
+    emit(AuthLoading());
     if (event.email.isEmpty || event.password.isEmpty) {
       emit(
         AuthError(errorMessage: 'Please fill in all fields'),
       );
       emit(AuthInitial());
     } else {
-      emit(AuthLoading());
-
       try {
         await authRepository.logInWithEmailPassword(
           email: event.email,
@@ -49,11 +49,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     RegisterButtonPressed event,
     Emitter<AuthState> emit,
   ) async {
+    emit(AuthLoading());
     if (event.email.isEmpty || event.password.isEmpty) {
       emit(AuthError(errorMessage: 'Please fill in all fields'));
       emit(AuthInitial());
     } else {
-      emit(AuthLoading());
       try {
         await authRepository.registerWithEmailPassword(
           email: event.email,
@@ -74,12 +74,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     PasswordResetPressed event,
     Emitter<AuthState> emit,
   ) async {
+    emit(AuthLoading());
     if (event.passwordResetEmail.isEmpty) {
       emit(AuthError(errorMessage: 'Field is empty'));
       emit(AuthInitial());
     } else {
       try {
-        emit(AuthLoading());
         await authRepository.resetPassword(
           email: event.passwordResetEmail,
         );
@@ -100,9 +100,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       emit(AuthLoading());
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-      if (googleUser != null) {
-        print(googleUser.email);
-      }
 
       final GoogleSignInAuthentication? googleAuth =
           await googleUser?.authentication;
@@ -113,12 +110,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
       await authRepository.signInWithCredential(
         credential: credential,
+        username: googleUser!.email,
       );
 
       emit(AuthSuccess());
       emit(AuthInitial());
-    } on Exception catch (e) {
-      emit(AuthError(errorMessage: e.toString()));
+    } catch (e) {
+      emit(AuthError(
+          errorMessage: 'Signing in with a Google account has failed'));
       emit(AuthInitial());
     }
   }
@@ -134,21 +133,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final OAuthCredential facebookAuthCredential =
           FacebookAuthProvider.credential(loginResult.accessToken!.token);
 
-      await authRepository.signInWithCredential(
-        credential: facebookAuthCredential,
-      );
-
       final userData = await FacebookAuth.instance.getUserData();
 
-      final userName = userData['name'];
-
-      print('userName: $userName');
+      await authRepository.signInWithCredential(
+        credential: facebookAuthCredential,
+        username: userData['name'] as String,
+      );
 
       emit(AuthSuccess());
       emit(AuthInitial());
-    } on Exception catch (e) {
-      emit(AuthError(errorMessage: e.toString()));
+    } catch (e) {
+      emit(AuthError(
+          errorMessage: 'Signing in with a Facebook account has failed'));
       emit(AuthInitial());
     }
+  }
+
+  bool isUserLogged() {
+    return authRepository.isUserLogged();
   }
 }
