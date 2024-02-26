@@ -110,7 +110,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
       await authRepository.signInWithCredential(
         credential: credential,
-        username: googleUser!.email,
+        username: googleUser!.email.substring(0, googleUser.email.indexOf('@')),
       );
 
       emit(AuthSuccess());

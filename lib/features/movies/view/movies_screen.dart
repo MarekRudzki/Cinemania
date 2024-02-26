@@ -5,8 +5,9 @@ class MoviesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Movies Screen'),
+    return Center(
+      child: Image.network(
+          'https://cdn-icons-png.flaticon.com/512/5625/5625453.png'),
     );
   }
 }

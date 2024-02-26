@@ -1,3 +1,4 @@
+import 'package:cinemania/config/icons.dart';
 import 'package:cinemania/features/account/view/account_screen.dart';
 import 'package:cinemania/features/movies/view/movies_screen.dart';
 import 'package:cinemania/features/tv_shows/view/tv_shows_screen.dart';
@@ -21,21 +22,20 @@ class HomeScreen extends HookWidget {
     return SafeArea(
       child: Scaffold(
         body: pages[pageIndex.value],
-        backgroundColor: Theme.of(context).colorScheme.background,
         bottomNavigationBar: GNav(
           haptic: false,
           selectedIndex: pageIndex.value,
           gap: 10,
-          backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-          color: const Color.fromARGB(255, 76, 21, 64),
-          activeColor: Colors.green,
+          backgroundColor: const Color.fromARGB(255, 45, 15, 50),
+          color: Colors.grey,
+          activeColor: Colors.white,
           padding: const EdgeInsets.symmetric(
             horizontal: 20,
             vertical: 15,
           ),
           tabs: [
             GButton(
-              icon: Icons.abc,
+              icon: MyIcons.movie,
               text: 'Movies',
               onPressed: () {
                 pageIndex.value = 0;
@@ -43,7 +43,7 @@ class HomeScreen extends HookWidget {
               iconSize: 30,
             ),
             GButton(
-              icon: Icons.text_snippet,
+              icon: MyIcons.tv_show,
               text: 'TV Shows',
               onPressed: () {
                 pageIndex.value = 1;

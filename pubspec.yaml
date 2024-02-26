@@ -33,6 +33,10 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: MyIcons
+      fonts:
+      - asset: assets/MyIcons.ttf
   assets:
     - assets/
     - .env

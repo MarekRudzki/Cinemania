@@ -1,5 +1,8 @@
-import 'package:cinemania/features/auth/model/datasources/auth_local_datasource.dart';
+import 'package:cinemania/features/account/view/widgets/custom_popup_menu.dart';
+import 'package:cinemania/features/account/view/widgets/favorites.dart';
+import 'package:cinemania/features/account/viewmodel/bloc/account_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
@@ -8,85 +11,40 @@ class AccountScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const Placeholder(
-              fallbackHeight: 200,
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: FractionalOffset.bottomCenter,
+              colors: [
+                Color.fromARGB(255, 45, 15, 50),
+                Color.fromARGB(255, 87, 25, 98),
+              ],
             ),
-            const Center(
-              child: Text('Favorites'),
-            ),
-            TextButton(
-                onPressed: () {
-                  AuthLocalDatasource().deleteUser();
-                },
-                child: const Text('Reset')),
-            const SizedBox(height: 10),
-            IntrinsicHeight(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {},
-                      child: Container(
-                        color: Colors.red,
-                        child: const Center(
-                          child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text(
-                              'Movies',
-                              style: TextStyle(
-                                fontSize: 15,
-                              ),
-                            ),
-                          ),
-                        ),
+          ),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(12),
+                child: Row(
+                  children: [
+                    const SizedBox(width: 48),
+                    const Spacer(),
+                    Text(
+                      context.read<AccountBloc>().getUsername(),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
                       ),
                     ),
-                  ),
-                  const VerticalDivider(
-                    thickness: 2,
-                    width: 4,
-                    color: Colors.purple,
-                  ),
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {},
-                      child: Container(
-                        color: Colors.amber,
-                        width: 50,
-                        child: const Center(
-                          child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text(
-                              'TV shows',
-                              style: TextStyle(
-                                fontSize: 15,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 400,
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                ),
-                itemCount: 20,
-                itemBuilder: (context, index) => const Placeholder(
-                  fallbackHeight: 50,
-                  fallbackWidth: 50,
+                    const Spacer(),
+                    const CustomPopupMenu(),
+                  ],
                 ),
               ),
-            )
-          ],
+              const Favorites(),
+            ],
+          ),
         ),
       ),
     );

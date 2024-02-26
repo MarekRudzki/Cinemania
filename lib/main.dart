@@ -1,3 +1,7 @@
+import 'package:cinemania/features/account/model/account_repository.dart';
+import 'package:cinemania/features/account/model/datasources/account_local_datasource.dart';
+import 'package:cinemania/features/account/model/datasources/account_remote_datasource.dart';
+import 'package:cinemania/features/account/viewmodel/bloc/account_bloc.dart';
 import 'package:cinemania/features/auth/model/auth_repository.dart';
 import 'package:cinemania/features/auth/model/datasources/auth_local_datasource.dart';
 import 'package:cinemania/features/auth/model/datasources/auth_remote_datasource.dart';
@@ -29,6 +33,14 @@ void main() async {
             authRepository: AuthRepository(
                 authRemoteDatasource: AuthRemoteDatasource(),
                 authLocalDatasource: AuthLocalDatasource()),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => AccountBloc(
+            accountRepository: AccountRepository(
+              accountLocalDatasource: AccountLocalDatasource(),
+              accountRemoteDatasource: AccountRemoteDatasource(),
+            ),
           ),
         )
       ],
