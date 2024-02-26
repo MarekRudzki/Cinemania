@@ -72,16 +72,26 @@ class AuthScreen extends HookWidget {
                       SizedBox(
                         height: constraints.maxHeight * 0.07,
                       ),
-                      CustomTextField(
-                        controller: emailController,
-                        labelText: 'Enter your email',
-                        icon: Icons.email_outlined,
-                      ),
-                      CustomTextField(
-                        controller: passwordController,
-                        labelText: 'Enter your password',
-                        inputAction: TextInputAction.done,
-                        icon: Icons.key,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 10,
+                        ),
+                        child: Column(
+                          children: [
+                            CustomTextField(
+                              controller: emailController,
+                              labelText: 'Enter your email',
+                              icon: Icons.email_outlined,
+                            ),
+                            CustomTextField(
+                              controller: passwordController,
+                              labelText: 'Enter your password',
+                              inputAction: TextInputAction.done,
+                              icon: Icons.key,
+                            ),
+                          ],
+                        ),
                       ),
                       if (isLoginView.value) const PasswordReset(),
                       const SizedBox(height: 8),

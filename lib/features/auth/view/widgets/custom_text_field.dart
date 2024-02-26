@@ -19,62 +19,54 @@ class CustomTextField extends HookWidget {
   Widget build(BuildContext context) {
     final isPasswordVisible = useState(false);
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 20,
-        vertical: 10,
-      ),
-      child: Row(
-        children: [
-          Icon(
-            icon,
-            color: Colors.white,
-            size: 20,
-          ),
-          const SizedBox(width: 15),
-          Expanded(
-            child: TextField(
-              textAlign: TextAlign.center,
-              obscureText: !isPasswordVisible.value && icon == Icons.key,
-              controller: controller,
-              textInputAction: inputAction,
-              cursorColor: Colors.white,
-              decoration: InputDecoration(
-                enabledBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.white,
-                  ),
-                ),
-                focusedBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.white,
-                  ),
-                ),
-                labelText: labelText,
-                labelStyle: TextStyle(
-                  color: Colors.grey.shade300,
-                  fontSize: 14,
+    return Row(
+      children: [
+        Icon(
+          icon,
+          color: Colors.white,
+          size: 20,
+        ),
+        const SizedBox(width: 15),
+        Expanded(
+          child: TextField(
+            textAlign: TextAlign.center,
+            obscureText: !isPasswordVisible.value && icon == Icons.key,
+            controller: controller,
+            textInputAction: inputAction,
+            cursorColor: Colors.white,
+            decoration: InputDecoration(
+              enabledBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.white,
                 ),
               ),
-              style: const TextStyle(
-                color: Colors.white,
+              focusedBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.white,
+                ),
+              ),
+              labelText: labelText,
+              labelStyle: TextStyle(
+                color: Colors.grey.shade300,
+                fontSize: 14,
               ),
             ),
-          ),
-          if (icon == Icons.key)
-            IconButton(
-              onPressed: () {
-                isPasswordVisible.value = !isPasswordVisible.value;
-              },
-              icon: Icon(
-                isPasswordVisible.value
-                    ? Icons.visibility_off
-                    : Icons.visibility,
-                color: Colors.white,
-              ),
+            style: const TextStyle(
+              color: Colors.white,
             ),
-        ],
-      ),
+          ),
+        ),
+        if (icon == Icons.key)
+          IconButton(
+            onPressed: () {
+              isPasswordVisible.value = !isPasswordVisible.value;
+            },
+            icon: Icon(
+              isPasswordVisible.value ? Icons.visibility_off : Icons.visibility,
+              color: Colors.white,
+            ),
+          ),
+      ],
     );
   }
 }

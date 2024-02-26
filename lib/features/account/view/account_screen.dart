@@ -1,5 +1,6 @@
-import 'package:cinemania/features/account/view/widgets/custom_popup_menu.dart';
+import 'package:cinemania/features/account/view/widgets/change_password.dart';
 import 'package:cinemania/features/account/view/widgets/favorites.dart';
+import 'package:cinemania/features/account/view/widgets/logout.dart';
 import 'package:cinemania/features/account/viewmodel/bloc/account_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,15 +31,66 @@ class AccountScreen extends StatelessWidget {
                   children: [
                     const SizedBox(width: 48),
                     const Spacer(),
-                    Text(
-                      context.read<AccountBloc>().getUsername(),
-                      style: const TextStyle(
+                    const Text(
+                      'context.read<AccountBloc>().getUsername()',
+                      style: TextStyle(
                         color: Colors.white,
                         fontSize: 18,
                       ),
                     ),
                     const Spacer(),
-                    const CustomPopupMenu(),
+                    PopupMenuButton(
+                      iconColor: Colors.white,
+                      color: const Color.fromARGB(255, 87, 25, 98),
+                      itemBuilder: (context) {
+                        return [
+                          PopupMenuItem(
+                            child: const Row(
+                              children: [
+                                Spacer(),
+                                Text(
+                                  'Change display name',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                SizedBox(width: 8),
+                                Icon(
+                                  Icons.edit,
+                                  color: Colors.white,
+                                ),
+                              ],
+                            ),
+                            onTap: () {},
+                          ),
+                          const PopupMenuItem(
+                            child: ChangePassword(),
+                          ),
+                          PopupMenuItem(
+                            child: const Row(
+                              children: [
+                                Spacer(),
+                                Text(
+                                  'Delete account',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                SizedBox(width: 8),
+                                Icon(
+                                  Icons.delete_forever,
+                                  color: Colors.red,
+                                ),
+                              ],
+                            ),
+                            onTap: () {},
+                          ),
+                          const PopupMenuItem(
+                            child: Logout(),
+                          ),
+                        ];
+                      },
+                    ),
                   ],
                 ),
               ),

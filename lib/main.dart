@@ -1,10 +1,12 @@
 import 'package:cinemania/features/account/model/account_repository.dart';
-import 'package:cinemania/features/account/model/datasources/account_local_datasource.dart';
-import 'package:cinemania/features/account/model/datasources/account_remote_datasource.dart';
+import 'package:cinemania/features/account/model/datasources/local/account_hive.dart';
+import 'package:cinemania/features/account/model/datasources/remote/account_auth.dart';
+import 'package:cinemania/features/account/model/datasources/remote/account_firestore.dart';
 import 'package:cinemania/features/account/viewmodel/bloc/account_bloc.dart';
 import 'package:cinemania/features/auth/model/auth_repository.dart';
-import 'package:cinemania/features/auth/model/datasources/auth_local_datasource.dart';
-import 'package:cinemania/features/auth/model/datasources/auth_remote_datasource.dart';
+import 'package:cinemania/features/auth/model/datasources/local/auth_hive.dart';
+import 'package:cinemania/features/auth/model/datasources/remote/auth_auth.dart';
+import 'package:cinemania/features/auth/model/datasources/remote/auth_firestore.dart';
 import 'package:cinemania/features/auth/view/auth_screen.dart';
 import 'package:cinemania/config/firebase_options.dart';
 import 'package:cinemania/features/auth/viewmodel/bloc/auth_bloc.dart';
@@ -31,15 +33,17 @@ void main() async {
         BlocProvider(
           create: (context) => AuthBloc(
             authRepository: AuthRepository(
-                authRemoteDatasource: AuthRemoteDatasource(),
-                authLocalDatasource: AuthLocalDatasource()),
+                authFirestore: AuthFirestore(),
+                authAuth: AuthAuth(),
+                authHive: AuthHive()),
           ),
         ),
         BlocProvider(
           create: (context) => AccountBloc(
             accountRepository: AccountRepository(
-              accountLocalDatasource: AccountLocalDatasource(),
-              accountRemoteDatasource: AccountRemoteDatasource(),
+              accountFirestore: AccountFirestore(),
+              accountHive: AccountHive(),
+              accountAuth: AccountAuth(),
             ),
           ),
         )
@@ -48,8 +52,9 @@ void main() async {
         debugShowCheckedModeBanner: false,
         home: AuthBloc(
           authRepository: AuthRepository(
-              authRemoteDatasource: AuthRemoteDatasource(),
-              authLocalDatasource: AuthLocalDatasource()),
+              authFirestore: AuthFirestore(),
+              authAuth: AuthAuth(),
+              authHive: AuthHive()),
         ).isUserLogged()
             ? const HomeScreen()
             : const AuthScreen(),

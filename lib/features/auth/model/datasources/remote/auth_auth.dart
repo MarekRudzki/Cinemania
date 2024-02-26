@@ -1,7 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-class AuthRemoteDatasource {
+class AuthAuth {
   final _auth = FirebaseAuth.instance;
+
+  String getUid() {
+    return _auth.currentUser!.uid;
+  }
 
   Future<void> logInWithEmailPassword({
     required String email,
