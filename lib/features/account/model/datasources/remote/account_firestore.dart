@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:injectable/injectable.dart';
 
+@lazySingleton
 class AccountFirestore {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 

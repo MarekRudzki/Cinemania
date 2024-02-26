@@ -1,7 +1,9 @@
 import 'package:cinemania/features/account/model/datasources/local/account_hive.dart';
 import 'package:cinemania/features/account/model/datasources/remote/account_auth.dart';
 import 'package:cinemania/features/account/model/datasources/remote/account_firestore.dart';
+import 'package:injectable/injectable.dart';
 
+@lazySingleton
 class AccountRepository {
   final AccountFirestore accountFirestore;
   final AccountAuth accountAuth;

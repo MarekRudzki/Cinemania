@@ -1,10 +1,12 @@
 import 'package:cinemania/features/account/model/account_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 
 part 'account_event.dart';
 part 'account_state.dart';
 
+@injectable
 class AccountBloc extends Bloc<AccountEvent, AccountState> {
   final AccountRepository accountRepository;
   AccountBloc({required this.accountRepository}) : super(AccountInitial()) {
