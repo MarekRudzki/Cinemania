@@ -16,138 +16,158 @@ class AuthScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final isLoginView = useState(true);
+    final isForgotPasswordView = useState(false);
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
 
     return SafeArea(
-      child: Scaffold(
-        backgroundColor: const Color.fromARGB(255, 45, 15, 50),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 14),
-          child: BlocListener<AuthBloc, AuthState>(
-            listener: (context, state) {
-              if (state is AuthLoading) {
-                showDialog(
-                  context: context,
-                  barrierDismissible: false,
-                  builder: (context) => Dialog.fullscreen(
-                    backgroundColor: Colors.grey.withOpacity(0.4),
-                    child: const Center(
-                      child: CircularProgressIndicator(),
+      child: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: FractionalOffset.bottomCenter,
+            colors: [
+              Color.fromARGB(255, 45, 15, 50),
+              Color.fromARGB(255, 87, 25, 98),
+            ],
+          ),
+        ),
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 14),
+            child: BlocListener<AuthBloc, AuthState>(
+              listener: (context, state) {
+                if (state is AuthLoading && !isForgotPasswordView.value) {
+                  showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (context) => Dialog.fullscreen(
+                      backgroundColor: Colors.grey.withOpacity(0.4),
+                      child: const Center(
+                        child: CircularProgressIndicator(),
+                      ),
                     ),
-                  ),
-                );
-              } else if (state is AuthError) {
-                Navigator.of(context).pop();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      state.errorMessage,
-                      textAlign: TextAlign.center,
+                  );
+                } else if (state is AuthError && !isForgotPasswordView.value) {
+                  Navigator.of(context).pop();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        state.errorMessage,
+                        textAlign: TextAlign.center,
+                      ),
+                      duration: const Duration(
+                        seconds: 3,
+                      ),
+                      backgroundColor: Colors.red,
                     ),
-                    duration: const Duration(
-                      seconds: 3,
+                  );
+                } else if (state is AuthSuccess &&
+                    !isForgotPasswordView.value) {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const HomeScreen(),
                     ),
-                    backgroundColor: Colors.red,
-                  ),
-                );
-              } else if (state is AuthSuccess) {
-                Navigator.of(context).pop();
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const HomeScreen(),
-                  ),
-                );
-              }
-            },
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                return SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: constraints.maxHeight * 0.07,
-                      ),
-                      Image.asset('assets/auth_icon.png'),
-                      SizedBox(
-                        height: constraints.maxHeight * 0.07,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 10,
-                        ),
-                        child: Column(
-                          children: [
-                            CustomTextField(
-                              controller: emailController,
-                              labelText: 'Enter your email',
-                              icon: Icons.email_outlined,
-                            ),
-                            CustomTextField(
-                              controller: passwordController,
-                              labelText: 'Enter your password',
-                              inputAction: TextInputAction.done,
-                              icon: Icons.key,
-                            ),
-                          ],
-                        ),
-                      ),
-                      if (isLoginView.value) const PasswordReset(),
-                      const SizedBox(height: 8),
-                      LoginRegisterButton(
-                        isLoginView: isLoginView.value,
-                        onTap: () {
-                          if (isLoginView.value) {
-                            context.read<AuthBloc>().add(
-                                  LoginButtonPressed(
-                                    email: emailController.text.trim(),
-                                    password: passwordController.text.trim(),
-                                  ),
-                                );
-                          } else {
-                            context.read<AuthBloc>().add(
-                                  RegisterButtonPressed(
-                                    email: emailController.text.trim(),
-                                    password: passwordController.text.trim(),
-                                  ),
-                                );
-                          }
-                        },
-                      ),
-                      CustomDivider(constraints: constraints),
-                      SocialMediaButton(
-                        imagePath: 'assets/google_icon.png',
-                        buttonText: 'Sign in with Google',
-                        onTap: () {
-                          context.read<AuthBloc>().add(
-                                LoginWithGooglePressed(),
-                              );
-                        },
-                      ),
-                      SocialMediaButton(
-                        imagePath: 'assets/facebook_icon.png',
-                        buttonText: 'Sign in with Facebook',
-                        onTap: () {
-                          context.read<AuthBloc>().add(
-                                LoginWithFacebookPressed(),
-                              );
-                        },
-                      ),
-                      const SizedBox(height: 10),
-                      SwitchViewButton(
-                        isLoginView: isLoginView.value,
-                        callback: () {
-                          emailController.clear();
-                          passwordController.clear();
-
-                          isLoginView.value = !isLoginView.value;
-                        },
-                      )
-                    ],
-                  ),
-                );
+                  );
+                }
               },
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  return SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: constraints.maxHeight * 0.07,
+                        ),
+                        Image.asset('assets/auth_icon.png'),
+                        SizedBox(
+                          height: constraints.maxHeight * 0.07,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 10,
+                          ),
+                          child: Column(
+                            children: [
+                              CustomTextField(
+                                controller: emailController,
+                                labelText: 'Enter your email',
+                                icon: Icons.email_outlined,
+                              ),
+                              CustomTextField(
+                                controller: passwordController,
+                                labelText: 'Enter your password',
+                                inputAction: TextInputAction.done,
+                                icon: Icons.key,
+                              ),
+                            ],
+                          ),
+                        ),
+                        if (isLoginView.value)
+                          PasswordReset(
+                            startCallback: () =>
+                                isForgotPasswordView.value = true,
+                            endCallback: () =>
+                                isForgotPasswordView.value = false,
+                          ),
+                        const SizedBox(height: 8),
+                        LoginRegisterButton(
+                          isLoginView: isLoginView.value,
+                          onTap: () {
+                            if (isLoginView.value) {
+                              context.read<AuthBloc>().add(
+                                    LoginButtonPressed(
+                                      email: emailController.text.trim(),
+                                      password: passwordController.text.trim(),
+                                    ),
+                                  );
+                            } else {
+                              context.read<AuthBloc>().add(
+                                    RegisterButtonPressed(
+                                      email: emailController.text.trim(),
+                                      password: passwordController.text.trim(),
+                                    ),
+                                  );
+                            }
+                          },
+                        ),
+                        CustomDivider(constraints: constraints),
+                        SocialMediaButton(
+                          imagePath: 'assets/google_icon.png',
+                          buttonText: 'Sign in with Google',
+                          onTap: () {
+                            context.read<AuthBloc>().add(
+                                  LoginWithGooglePressed(),
+                                );
+                          },
+                        ),
+                        SocialMediaButton(
+                          imagePath: 'assets/facebook_icon.png',
+                          buttonText: 'Sign in with Facebook',
+                          onTap: () {
+                            context.read<AuthBloc>().add(
+                                  LoginWithFacebookPressed(),
+                                );
+                          },
+                        ),
+                        const SizedBox(height: 10),
+                        SwitchViewButton(
+                          isLoginView: isLoginView.value,
+                          callback: () {
+                            emailController.clear();
+                            passwordController.clear();
+
+                            isLoginView.value = !isLoginView.value;
+                          },
+                        )
+                      ],
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ),

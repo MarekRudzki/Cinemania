@@ -24,7 +24,7 @@ class ChangeUsername extends HookWidget {
           ),
           SizedBox(width: 8),
           Icon(
-            Icons.edit,
+            Icons.person,
             color: Colors.white,
           ),
         ],
