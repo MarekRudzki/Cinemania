@@ -20,17 +20,17 @@ class AuthAuth {
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'network-request-failed') {
-        throw Exception('No Internet connection');
+        throw 'No Internet connection';
       } else if (e.code == 'wrong-password') {
-        throw Exception('Given password is incorrect');
+        throw 'Given password is incorrect';
       } else if (e.code == 'user-not-found') {
-        throw Exception('No user found for given email');
+        throw 'No user found for given email';
       } else if (e.code == 'too-many-requests') {
-        throw Exception('Too many attempts, please try again later');
+        throw 'Too many attempts, please try again later';
       } else if (e.code == 'invalid-email') {
-        throw Exception('Email adress is not valid');
+        throw 'Email adress is not valid';
       } else {
-        throw Exception('Unknown error');
+        throw 'Unknown error';
       }
     }
   }
@@ -46,15 +46,15 @@ class AuthAuth {
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'network-request-failed') {
-        throw Exception('No Internet connection');
+        throw 'No Internet connection';
       } else if (e.code == 'invalid-email') {
-        throw Exception('Email adress is not valid');
+        throw 'Email adress is not valid';
       } else if (e.code == 'weak-password') {
-        throw Exception('Given password is too weak');
+        throw 'Given password is too weak';
       } else if (e.code == 'email-already-in-use') {
-        throw Exception('Account with given email already exist');
+        throw 'Account with given email already exist';
       } else {
-        throw Exception('Unknown error');
+        throw 'Unknown error';
       }
     }
   }
@@ -68,11 +68,11 @@ class AuthAuth {
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-email') {
-        throw Exception('Email adress is not valid');
+        throw 'Email adress is not valid';
       } else if (e.code == 'user-not-found') {
-        throw Exception('User not found');
+        throw 'User not found';
       } else {
-        throw Exception('Unknown error');
+        throw 'Unknown error';
       }
     }
   }

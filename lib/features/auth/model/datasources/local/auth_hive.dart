@@ -8,9 +8,11 @@ class AuthHive {
   Future<void> saveUser({
     required String uid,
     required String username,
+    required String loginMethod,
   }) async {
     await _userBox.put('uid', uid);
     await _userBox.put('username', username);
+    await _userBox.put('loginMethod', loginMethod);
   }
 
   bool isUserLogged() {

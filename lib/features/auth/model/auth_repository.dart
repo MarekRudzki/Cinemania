@@ -28,9 +28,10 @@ class AuthRepository {
       await authHive.saveUser(
         uid: authAuth.getUid(),
         username: email,
+        loginMethod: 'email_password',
       );
     } catch (e) {
-      throw Exception(e);
+      rethrow;
     }
   }
 
@@ -46,13 +47,14 @@ class AuthRepository {
       await authHive.saveUser(
         uid: authAuth.getUid(),
         username: email,
+        loginMethod: 'email_password',
       );
       await authFirestore.addUser(
         uid: authAuth.getUid(),
         username: email,
       );
     } catch (e) {
-      throw Exception(e);
+      rethrow;
     }
   }
 
@@ -67,13 +69,14 @@ class AuthRepository {
       await authHive.saveUser(
         uid: authAuth.getUid(),
         username: username,
+        loginMethod: 'social_media',
       );
       await authFirestore.addUser(
         uid: authAuth.getUid(),
         username: username,
       );
     } catch (e) {
-      throw Exception(e);
+      rethrow;
     }
   }
 

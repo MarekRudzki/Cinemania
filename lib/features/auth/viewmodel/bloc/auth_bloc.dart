@@ -40,8 +40,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthSuccess());
         emit(AuthInitial());
       } catch (error) {
-        emit(AuthError(
-            errorMessage: error.toString().replaceFirst('Exception: ', '')));
+        emit(AuthError(errorMessage: error.toString()));
         emit(AuthInitial());
       }
     }
@@ -65,8 +64,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthSuccess());
         emit(AuthInitial());
       } catch (error) {
-        emit(AuthError(
-            errorMessage: error.toString().replaceFirst('Exception: ', '')));
+        emit(AuthError(errorMessage: error.toString()));
         emit(AuthInitial());
       }
     }
@@ -88,8 +86,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthSuccess());
         emit(AuthInitial());
       } catch (error) {
-        emit(AuthError(
-            errorMessage: error.toString().replaceFirst('Exception: ', '')));
+        emit(AuthError(errorMessage: error.toString()));
         emit(AuthInitial());
       }
     }

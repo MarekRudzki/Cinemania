@@ -23,7 +23,7 @@ class AccountRepository {
       );
       await accountAuth.deleteUser();
     } catch (e) {
-      throw Exception(e);
+      rethrow;
     }
   }
 
@@ -37,7 +37,7 @@ class AccountRepository {
         newPassword: newPassword,
       );
     } catch (e) {
-      throw Exception(e);
+      rethrow;
     }
   }
 
@@ -53,7 +53,7 @@ class AccountRepository {
         username: username,
       );
     } catch (e) {
-      throw Exception(e);
+      rethrow;
     }
   }
 
@@ -65,5 +65,13 @@ class AccountRepository {
     final uid = accountHive.getUid();
     final username = await accountFirestore.getUsername(uid: uid);
     await accountHive.saveUsername(username: username);
+  }
+
+  String getUsername() {
+    return accountHive.getUsername();
+  }
+
+  String getLoginMethod() {
+    return accountHive.getLoginMethod();
   }
 }

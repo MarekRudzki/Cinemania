@@ -1,5 +1,6 @@
+import 'package:cinemania/common/custom_snackbar.dart';
 import 'package:cinemania/features/account/viewmodel/bloc/account_bloc.dart';
-import 'package:cinemania/features/auth/view/widgets/custom_text_field.dart';
+import 'package:cinemania/common/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -24,7 +25,7 @@ class ChangePassword extends HookWidget {
           ),
           SizedBox(width: 8),
           Icon(
-            Icons.edit,
+            Icons.key,
             color: Colors.white,
           ),
         ],
@@ -37,41 +38,87 @@ class ChangePassword extends HookWidget {
               width: double.infinity,
               color: Colors.transparent,
               child: AlertDialog(
-                title: const Text(
-                  'Change password?',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                contentPadding: EdgeInsets.zero,
+                content: Container(
+                  padding: const EdgeInsets.fromLTRB(15, 20, 15, 10),
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: FractionalOffset.bottomCenter,
+                      colors: [
+                        Color.fromARGB(255, 45, 15, 50),
+                        Color.fromARGB(255, 87, 25, 98),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                ),
-                contentPadding: const EdgeInsets.fromLTRB(25, 20, 25, 10),
-                content: const Text(
-                  softWrap: true,
-                  'Please type in your current and new password.',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                  ),
-                ),
-                backgroundColor: const Color.fromARGB(255, 87, 25, 98),
-                actions: [
-                  Column(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
+                      const Text(
+                        'Change password?',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      const Text(
+                        softWrap: true,
+                        'Please type in your current and new password.',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                        ),
+                      ),
                       BlocConsumer<AccountBloc, AccountState>(
                         listener: (context, state) {
-                          // if (state is ChangePasswordSuccess) {
-                          //   currentPasswordController.clear();
-                          //   newPasswordController.clear();
-                          //   confirmedNewPasswordController.clear();
-                          //   Navigator.of(context).pop();
-                          //   ScaffoldMessenger.of(context).clearSnackBars();
-                          //   ScaffoldMessenger.of(context)
-                          //       .showSnackBar(CustomSnackbar.showSnackBar(
-                          //     message: 'Password changed successfully',
-                          //     backgroundColor: Colors.green,
-                          //   ));
-                          // }
+                          if (state is AccountSuccess) {
+                            currentPasswordController.clear();
+                            newPasswordController.clear();
+
+                            Navigator.of(context).pop();
+                            ScaffoldMessenger.of(context).clearSnackBars();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              CustomSnackbar.showSnackBar(
+                                message: 'Password changed successfully',
+                                backgroundColor: Colors.green,
+                              ),
+                            );
+                          }
+                          if (state is AccountError) {
+                            showModalBottomSheet(
+                              context: context,
+                              barrierColor: const Color.fromARGB(62, 3, 2, 2),
+                              builder: (BuildContext context) {
+                                Future.delayed(
+                                  const Duration(seconds: 3),
+                                  () {
+                                    if (!context.mounted) return;
+                                    Navigator.pop(context);
+                                  },
+                                );
+                                return Container(
+                                  color: Colors.red,
+                                  padding: const EdgeInsets.all(12),
+                                  child: Wrap(
+                                    children: [
+                                      Center(
+                                        child: Text(
+                                          state.errorMessage,
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                );
+                              },
+                            );
+                          }
                         },
                         builder: (context, state) {
                           if (state is AccountLoading) {
@@ -91,69 +138,26 @@ class ChangePassword extends HookWidget {
                                   labelText: 'New password',
                                   icon: Icons.key,
                                 ),
-                                Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 5),
-                                    child:
-                                        BlocListener<AccountBloc, AccountState>(
-                                      listener: (context, state) {
-                                        if (state is AccountError) {
-                                          showModalBottomSheet(
-                                            context: context,
-                                            barrierColor: const Color.fromARGB(
-                                                62, 3, 2, 2),
-                                            builder: (BuildContext context) {
-                                              Future.delayed(
-                                                const Duration(seconds: 3),
-                                                () {
-                                                  if (!context.mounted) return;
-                                                  Navigator.pop(context);
-                                                },
-                                              );
-                                              return Container(
-                                                color: const Color.fromARGB(
-                                                    255, 87, 25, 98),
-                                                padding:
-                                                    const EdgeInsets.all(12),
-                                                child: Wrap(
-                                                  children: [
-                                                    Center(
-                                                      child: Text(
-                                                        state.errorMessage,
-                                                        style: const TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 15,
-                                                        ),
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        }
-                                      },
-                                    )),
                               ],
                             );
                           }
                         },
                       ),
+                      const SizedBox(height: 8),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           IconButton(
                             onPressed: () async {
                               FocusManager.instance.primaryFocus?.unfocus();
-                              // context
-                              //     .read<ChangePasswordBloc>()
-                              //     .add(ChangePasswordPressed(
-                              //       currentPassword:
-                              //           currentPasswordController.text.trim(),
-                              //       newPassword: newPasswordController.text.trim(),
-                              //       confirmedNewPassword:
-                              //           confirmedNewPasswordController.text.trim(),
-                              //     ));
+                              context.read<AccountBloc>().add(
+                                    ChangePasswordPressed(
+                                      currentPassword:
+                                          currentPasswordController.text.trim(),
+                                      newPassword:
+                                          newPasswordController.text.trim(),
+                                    ),
+                                  );
                             },
                             icon: const Icon(
                               Icons.done,
@@ -176,7 +180,7 @@ class ChangePassword extends HookWidget {
                       ),
                     ],
                   ),
-                ],
+                ),
               ),
             );
           },

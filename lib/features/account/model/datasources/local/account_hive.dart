@@ -25,4 +25,12 @@ class AccountHive {
   String getUid() {
     return _userBox.get('uid') as String;
   }
+
+  String getUsername() {
+    return _userBox.get('username') as String;
+  }
+
+  String getLoginMethod() {
+    return _userBox.get('loginMethod') as String;
+  }
 }

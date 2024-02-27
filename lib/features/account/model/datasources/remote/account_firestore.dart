@@ -12,7 +12,7 @@ class AccountFirestore {
       final collection = _firestore.collection('users');
       await collection.doc(uid).delete();
     } on Exception catch (e) {
-      throw Exception(e.toString());
+      throw e.toString();
     }
   }
 
@@ -26,7 +26,7 @@ class AccountFirestore {
         'username': username,
       });
     } on Exception catch (e) {
-      throw Exception(e.toString());
+      throw e.toString();
     }
   }
 
@@ -44,7 +44,7 @@ class AccountFirestore {
       }
       return username;
     } on Exception catch (e) {
-      throw Exception(e.toString());
+      throw e.toString();
     }
   }
 }

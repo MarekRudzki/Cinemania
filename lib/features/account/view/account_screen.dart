@@ -10,6 +10,9 @@ class AccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final passwordChangeVisible =
+        context.read<AccountBloc>().passwordChangePossible();
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -31,9 +34,9 @@ class AccountScreen extends StatelessWidget {
                   children: [
                     const SizedBox(width: 48),
                     const Spacer(),
-                    const Text(
-                      'context.read<AccountBloc>().getUsername()',
-                      style: TextStyle(
+                    Text(
+                      context.read<AccountBloc>().getUsername(),
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
                       ),
@@ -63,9 +66,10 @@ class AccountScreen extends StatelessWidget {
                             ),
                             onTap: () {},
                           ),
-                          const PopupMenuItem(
-                            child: ChangePassword(),
-                          ),
+                          if (passwordChangeVisible)
+                            const PopupMenuItem(
+                              child: ChangePassword(),
+                            ),
                           PopupMenuItem(
                             child: const Row(
                               children: [

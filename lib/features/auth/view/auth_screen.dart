@@ -1,5 +1,5 @@
 import 'package:cinemania/features/auth/view/widgets/custom_divider.dart';
-import 'package:cinemania/features/auth/view/widgets/custom_text_field.dart';
+import 'package:cinemania/common/custom_text_field.dart';
 import 'package:cinemania/features/auth/view/widgets/login_register_button.dart';
 import 'package:cinemania/features/auth/view/widgets/password_reset.dart';
 import 'package:cinemania/features/auth/view/widgets/social_media_button.dart';

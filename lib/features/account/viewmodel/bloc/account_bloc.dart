@@ -25,14 +25,13 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     }
 
     try {
-      // await accountRepository.changePassword(
-      //   currentPassword: event.currentPassword,
-      //   newPassword: event.newPassword,
-      // );
+      await accountRepository.changePassword(
+        currentPassword: event.currentPassword,
+        newPassword: event.newPassword,
+      );
       emit(AccountSuccess());
     } catch (error) {
-      emit(AccountError(
-          errorMessage: error.toString().replaceFirst('Exception: ', '')));
+      emit(AccountError(errorMessage: error.toString()));
       emit(AccountInitial());
     }
   }
@@ -43,5 +42,18 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
 
   Future<void> saveUsernameFromFirebaseToHive() async {
     await accountRepository.saveUsernameFromFirebaseToHive();
+  }
+
+  String getUsername() {
+    return accountRepository.getUsername();
+  }
+
+  bool passwordChangePossible() {
+    final String loginMethod = accountRepository.getLoginMethod();
+    if (loginMethod == 'email_password') {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

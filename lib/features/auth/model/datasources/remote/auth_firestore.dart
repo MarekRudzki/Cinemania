@@ -14,7 +14,7 @@ class AuthFirestore {
         'username': username,
       });
     } on Exception catch (e) {
-      throw Exception(e.toString());
+      throw e.toString();
     }
   }
 }

@@ -17,7 +17,7 @@ class AccountAuth {
     try {
       await _auth.currentUser!.delete();
     } on FirebaseAuthException catch (e) {
-      throw Exception(e);
+      throw e.toString();
     }
   }
 
@@ -35,11 +35,11 @@ class AccountAuth {
       await _auth.currentUser!.updatePassword(newPassword);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'wrong-password') {
-        throw Exception('Current password not correct');
+        throw 'Current password not correct';
       } else if (e.code == 'weak-password') {
-        throw Exception('Password is weak');
+        throw 'Password is weak';
       } else {
-        throw Exception('Unknown error');
+        throw 'Unknown error';
       }
     }
   }
