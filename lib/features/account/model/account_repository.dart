@@ -57,6 +57,14 @@ class AccountRepository {
     }
   }
 
+  Future<void> validateUserPassword({
+    required String password,
+  }) async {
+    await accountAuth.validateUserPassword(
+      password: password,
+    );
+  }
+
   Future<void> logout() async {
     await accountHive.deleteUser();
   }

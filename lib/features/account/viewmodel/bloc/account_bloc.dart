@@ -11,6 +11,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
   final AccountRepository accountRepository;
   AccountBloc({required this.accountRepository}) : super(AccountInitial()) {
     on<ChangePasswordPressed>(_onChangePasswordPressed);
+    on<DeleteAccountPressed>(_onDeleteAccountPressed);
   }
 
   Future<void> _onChangePasswordPressed(
@@ -29,6 +30,26 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
         currentPassword: event.currentPassword,
         newPassword: event.newPassword,
       );
+      emit(AccountSuccess());
+    } catch (error) {
+      emit(AccountError(errorMessage: error.toString()));
+      emit(AccountInitial());
+    }
+  }
+
+  Future<void> _onDeleteAccountPressed(
+    DeleteAccountPressed event,
+    Emitter<AccountState> emit,
+  ) async {
+    emit(AccountLoading());
+    if (event.password.trim().isEmpty) {
+      emit(AccountError(errorMessage: 'Password field cannot be empty'));
+      emit(AccountInitial());
+    }
+
+    try {
+      await accountRepository.validateUserPassword(password: event.password);
+      await accountRepository.deleteUser();
       emit(AccountSuccess());
     } catch (error) {
       emit(AccountError(errorMessage: error.toString()));

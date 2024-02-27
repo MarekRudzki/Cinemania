@@ -22,3 +22,16 @@ class ChangePasswordPressed extends AccountEvent {
         newPassword,
       ];
 }
+
+class DeleteAccountPressed extends AccountEvent {
+  final String password;
+
+  DeleteAccountPressed({
+    required this.password,
+  });
+
+  @override
+  List<Object> get props => [
+        password,
+      ];
+}

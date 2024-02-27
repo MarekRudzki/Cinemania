@@ -43,4 +43,22 @@ class AccountAuth {
       }
     }
   }
+
+  Future<void> validateUserPassword({
+    required String password,
+  }) async {
+    try {
+      final credential = EmailAuthProvider.credential(
+        email: getEmail()!,
+        password: password,
+      );
+      await _auth.currentUser!.reauthenticateWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'wrong-password') {
+        throw 'Password not correct';
+      } else {
+        throw 'Unknown error';
+      }
+    }
+  }
 }

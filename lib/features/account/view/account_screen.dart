@@ -1,4 +1,5 @@
 import 'package:cinemania/features/account/view/widgets/change_password.dart';
+import 'package:cinemania/features/account/view/widgets/delete_account.dart';
 import 'package:cinemania/features/account/view/widgets/favorites.dart';
 import 'package:cinemania/features/account/view/widgets/logout.dart';
 import 'package:cinemania/features/account/viewmodel/bloc/account_bloc.dart';
@@ -67,31 +68,9 @@ class AccountScreen extends StatelessWidget {
                             onTap: () {},
                           ),
                           if (passwordChangeVisible)
-                            const PopupMenuItem(
-                              child: ChangePassword(),
-                            ),
-                          PopupMenuItem(
-                            child: const Row(
-                              children: [
-                                Spacer(),
-                                Text(
-                                  'Delete account',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(width: 8),
-                                Icon(
-                                  Icons.delete_forever,
-                                  color: Colors.red,
-                                ),
-                              ],
-                            ),
-                            onTap: () {},
-                          ),
-                          const PopupMenuItem(
-                            child: Logout(),
-                          ),
+                            const PopupMenuItem(child: ChangePassword()),
+                          const PopupMenuItem(child: DeleteAccount()),
+                          const PopupMenuItem(child: Logout()),
                         ];
                       },
                     ),
