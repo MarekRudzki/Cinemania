@@ -35,3 +35,16 @@ class DeleteAccountPressed extends AccountEvent {
         password,
       ];
 }
+
+class ChangeUsernamePressed extends AccountEvent {
+  final String username;
+
+  ChangeUsernamePressed({
+    required this.username,
+  });
+
+  @override
+  List<Object> get props => [
+        username,
+      ];
+}

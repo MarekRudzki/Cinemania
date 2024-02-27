@@ -1,4 +1,5 @@
 import 'package:cinemania/features/account/view/widgets/change_password.dart';
+import 'package:cinemania/features/account/view/widgets/change_username.dart';
 import 'package:cinemania/features/account/view/widgets/delete_account.dart';
 import 'package:cinemania/features/account/view/widgets/favorites.dart';
 import 'package:cinemania/features/account/view/widgets/logout.dart';
@@ -36,7 +37,7 @@ class AccountScreen extends StatelessWidget {
                     const SizedBox(width: 48),
                     const Spacer(),
                     Text(
-                      context.read<AccountBloc>().getUsername(),
+                      context.watch<AccountBloc>().getUsername(),
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -48,25 +49,7 @@ class AccountScreen extends StatelessWidget {
                       color: const Color.fromARGB(255, 87, 25, 98),
                       itemBuilder: (context) {
                         return [
-                          PopupMenuItem(
-                            child: const Row(
-                              children: [
-                                Spacer(),
-                                Text(
-                                  'Change display name',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(width: 8),
-                                Icon(
-                                  Icons.edit,
-                                  color: Colors.white,
-                                ),
-                              ],
-                            ),
-                            onTap: () {},
-                          ),
+                          const PopupMenuItem(child: ChangeUsername()),
                           if (passwordChangeVisible)
                             const PopupMenuItem(child: ChangePassword()),
                           const PopupMenuItem(child: DeleteAccount()),

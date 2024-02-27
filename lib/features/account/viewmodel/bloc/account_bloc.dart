@@ -12,6 +12,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
   AccountBloc({required this.accountRepository}) : super(AccountInitial()) {
     on<ChangePasswordPressed>(_onChangePasswordPressed);
     on<DeleteAccountPressed>(_onDeleteAccountPressed);
+    on<ChangeUsernamePressed>(_onChangeUsernamePressed);
   }
 
   Future<void> _onChangePasswordPressed(
@@ -19,8 +20,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     Emitter<AccountState> emit,
   ) async {
     emit(AccountLoading());
-    if (event.currentPassword.trim().isEmpty ||
-        event.newPassword.trim().isEmpty) {
+    if (event.currentPassword.isEmpty || event.newPassword.isEmpty) {
       emit(AccountError(errorMessage: 'Please fill in all fields'));
       emit(AccountInitial());
     }
@@ -42,7 +42,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     Emitter<AccountState> emit,
   ) async {
     emit(AccountLoading());
-    if (event.password.trim().isEmpty) {
+    if (event.password.isEmpty) {
       emit(AccountError(errorMessage: 'Password field cannot be empty'));
       emit(AccountInitial());
     }
@@ -50,6 +50,25 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     try {
       await accountRepository.validateUserPassword(password: event.password);
       await accountRepository.deleteUser();
+      emit(AccountSuccess());
+    } catch (error) {
+      emit(AccountError(errorMessage: error.toString()));
+      emit(AccountInitial());
+    }
+  }
+
+  Future<void> _onChangeUsernamePressed(
+    ChangeUsernamePressed event,
+    Emitter<AccountState> emit,
+  ) async {
+    emit(AccountLoading());
+    if (event.username.isEmpty) {
+      emit(AccountError(errorMessage: 'Username field cannot be empty'));
+      emit(AccountInitial());
+    }
+
+    try {
+      await accountRepository.changeUsername(username: event.username);
       emit(AccountSuccess());
     } catch (error) {
       emit(AccountError(errorMessage: error.toString()));
