@@ -2,7 +2,8 @@ import 'package:cinemania/features/account/viewmodel/bloc/account_bloc.dart';
 import 'package:cinemania/features/auth/view/auth_screen.dart';
 import 'package:cinemania/config/firebase_options.dart';
 import 'package:cinemania/features/auth/viewmodel/bloc/auth_bloc.dart';
-import 'package:cinemania/features/home/view/home_screen.dart';
+import 'package:cinemania/features/main/view/main_screen.dart';
+import 'package:cinemania/features/search/viewmodel/bloc/search_bloc.dart';
 import 'package:cinemania/utils/di.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -26,12 +27,13 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => getIt<AuthBloc>()),
-        BlocProvider(create: (context) => getIt<AccountBloc>())
+        BlocProvider(create: (context) => getIt<AccountBloc>()),
+        BlocProvider(create: (context) => getIt<SearchBloc>()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: getIt<AuthBloc>().isUserLogged()
-            ? const HomeScreen()
+            ? const MainScreen()
             : const AuthScreen(),
       ),
     ),

@@ -16,12 +16,15 @@ import '../features/account/model/datasources/local/account_hive.dart' as _i5;
 import '../features/account/model/datasources/remote/account_auth.dart' as _i3;
 import '../features/account/model/datasources/remote/account_firestore.dart'
     as _i4;
-import '../features/account/viewmodel/bloc/account_bloc.dart' as _i11;
+import '../features/account/viewmodel/bloc/account_bloc.dart' as _i12;
 import '../features/auth/model/auth_repository.dart' as _i10;
 import '../features/auth/model/datasources/local/auth_hive.dart' as _i9;
 import '../features/auth/model/datasources/remote/auth_auth.dart' as _i7;
 import '../features/auth/model/datasources/remote/auth_firestore.dart' as _i8;
-import '../features/auth/viewmodel/bloc/auth_bloc.dart' as _i12;
+import '../features/auth/viewmodel/bloc/auth_bloc.dart' as _i13;
+import '../features/search/model/datasources/remote/search_tmdb.dart' as _i11;
+import '../features/search/model/search_repository.dart' as _i14;
+import '../features/search/viewmodel/bloc/search_bloc.dart' as _i15;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -50,10 +53,15 @@ extension GetItInjectableX on _i1.GetIt {
           authAuth: gh<_i7.AuthAuth>(),
           authHive: gh<_i9.AuthHive>(),
         ));
-    gh.factory<_i11.AccountBloc>(
-        () => _i11.AccountBloc(accountRepository: gh<_i6.AccountRepository>()));
-    gh.factory<_i12.AuthBloc>(
-        () => _i12.AuthBloc(authRepository: gh<_i10.AuthRepository>()));
+    gh.lazySingleton<_i11.SearchTMDB>(() => _i11.SearchTMDB());
+    gh.factory<_i12.AccountBloc>(
+        () => _i12.AccountBloc(accountRepository: gh<_i6.AccountRepository>()));
+    gh.factory<_i13.AuthBloc>(
+        () => _i13.AuthBloc(authRepository: gh<_i10.AuthRepository>()));
+    gh.lazySingleton<_i14.SearchRepository>(
+        () => _i14.SearchRepository(searchTMDB: gh<_i11.SearchTMDB>()));
+    gh.factory<_i15.SearchBloc>(
+        () => _i15.SearchBloc(gh<_i14.SearchRepository>()));
     return this;
   }
 }

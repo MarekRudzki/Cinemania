@@ -5,7 +5,7 @@ import 'package:cinemania/features/auth/view/widgets/password_reset.dart';
 import 'package:cinemania/features/auth/view/widgets/social_media_button.dart';
 import 'package:cinemania/features/auth/view/widgets/switch_view_button.dart';
 import 'package:cinemania/features/auth/viewmodel/bloc/auth_bloc.dart';
-import 'package:cinemania/features/home/view/home_screen.dart';
+import 'package:cinemania/features/main/view/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -68,7 +68,7 @@ class AuthScreen extends HookWidget {
                   Navigator.of(context).pop();
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => const HomeScreen(),
+                      builder: (context) => const MainScreen(),
                     ),
                   );
                 }
