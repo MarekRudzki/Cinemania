@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CustomSnackbar {
   static SnackBar showSnackBar({
     required String message,
-    Color backgroundColor = Colors.red,
+    Color backgroundColor = const Color.fromARGB(255, 238, 81, 69),
   }) {
     return SnackBar(
       content: Text(

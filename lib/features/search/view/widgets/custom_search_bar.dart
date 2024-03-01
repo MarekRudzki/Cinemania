@@ -1,5 +1,5 @@
-import 'package:cinemania/features/search/viewmodel/bloc/search_bloc.dart';
-import 'package:cinemania/utils/enums.dart';
+import 'package:cinemania/features/search/view/widgets/category_picker.dart';
+import 'package:cinemania/features/search/viewmodel/search/search_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -9,8 +9,9 @@ class CustomSearchBar extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final searchController = useTextEditingController();
-    final currentCategory = useState(SearchCategory.movies);
+    final searchController =
+        useTextEditingController(text: context.watch<SearchBloc>().searchQuery);
+    final currentCategory = context.watch<SearchBloc>().currentCategory;
 
     return Padding(
       padding: const EdgeInsets.all(12),
@@ -40,10 +41,11 @@ class CustomSearchBar extends HookWidget {
                         border: InputBorder.none,
                       ),
                       onSubmitted: (value) {
+                        FocusScope.of(context).unfocus();
                         context.read<SearchBloc>().add(
                               SearchPressed(
                                 searchQuery: searchController.text.trim(),
-                                category: currentCategory.value,
+                                category: currentCategory,
                               ),
                             );
                       },
@@ -64,10 +66,11 @@ class CustomSearchBar extends HookWidget {
                   padding: const EdgeInsets.symmetric(vertical: 2),
                   child: IconButton(
                     onPressed: () {
+                      FocusScope.of(context).unfocus();
                       context.read<SearchBloc>().add(
                             SearchPressed(
                               searchQuery: searchController.text.trim(),
-                              category: currentCategory.value,
+                              category: currentCategory,
                             ),
                           );
                     },
@@ -81,91 +84,10 @@ class CustomSearchBar extends HookWidget {
             ],
           ),
           const SizedBox(height: 10),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.9,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                InkWell(
-                  child: Column(
-                    children: [
-                      const Text(
-                        'Movies',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      Container(
-                        height: 12,
-                        width: 12,
-                        decoration: BoxDecoration(
-                          color: currentCategory.value == SearchCategory.movies
-                              ? Colors.greenAccent
-                              : Colors.grey,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                    ],
-                  ),
-                  onTap: () {
-                    currentCategory.value = SearchCategory.movies;
-                  },
-                ),
-                InkWell(
-                  child: Column(
-                    children: [
-                      const Text(
-                        'TV Shows',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      Container(
-                        height: 12,
-                        width: 12,
-                        decoration: BoxDecoration(
-                          color: currentCategory.value == SearchCategory.tvShows
-                              ? Colors.greenAccent
-                              : Colors.grey,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                    ],
-                  ),
-                  onTap: () {
-                    currentCategory.value = SearchCategory.tvShows;
-                  },
-                ),
-                InkWell(
-                  child: Column(
-                    children: [
-                      const Text(
-                        'Cast',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      Container(
-                        height: 12,
-                        width: 12,
-                        decoration: BoxDecoration(
-                          color: currentCategory.value == SearchCategory.cast
-                              ? Colors.greenAccent
-                              : Colors.grey,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                    ],
-                  ),
-                  onTap: () {
-                    currentCategory.value = SearchCategory.cast;
-                  },
-                ),
-              ],
-            ),
+          CategoryPicker(
+            callback: () {
+              searchController.clear();
+            },
           ),
         ],
       ),

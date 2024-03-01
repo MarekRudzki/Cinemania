@@ -24,7 +24,8 @@ import '../features/auth/model/datasources/remote/auth_firestore.dart' as _i8;
 import '../features/auth/viewmodel/bloc/auth_bloc.dart' as _i13;
 import '../features/search/model/datasources/remote/search_tmdb.dart' as _i11;
 import '../features/search/model/search_repository.dart' as _i14;
-import '../features/search/viewmodel/bloc/search_bloc.dart' as _i15;
+import '../features/search/viewmodel/pagination/pagination_bloc.dart' as _i15;
+import '../features/search/viewmodel/search/search_bloc.dart' as _i16;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -60,8 +61,10 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i13.AuthBloc(authRepository: gh<_i10.AuthRepository>()));
     gh.lazySingleton<_i14.SearchRepository>(
         () => _i14.SearchRepository(searchTMDB: gh<_i11.SearchTMDB>()));
-    gh.factory<_i15.SearchBloc>(
-        () => _i15.SearchBloc(gh<_i14.SearchRepository>()));
+    gh.factory<_i15.PaginationBloc>(
+        () => _i15.PaginationBloc(gh<_i14.SearchRepository>()));
+    gh.factory<_i16.SearchBloc>(
+        () => _i16.SearchBloc(gh<_i14.SearchRepository>()));
     return this;
   }
 }

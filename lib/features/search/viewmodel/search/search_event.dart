@@ -9,7 +9,7 @@ sealed class SearchEvent extends Equatable {
 
 class SearchPressed extends SearchEvent {
   final String searchQuery;
-  final SearchCategory category;
+  final Category category;
 
   SearchPressed({
     required this.searchQuery,
@@ -19,6 +19,21 @@ class SearchPressed extends SearchEvent {
   @override
   List<Object> get props => [
         searchQuery,
+        category,
+      ];
+}
+
+class ResetSearch extends SearchEvent {}
+
+class ChangeCategoryPressed extends SearchEvent {
+  final Category category;
+
+  ChangeCategoryPressed({
+    required this.category,
+  });
+
+  @override
+  List<Object> get props => [
         category,
       ];
 }

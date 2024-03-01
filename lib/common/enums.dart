@@ -1,4 +1,4 @@
-enum SearchCategory {
+enum Category {
   movies,
   tvShows,
   cast,
