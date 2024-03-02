@@ -2,6 +2,7 @@ import 'package:cinemania/features/account/viewmodel/bloc/account_bloc.dart';
 import 'package:cinemania/features/auth/view/auth_screen.dart';
 import 'package:cinemania/config/firebase_options.dart';
 import 'package:cinemania/features/auth/viewmodel/bloc/auth_bloc.dart';
+import 'package:cinemania/features/details/viewmodel/bloc/details_bloc.dart';
 import 'package:cinemania/features/main/view/main_screen.dart';
 import 'package:cinemania/features/search/viewmodel/pagination/pagination_bloc.dart';
 import 'package:cinemania/features/search/viewmodel/search/search_bloc.dart';
@@ -30,7 +31,8 @@ void main() async {
         BlocProvider(create: (context) => getIt<AuthBloc>()),
         BlocProvider(create: (context) => getIt<AccountBloc>()),
         BlocProvider(create: (context) => getIt<SearchBloc>()),
-        BlocProvider(create: (context) => getIt<PaginationBloc>())
+        BlocProvider(create: (context) => getIt<PaginationBloc>()),
+        BlocProvider(create: (context) => getIt<DetailsBloc>()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

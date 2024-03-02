@@ -91,16 +91,16 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     int? gender,
   }) {
     if (category == Category.movies) {
-      return 'assets/movie_no_photo.png';
+      return 'assets/movie.png';
     } else if (category == Category.tvShows) {
-      return 'assets/tv_show_no_photo.png';
+      return 'assets/tv_show.png';
     } else {
       if (gender == 1) {
-        return 'assets/woman_no_photo.png';
+        return 'assets/woman.png';
       } else if (gender == 2) {
-        return 'assets/man_no_photo.png';
+        return 'assets/man.png';
       } else {
-        return 'assets/unknown_nonbinary_no_photo.png';
+        return 'assets/unknown_nonbinary.png';
       }
     }
   }

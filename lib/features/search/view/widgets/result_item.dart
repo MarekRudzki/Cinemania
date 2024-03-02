@@ -45,22 +45,38 @@ class ResultItem extends StatelessWidget {
                 ),
               ),
               child: url.contains('No data')
-                  ? Image.asset(
-                      context.read<SearchBloc>().getAssetAdress(
-                            category: category,
-                            gender: gender,
+                  ? Stack(
+                      children: [
+                        Image.asset(
+                          context.read<SearchBloc>().getAssetAdress(
+                                category: category,
+                                gender: gender,
+                              ),
+                          fit: BoxFit.cover,
+                        ),
+                        Positioned(
+                          bottom: 00,
+                          left: 0,
+                          right: 0,
+                          top: MediaQuery.sizeOf(context).height * 0.22,
+                          child: const Center(
+                            child: Text(
+                              'NO IMAGE',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                              ),
+                            ),
                           ),
-                      fit: BoxFit.cover,
+                        )
+                      ],
                     )
                   : FadeInImage(
                       placeholder: AssetImage(
-                        context
-                            .read<SearchBloc>()
-                            .getAssetAdress(
+                        context.read<SearchBloc>().getAssetAdress(
                               category: category,
                               gender: gender,
-                            )
-                            .replaceAll('no_photo', 'loading'),
+                            ),
                       ),
                       image: NetworkImage(
                         url,
