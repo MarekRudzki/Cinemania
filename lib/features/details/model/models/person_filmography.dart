@@ -32,7 +32,11 @@ class PersonFilmography extends Equatable {
           json['character'] != null ? json['character'] as String : 'Unknown',
       popularity:
           json['popularity'] != null ? json['popularity'] as double : 0.0,
-      title: json['title'] != null ? json['title'] as String : 'No data',
+      title: json['title'] != null
+          ? json['title'] as String
+          : json['original_name'] != null
+              ? json['original_name'] as String
+              : 'No data',
       year: json['release_date'] != null
           ? json['release_date'] as String
           : 'Unknown',

@@ -6,6 +6,7 @@ class Person extends Equatable {
   final String birthday;
   final String deathday;
   final int gender;
+  final int height;
   final String name;
   final String placeOfBirth;
   final String photoUrl;
@@ -18,6 +19,7 @@ class Person extends Equatable {
     required this.deathday,
     required this.gender,
     required this.name,
+    required this.height,
     required this.placeOfBirth,
     required this.photoUrl,
     required this.images,
@@ -28,6 +30,7 @@ class Person extends Equatable {
     Map<String, dynamic> detailsJson,
     List<dynamic> imagesJson,
     List<dynamic> filmographyJson,
+    Map<String, dynamic> heightJson,
   ) {
     final List<String> images = [];
     final List<PersonFilmography> filmography = [];
@@ -51,6 +54,9 @@ class Person extends Equatable {
     }
     filmography.sort((a, b) => b.popularity.compareTo(a.popularity));
 
+    final double height =
+        heightJson['height'] != null ? heightJson['height'] as double : 0;
+
     return Person(
       biography: detailsJson['biography'] != null
           ? detailsJson['biography'] as String
@@ -62,6 +68,7 @@ class Person extends Equatable {
           ? detailsJson['deathday'] as String
           : 'No data',
       gender: detailsJson['gender'] != null ? detailsJson['gender'] as int : 0,
+      height: (height * 100).toInt(),
       name: detailsJson['name'] != null
           ? detailsJson['name'] as String
           : 'No data',
@@ -80,6 +87,7 @@ class Person extends Equatable {
         birthday,
         deathday,
         gender,
+        height,
         name,
         placeOfBirth,
         photoUrl,

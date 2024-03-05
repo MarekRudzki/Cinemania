@@ -12,7 +12,7 @@ class DetailsRepository {
     required this.detailsTMDB,
   });
 
-  Future<Movie> getMovieData({
+  Future<Movie> fetchMovieData({
     required int id,
   }) async {
     final Map<String, dynamic> movieDetails =
@@ -30,7 +30,7 @@ class DetailsRepository {
     );
   }
 
-  Future<TVShow> getTVShowData({
+  Future<TVShow> fetchTVShowData({
     required int id,
   }) async {
     final Map<String, dynamic> tvShowDetails =
@@ -48,7 +48,7 @@ class DetailsRepository {
     );
   }
 
-  Future<Person> getPersonData({
+  Future<Person> fetchPersonData({
     required int id,
   }) async {
     final Map<String, dynamic> personDetails =
@@ -59,10 +59,14 @@ class DetailsRepository {
     final Map<String, dynamic> personCredits =
         await detailsTMDB.fetchPersonCredits(id: id);
 
+    final Map<String, dynamic> personHeight = await detailsTMDB
+        .fetchPersonHeight(name: personDetails['name'] as String);
+
     return Person.fromJson(
       personDetails,
       personImages['profiles'] as List<dynamic>,
       personCredits['cast'] as List<dynamic>,
+      personHeight,
     );
   }
 }

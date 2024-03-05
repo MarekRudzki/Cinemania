@@ -1,4 +1,5 @@
 import 'package:cinemania/features/details/view/details_screen.dart';
+import 'package:cinemania/features/details/viewmodel/bloc/details_bloc.dart';
 import 'package:cinemania/features/search/viewmodel/search/search_bloc.dart';
 import 'package:cinemania/common/enums.dart';
 import 'package:flutter/material.dart';
@@ -26,14 +27,18 @@ class ResultItem extends StatelessWidget {
       padding: const EdgeInsets.all(3),
       child: GestureDetector(
         onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => DetailsScreen(
-                category: category,
-                id: id,
-              ),
+          if (category == Category.movies) {
+            context.read<DetailsBloc>().add(FetchMovieDataPressed(id: id));
+          } else if (category == Category.tvShows) {
+            context.read<DetailsBloc>().add(FetchTVShowDataPressed(id: id));
+          } else {
+            context.read<DetailsBloc>().add(FetchPersonDataPressed(id: id));
+          }
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => DetailsScreen(
+              category: category,
             ),
-          );
+          ));
         },
         child: Column(
           children: [

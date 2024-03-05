@@ -16,8 +16,9 @@ class CastMember extends Equatable {
   });
 
   factory CastMember.fromJson(Map<String, dynamic> json) {
-    final String basicUrl =
-        json['poster_path'] != null ? json['poster_path'] as String : 'No data';
+    final String basicUrl = json['profile_path'] != null
+        ? json['profile_path'] as String
+        : 'No data';
     final String fullUrl = 'https://image.tmdb.org/t/p/w500$basicUrl';
 
     return CastMember(

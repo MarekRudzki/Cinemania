@@ -12,7 +12,6 @@ class Movie extends Equatable {
   final int runtime;
   final String title;
   final double voteAverage;
-  final int voteCount;
   final List<String> images;
   final List<CastMember> cast;
 
@@ -26,7 +25,6 @@ class Movie extends Equatable {
     required this.runtime,
     required this.title,
     required this.voteAverage,
-    required this.voteCount,
     required this.images,
     required this.cast,
   });
@@ -54,7 +52,9 @@ class Movie extends Equatable {
     final String fullUrl = 'https://image.tmdb.org/t/p/w500$basicUrl';
 
     for (final image in imagesDataList) {
-      images.add(image['file_path'] as String);
+      final imageUrlEndpoint = image['file_path'] as String;
+      final String url = 'https://image.tmdb.org/t/p/w500$imageUrlEndpoint';
+      images.add(url);
     }
 
     for (final entity in castDataList) {
@@ -85,9 +85,6 @@ class Movie extends Equatable {
       voteAverage: detailsJson['vote_average'] != null
           ? detailsJson['vote_average'] as double
           : 0.0,
-      voteCount: detailsJson['vote_count'] != null
-          ? detailsJson['vote_count'] as int
-          : 0,
       images: images,
       cast: cast,
     );
@@ -104,7 +101,6 @@ class Movie extends Equatable {
         runtime,
         title,
         voteAverage,
-        voteCount,
         images,
         cast,
       ];

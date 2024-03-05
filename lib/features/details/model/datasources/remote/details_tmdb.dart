@@ -125,4 +125,26 @@ class DetailsTMDB {
       rethrow;
     }
   }
+
+  Future<Map<String, dynamic>> fetchPersonHeight({
+    required String name,
+  }) async {
+    final apiKey = dotenv.env['NinjasAPIKey'];
+
+    try {
+      final response =
+          await Dio().get('https://api.api-ninjas.com/v1/celebrity?name=$name',
+              options: Options(headers: {
+                'X-Api-Key': apiKey,
+              }));
+      final List<dynamic> responseDynamic = response.data as List<dynamic>;
+      if (responseDynamic.isEmpty) {
+        return {};
+      } else {
+        return responseDynamic[0] as Map<String, dynamic>;
+      }
+    } catch (error) {
+      rethrow;
+    }
+  }
 }
