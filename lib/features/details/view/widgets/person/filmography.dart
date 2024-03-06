@@ -1,15 +1,20 @@
 import 'package:cinemania/common/enums.dart';
 import 'package:cinemania/features/details/model/models/person_filmography.dart';
+import 'package:cinemania/features/details/view/details_screen.dart';
 import 'package:cinemania/features/details/view/widgets/common/entity_photo.dart';
+import 'package:cinemania/features/details/viewmodel/bloc/details_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class Filmography extends HookWidget {
   final List<PersonFilmography> filmography;
+  final int sourceId;
 
   const Filmography({
     super.key,
     required this.filmography,
+    required this.sourceId,
   });
 
   @override
@@ -116,36 +121,62 @@ class Filmography extends HookWidget {
                 }
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 3),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.white,
+                  child: GestureDetector(
+                    onTap: () {
+                      context.read<DetailsBloc>().add(AddToHistoryPressed(
+                          id: sourceId, category: Category.cast));
+
+                      if (currentCategory.value == 'movie') {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const DetailsScreen(
+                            category: Category.movies,
+                          ),
+                        ));
+                        context
+                            .read<DetailsBloc>()
+                            .add(FetchMovieDataPressed(id: entity.id));
+                      } else {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const DetailsScreen(
+                            category: Category.tvShows,
+                          ),
+                        ));
+                        context
+                            .read<DetailsBloc>()
+                            .add(FetchTVShowDataPressed(id: entity.id));
+                      }
+                    },
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.white,
+                            ),
+                          ),
+                          child: EntityPhoto(
+                            photoUrl: entity.url,
+                            category: entity.mediaType == 'movie'
+                                ? Category.movies
+                                : Category.tvShows,
                           ),
                         ),
-                        child: EntityPhoto(
-                          photoUrl: entity.url,
-                          category: entity.mediaType == 'movie'
-                              ? Category.movies
-                              : Category.tvShows,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      SizedBox(
-                        width: MediaQuery.sizeOf(context).width * 0.33,
-                        child: Text(
-                          entity.title,
-                          textAlign: TextAlign.center,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
-                          style: const TextStyle(
-                            color: Colors.white,
+                        const SizedBox(height: 4),
+                        SizedBox(
+                          width: MediaQuery.sizeOf(context).width * 0.33,
+                          child: Text(
+                            entity.title,
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 3,
+                            style: const TextStyle(
+                              color: Colors.white,
+                            ),
                           ),
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 );
               },

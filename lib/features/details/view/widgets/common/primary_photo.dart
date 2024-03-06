@@ -1,4 +1,5 @@
 import 'package:cinemania/common/enums.dart';
+import 'package:cinemania/features/details/view/widgets/common/custom_back_button.dart';
 import 'package:cinemania/features/details/viewmodel/bloc/details_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,19 +46,7 @@ class PrimaryPhoto extends StatelessWidget {
                     ),
                   ),
                 ),
-                Positioned(
-                  top: 20,
-                  left: 20,
-                  child: IconButton(
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ),
+                const CustomBackButton(),
               ],
             )
           : Stack(
@@ -74,19 +63,7 @@ class PrimaryPhoto extends StatelessWidget {
                   ),
                   fit: BoxFit.cover,
                 ),
-                Positioned(
-                  top: 0,
-                  left: 0,
-                  child: IconButton(
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ),
+                const CustomBackButton(),
               ],
             ),
     );

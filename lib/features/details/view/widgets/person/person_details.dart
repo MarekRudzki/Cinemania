@@ -3,6 +3,7 @@ import 'package:cinemania/features/details/model/models/person.dart';
 import 'package:cinemania/features/details/view/widgets/common/primary_photo.dart';
 import 'package:cinemania/features/details/view/widgets/common/description.dart';
 import 'package:cinemania/features/details/view/widgets/person/filmography.dart';
+import 'package:cinemania/features/details/view/widgets/person/person_photos.dart';
 import 'package:cinemania/features/details/view/widgets/person/personal_data.dart';
 import 'package:flutter/material.dart';
 
@@ -35,8 +36,15 @@ class PersonDetails extends StatelessWidget {
             ],
           ),
           Description(description: person.biography),
-          Filmography(filmography: person.filmography),
-          //TODO zdjecia
+          Filmography(
+            filmography: person.filmography,
+            sourceId: person.id,
+          ),
+          if (person.images.length > 1)
+            PersonPhotos(
+              images: person.images,
+              gender: person.gender,
+            ),
         ],
       ),
     );

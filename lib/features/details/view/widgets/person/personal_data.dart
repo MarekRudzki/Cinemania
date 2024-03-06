@@ -88,7 +88,7 @@ class PersonalData extends StatelessWidget {
                 ],
               ),
             const SizedBox(height: 5),
-            if (birthday != 'No data')
+            if (birthday != 'Unknown date')
               Row(
                 children: [
                   const Text(

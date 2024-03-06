@@ -1,25 +1,23 @@
 import 'package:cinemania/common/models/genre.dart';
-import 'package:cinemania/features/details/viewmodel/bloc/details_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MovieInfo extends StatelessWidget {
-  final int budget;
+class TVShowInfo extends StatelessWidget {
+  final String begginingDate;
+  final String endingDate;
+  final int episodesNumber;
   final List<Genre> genres;
-  final String releaseDate;
-  final int revenue;
-  final int runtime;
   final String title;
+  final int seasonsNumber;
   final double voteAverage;
 
-  const MovieInfo({
+  const TVShowInfo({
     super.key,
-    required this.budget,
+    required this.begginingDate,
+    required this.endingDate,
+    required this.episodesNumber,
     required this.genres,
-    required this.releaseDate,
-    required this.revenue,
-    required this.runtime,
     required this.title,
+    required this.seasonsNumber,
     required this.voteAverage,
   });
 
@@ -39,6 +37,7 @@ class MovieInfo extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
+
             if (voteAverage != 0.0)
               Row(
                 children: [
@@ -66,18 +65,49 @@ class MovieInfo extends StatelessWidget {
                 ],
               ),
             const SizedBox(height: 5),
-            if (releaseDate != 'No data')
+
+            Row(
+              children: [
+                if (begginingDate != 'No data')
+                  Row(
+                    children: [
+                      Text(
+                        begginingDate.substring(0, 4),
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      const Text(
+                        ' - ',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      if (endingDate != 'No data')
+                        Text(
+                          endingDate.substring(0, 4),
+                          style: const TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                    ],
+                  ),
+              ],
+            ),
+            const SizedBox(height: 5),
+            if (seasonsNumber != 0)
               Row(
                 children: [
                   const Text(
-                    'Release:',
+                    'Seasons:',
                     style: TextStyle(
                       color: Color.fromARGB(255, 133, 128, 128),
                     ),
                   ),
                   const SizedBox(width: 5),
                   Text(
-                    releaseDate,
+                    '$seasonsNumber',
                     style: const TextStyle(
                       color: Colors.white,
                     ),
@@ -85,58 +115,18 @@ class MovieInfo extends StatelessWidget {
                 ],
               ),
             const SizedBox(height: 5),
-            if (runtime != 0)
+            if (episodesNumber != 0)
               Row(
                 children: [
                   const Text(
-                    'Runtime:',
+                    'Episodes:',
                     style: TextStyle(
                       color: Color.fromARGB(255, 133, 128, 128),
                     ),
                   ),
                   const SizedBox(width: 5),
                   Text(
-                    context
-                        .read<DetailsBloc>()
-                        .calculateMovieLength(minutes: runtime),
-                    style: const TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-            const SizedBox(height: 5),
-            if (budget != 0)
-              Row(
-                children: [
-                  const Text(
-                    'Budget:',
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 133, 128, 128),
-                    ),
-                  ),
-                  const SizedBox(width: 5),
-                  Text(
-                    context.read<DetailsBloc>().showBigNumer(number: budget),
-                    style: const TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-            const SizedBox(height: 5),
-            if (revenue != 0)
-              Row(
-                children: [
-                  const Text(
-                    'Revenue:',
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 133, 128, 128),
-                    ),
-                  ),
-                  const SizedBox(width: 5),
-                  Text(
-                    context.read<DetailsBloc>().showBigNumer(number: revenue),
+                    '$episodesNumber',
                     style: const TextStyle(
                       color: Colors.white,
                     ),
@@ -144,7 +134,6 @@ class MovieInfo extends StatelessWidget {
                 ],
               ),
             const SizedBox(height: 15),
-
             // if (genres.isNotEmpty)
             //   Flex(
 

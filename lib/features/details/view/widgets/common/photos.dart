@@ -2,10 +2,10 @@ import 'package:cinemania/features/details/viewmodel/bloc/details_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MoviePhotos extends StatelessWidget {
+class Photos extends StatelessWidget {
   final List<String> photos;
 
-  const MoviePhotos({
+  const Photos({
     super.key,
     required this.photos,
   });

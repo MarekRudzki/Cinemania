@@ -1,8 +1,10 @@
 import 'package:cinemania/common/models/genre.dart';
+import 'package:cinemania/common/models/movie_basic.dart';
 import 'package:cinemania/features/details/model/models/cast_member.dart';
 import 'package:equatable/equatable.dart';
 
 class Movie extends Equatable {
+  final int id;
   final int budget;
   final List<Genre> genres;
   final String overview;
@@ -14,8 +16,10 @@ class Movie extends Equatable {
   final double voteAverage;
   final List<String> images;
   final List<CastMember> cast;
+  final List<MovieBasic> similarMovies;
 
   Movie({
+    required this.id,
     required this.budget,
     required this.genres,
     required this.overview,
@@ -27,29 +31,35 @@ class Movie extends Equatable {
     required this.voteAverage,
     required this.images,
     required this.cast,
+    required this.similarMovies,
   });
 
   factory Movie.fromJson(
     Map<String, dynamic> detailsJson,
-    List<dynamic> imagesJson,
-    List<dynamic> castJson,
   ) {
     final List<String> images = [];
     final List<CastMember> cast = [];
     final List<Genre> genres = [];
+    final List<MovieBasic> recommendations = [];
 
+    final imagesDynamic = (detailsJson['images']
+        as Map<String, dynamic>)['backdrops'] as List<dynamic>;
     final imagesDataList =
-        imagesJson.map((e) => e as Map<String, dynamic>).toList();
+        imagesDynamic.map((e) => e as Map<String, dynamic>).toList();
+
+    final castDynamic = (detailsJson['credits'] as Map<String, dynamic>)['cast']
+        as List<dynamic>;
     final castDataList =
-        castJson.map((e) => e as Map<String, dynamic>).toList();
+        castDynamic.map((e) => e as Map<String, dynamic>).toList();
+
     final genresDynamic = detailsJson['genres'] as List<dynamic>;
     final genresDataList =
         genresDynamic.map((e) => e as Map<String, dynamic>).toList();
 
-    final String basicUrl = detailsJson['poster_path'] != null
-        ? detailsJson['poster_path'] as String
-        : 'No data';
-    final String fullUrl = 'https://image.tmdb.org/t/p/w500$basicUrl';
+    final similarDynamic = (detailsJson['recommendations']
+        as Map<String, dynamic>)['results'] as List<dynamic>;
+    final similarDataList =
+        similarDynamic.map((e) => e as Map<String, dynamic>).toList();
 
     for (final image in imagesDataList) {
       final imageUrlEndpoint = image['file_path'] as String;
@@ -65,7 +75,17 @@ class Movie extends Equatable {
       genres.add(Genre.fromJson(genre));
     }
 
+    for (final recommendation in similarDataList) {
+      recommendations.add(MovieBasic.fromJson(recommendation));
+    }
+
+    final String basicUrl = detailsJson['poster_path'] != null
+        ? detailsJson['poster_path'] as String
+        : 'No data';
+    final String fullUrl = 'https://image.tmdb.org/t/p/w500$basicUrl';
+
     return Movie(
+      id: detailsJson['id'] as int,
       budget: detailsJson['budget'] != null ? detailsJson['budget'] as int : 0,
       genres: genres,
       overview: detailsJson['overview'] != null
@@ -87,11 +107,13 @@ class Movie extends Equatable {
           : 0.0,
       images: images,
       cast: cast,
+      similarMovies: recommendations,
     );
   }
 
   @override
   List<Object?> get props => [
+        id,
         budget,
         genres,
         overview,

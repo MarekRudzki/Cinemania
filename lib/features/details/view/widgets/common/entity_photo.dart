@@ -6,11 +6,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class EntityPhoto extends StatelessWidget {
   final String photoUrl;
   final Category category;
+  final int? gender;
 
   const EntityPhoto({
     super.key,
     required this.photoUrl,
     required this.category,
+    this.gender,
   });
 
   @override
@@ -24,6 +26,7 @@ class EntityPhoto extends StatelessWidget {
                 Image.asset(
                   context.read<DetailsBloc>().getAssetAdress(
                         category: category,
+                        gender: gender,
                       ),
                   fit: BoxFit.cover,
                 ),
@@ -48,6 +51,7 @@ class EntityPhoto extends StatelessWidget {
               placeholder: AssetImage(
                 context.read<DetailsBloc>().getAssetAdress(
                       category: category,
+                      gender: gender,
                     ),
               ),
               image: NetworkImage(

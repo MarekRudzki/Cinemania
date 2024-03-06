@@ -6,12 +6,16 @@ import 'package:cinemania/features/details/viewmodel/bloc/details_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MovieCast extends StatelessWidget {
+class Cast extends StatelessWidget {
   final List<CastMember> cast;
+  final Category sourceCategory;
+  final int sourceId;
 
-  const MovieCast({
+  const Cast({
     super.key,
     required this.cast,
+    required this.sourceCategory,
+    required this.sourceId,
   });
 
   @override
@@ -37,18 +41,21 @@ class MovieCast extends StatelessWidget {
               itemCount: cast.length,
               itemBuilder: (context, index) {
                 final person = cast[index];
+
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 3),
                   child: GestureDetector(
                     onTap: () {
+                      context
+                          .read<DetailsBloc>()
+                          .add(FetchPersonDataPressed(id: person.id));
+                      context.read<DetailsBloc>().add(AddToHistoryPressed(
+                          id: sourceId, category: sourceCategory));
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => const DetailsScreen(
                           category: Category.cast,
                         ),
                       ));
-                      context
-                          .read<DetailsBloc>()
-                          .add(FetchPersonDataPressed(id: person.id));
                     },
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -62,6 +69,7 @@ class MovieCast extends StatelessWidget {
                           child: EntityPhoto(
                             photoUrl: person.url,
                             category: Category.cast,
+                            gender: person.gender,
                           ),
                         ),
                         const SizedBox(height: 4),
@@ -78,21 +86,27 @@ class MovieCast extends StatelessWidget {
                                   color: Colors.white,
                                 ),
                               ),
-                              const Text(
-                                'as',
-                                style: TextStyle(
-                                  color: Color.fromARGB(255, 133, 128, 128),
+                              if (person.character.isNotEmpty)
+                                Column(
+                                  children: [
+                                    const Text(
+                                      'as',
+                                      style: TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 133, 128, 128),
+                                      ),
+                                    ),
+                                    Text(
+                                      person.character,
+                                      textAlign: TextAlign.center,
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    )
+                                  ],
                                 ),
-                              ),
-                              Text(
-                                person.character,
-                                textAlign: TextAlign.center,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                ),
-                              )
                             ],
                           ),
                         ),

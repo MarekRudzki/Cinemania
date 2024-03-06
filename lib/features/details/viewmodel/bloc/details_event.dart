@@ -45,3 +45,21 @@ class FetchPersonDataPressed extends DetailsEvent {
         id,
       ];
 }
+
+class AddToHistoryPressed extends DetailsEvent {
+  final int id;
+  final Category category;
+
+  AddToHistoryPressed({
+    required this.id,
+    required this.category,
+  });
+
+  @override
+  List<Object> get props => [
+        id,
+        category,
+      ];
+}
+
+class DeleteLastHistoryElementPressed extends DetailsEvent {}

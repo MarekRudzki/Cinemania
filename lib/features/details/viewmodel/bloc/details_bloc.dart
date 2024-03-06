@@ -1,5 +1,6 @@
 import 'package:cinemania/common/enums.dart';
 import 'package:cinemania/features/details/model/details_repository.dart';
+import 'package:cinemania/features/details/model/models/details_history.dart';
 import 'package:cinemania/features/details/model/models/movie.dart';
 import 'package:cinemania/features/details/model/models/person.dart';
 import 'package:cinemania/features/details/model/models/tv_show.dart';
@@ -18,6 +19,31 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
     on<FetchMovieDataPressed>(_onFetchMovieDataPressed);
     on<FetchTVShowDataPressed>(_onFetchTVShowDataPressed);
     on<FetchPersonDataPressed>(_onFetchPersonDataPressed);
+    on<AddToHistoryPressed>(_onAddToHistoryPressed);
+    on<DeleteLastHistoryElementPressed>(_onDeleteLastHistoryElementPressed);
+  }
+
+  List<DetailsHistory> history = [];
+
+  void _onAddToHistoryPressed(
+    AddToHistoryPressed event,
+    Emitter<DetailsState> emit,
+  ) {
+    history.add(
+      DetailsHistory(
+        category: event.category,
+        id: event.id,
+      ),
+    );
+  }
+
+  void _onDeleteLastHistoryElementPressed(
+    DeleteLastHistoryElementPressed event,
+    Emitter<DetailsState> emit,
+  ) {
+    if (history.isNotEmpty) {
+      history.removeLast();
+    }
   }
 
   Future<void> _onFetchMovieDataPressed(
@@ -145,6 +171,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
 
     String formattedNumber = result.substring(0, separatorPosition);
     for (int i = separatorPosition; i < result.length; i += 3) {
+      // ignore: use_string_buffers
       formattedNumber += ' ${result.substring(i, i + 3)}';
     }
 
