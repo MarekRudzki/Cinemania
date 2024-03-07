@@ -1,5 +1,6 @@
 import 'package:cinemania/common/enums.dart';
 import 'package:cinemania/features/details/view/widgets/common/custom_back_button.dart';
+import 'package:cinemania/features/details/view/widgets/common/favorite_button.dart';
 import 'package:cinemania/features/details/viewmodel/bloc/details_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,12 +9,16 @@ class PrimaryPhoto extends StatelessWidget {
   final String photoUrl;
   final Category category;
   final int? gender;
+  final String name;
+  final int id;
 
   const PrimaryPhoto({
     super.key,
     required this.photoUrl,
     required this.category,
     this.gender,
+    required this.name,
+    required this.id,
   });
 
   @override
@@ -64,6 +69,13 @@ class PrimaryPhoto extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
                 const CustomBackButton(),
+                FavoriteButton(
+                  category: category,
+                  id: id,
+                  url: photoUrl,
+                  name: name,
+                  gender: gender,
+                ),
               ],
             ),
     );

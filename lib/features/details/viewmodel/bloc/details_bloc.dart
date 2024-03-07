@@ -15,6 +15,7 @@ part 'details_state.dart';
 @injectable
 class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
   final DetailsRepository detailsRepository;
+
   DetailsBloc(this.detailsRepository) : super(DetailsInitial()) {
     on<FetchMovieDataPressed>(_onFetchMovieDataPressed);
     on<FetchTVShowDataPressed>(_onFetchTVShowDataPressed);

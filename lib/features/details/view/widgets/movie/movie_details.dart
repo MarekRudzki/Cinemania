@@ -28,6 +28,8 @@ class MovieDetails extends StatelessWidget {
               PrimaryPhoto(
                 photoUrl: movie.url,
                 category: Category.movies,
+                name: movie.title,
+                id: movie.id,
               ),
               MovieInfo(
                 budget: movie.budget,

@@ -25,6 +25,8 @@ class PersonDetails extends StatelessWidget {
                 photoUrl: person.photoUrl,
                 gender: person.gender,
                 category: Category.cast,
+                name: person.name,
+                id: person.id,
               ),
               PersonalData(
                 birthday: person.birthday,

@@ -25,6 +25,8 @@ class TVShowDetails extends StatelessWidget {
               PrimaryPhoto(
                 photoUrl: tvShow.url,
                 category: Category.tvShows,
+                name: tvShow.title,
+                id: tvShow.id,
               ),
               TVShowInfo(
                 begginingDate: tvShow.begginingDate,

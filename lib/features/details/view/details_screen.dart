@@ -1,5 +1,6 @@
 import 'package:cinemania/common/custom_snackbar.dart';
 import 'package:cinemania/common/enums.dart';
+import 'package:cinemania/features/account/viewmodel/bloc/account_bloc.dart';
 import 'package:cinemania/features/details/model/models/details_history.dart';
 import 'package:cinemania/features/details/view/widgets/movie/movie_details.dart';
 import 'package:cinemania/features/details/view/widgets/person/person_details.dart';
@@ -11,17 +12,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class DetailsScreen extends StatelessWidget {
   final Category category;
 
-  const DetailsScreen({
-    super.key,
-    required this.category,
-  });
+  const DetailsScreen({required this.category});
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        // ignore: deprecated_member_use
         body: WillPopScope(
           onWillPop: () async {
+            context.read<AccountBloc>().add(UserFavoritesRequested());
             final List<DetailsHistory> history =
                 context.read<DetailsBloc>().history;
 

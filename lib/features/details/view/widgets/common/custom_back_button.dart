@@ -1,4 +1,5 @@
 import 'package:cinemania/common/enums.dart';
+import 'package:cinemania/features/account/viewmodel/bloc/account_bloc.dart';
 import 'package:cinemania/features/details/model/models/details_history.dart';
 import 'package:cinemania/features/details/viewmodel/bloc/details_bloc.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,7 @@ class CustomBackButton extends StatelessWidget {
           ],
         ),
         onPressed: () {
+          context.read<AccountBloc>().add(UserFavoritesRequested());
           final List<DetailsHistory> history =
               context.read<DetailsBloc>().history;
 

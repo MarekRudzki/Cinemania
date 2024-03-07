@@ -12,6 +12,9 @@ class AuthFirestore {
     try {
       await _firestore.collection('users').doc(uid).set({
         'username': username,
+        'favorites': [
+          {},
+        ],
       });
     } on Exception catch (e) {
       throw e.toString();

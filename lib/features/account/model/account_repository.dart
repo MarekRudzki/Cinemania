@@ -1,6 +1,7 @@
 import 'package:cinemania/features/account/model/datasources/local/account_hive.dart';
 import 'package:cinemania/features/account/model/datasources/remote/account_auth.dart';
 import 'package:cinemania/features/account/model/datasources/remote/account_firestore.dart';
+import 'package:cinemania/features/account/model/models/favorite_model.dart';
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
@@ -81,5 +82,52 @@ class AccountRepository {
 
   String getLoginMethod() {
     return accountHive.getLoginMethod();
+  }
+
+  Future<List<Favorite>> getFavorites() async {
+    try {
+      final List<Favorite> favorites = [];
+      final favoritesData = await accountFirestore.getUserFavorites(
+        uid: accountAuth.getUid(),
+      );
+      if (favoritesData.isNotEmpty) {
+        for (final favorite in favoritesData) {
+          favorites.add(Favorite.fromJson(favorite as Map<String, dynamic>));
+        }
+      }
+
+      return favorites;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> addFavorite({
+    required Favorite favorite,
+  }) async {
+    await accountFirestore.addFavorite(
+      uid: accountAuth.getUid(),
+      favorite: favorite,
+    );
+  }
+
+  Future<void> deleteFavorite({
+    required int id,
+  }) async {
+    await accountFirestore.deleteFavorite(
+      uid: accountAuth.getUid(),
+      id: id,
+    );
+  }
+
+  Future<bool> isFavorite({
+    required int id,
+  }) async {
+    final isFavorite = await accountFirestore.isFavorite(
+      uid: accountAuth.getUid(),
+      id: id,
+    );
+
+    return isFavorite;
   }
 }

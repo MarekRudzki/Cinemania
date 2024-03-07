@@ -1,4 +1,6 @@
+import 'package:cinemania/common/enums.dart';
 import 'package:cinemania/features/account/model/account_repository.dart';
+import 'package:cinemania/features/account/model/models/favorite_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -13,6 +15,33 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     on<ChangePasswordPressed>(_onChangePasswordPressed);
     on<DeleteAccountPressed>(_onDeleteAccountPressed);
     on<ChangeUsernamePressed>(_onChangeUsernamePressed);
+    on<AddFavoritePressed>(_onAddFavoritePressed);
+    on<UserFavoritesRequested>(_onUserFavoritesRequested);
+    on<DeleteFavoritePressed>(_onDeleteFavoritePressed);
+  }
+
+  List<int> favoritesId = [];
+
+  void addListToLocalFavorites({
+    required List<Favorite> allfavorites,
+  }) {
+    final List<int> newList = [];
+    for (final favorite in allfavorites) {
+      newList.add(favorite.id);
+    }
+    favoritesId = newList;
+  }
+
+  bool checkIfLocalFavoritesContains({required int id}) {
+    return favoritesId.contains(id);
+  }
+
+  void addSingleFavToLocalFavorites({required int id}) {
+    favoritesId.add(id);
+  }
+
+  void deleteSingleFavFromLocalFavorites({required int id}) {
+    favoritesId.remove(id);
   }
 
   Future<void> _onChangePasswordPressed(
@@ -94,6 +123,71 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       return true;
     } else {
       return false;
+    }
+  }
+
+  Future<void> _onUserFavoritesRequested(
+    UserFavoritesRequested event,
+    Emitter<AccountState> emit,
+  ) async {
+    emit(AccountLoading());
+    try {
+      final List<Favorite> favorites = await accountRepository.getFavorites();
+
+      emit(AccountSuccess(
+        favorites: favorites,
+      ));
+    } catch (error) {
+      emit(AccountError(errorMessage: error.toString()));
+    }
+  }
+
+  Future<void> _onAddFavoritePressed(
+    AddFavoritePressed event,
+    Emitter<AccountState> emit,
+  ) async {
+    await accountRepository.addFavorite(
+      favorite: Favorite(
+        category: event.category,
+        id: event.id,
+        name: event.name,
+        url: event.url,
+        gender: event.gender,
+      ),
+    );
+  }
+
+  Future<void> _onDeleteFavoritePressed(
+    DeleteFavoritePressed event,
+    Emitter<AccountState> emit,
+  ) async {
+    await accountRepository.deleteFavorite(id: event.id);
+  }
+
+  List<Favorite> pickFavoritesByCategory({
+    required List<Favorite> favorites,
+    required String currentCategory,
+  }) {
+    return favorites.where((favorite) {
+      if (currentCategory == 'movies') {
+        return favorite.category == Category.movies;
+      } else if (currentCategory == 'tv_shows') {
+        return favorite.category == Category.tvShows;
+      } else {
+        return favorite.category == Category.cast;
+      }
+    }).toList();
+  }
+
+  String getNoFavoriteText({
+    required String category,
+  }) {
+    if (category == 'movies') {
+      return 'movies';
+    } else if (category == 'tv_shows') {
+      return 'TV Shows';
+    } else {
+      return 'Actor';
     }
   }
 }

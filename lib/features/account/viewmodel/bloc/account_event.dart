@@ -48,3 +48,43 @@ class ChangeUsernamePressed extends AccountEvent {
         username,
       ];
 }
+
+class UserFavoritesRequested extends AccountEvent {}
+
+class AddFavoritePressed extends AccountEvent {
+  final Category category;
+  final int id;
+  final String name;
+  final String url;
+  final int? gender;
+
+  AddFavoritePressed({
+    required this.category,
+    required this.id,
+    required this.name,
+    required this.url,
+    this.gender,
+  });
+
+  @override
+  List<Object> get props => [
+        category,
+        id,
+        name,
+        url,
+        gender ?? Object(),
+      ];
+}
+
+class DeleteFavoritePressed extends AccountEvent {
+  final int id;
+
+  DeleteFavoritePressed({
+    required this.id,
+  });
+
+  @override
+  List<Object> get props => [
+        id,
+      ];
+}
