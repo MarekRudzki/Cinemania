@@ -1,4 +1,4 @@
-import 'package:cinemania/common/models/basic_model_do_zmiany.dart';
+import 'package:cinemania/common/models/basic_model.dart';
 import 'package:cinemania/common/models/genre.dart';
 import 'package:cinemania/features/details/model/models/cast_member.dart';
 import 'package:equatable/equatable.dart';

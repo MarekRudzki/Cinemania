@@ -1,5 +1,5 @@
 import 'package:cinemania/common/enums.dart';
-import 'package:cinemania/common/models/basic_model_do_zmiany.dart';
+import 'package:cinemania/common/models/basic_model.dart';
 import 'package:cinemania/features/details/view/details_screen.dart';
 import 'package:cinemania/features/details/view/widgets/common/entity_photo.dart';
 import 'package:cinemania/features/details/viewmodel/bloc/details_bloc.dart';

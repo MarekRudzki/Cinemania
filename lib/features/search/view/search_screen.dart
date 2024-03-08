@@ -21,22 +21,12 @@ class SearchScreen extends StatelessWidget {
               elevation: 5,
               backgroundColor: const Color.fromARGB(255, 45, 15, 50),
               forceElevated: innerBoxIsScrolled,
-              bottom: PreferredSize(
-                preferredSize: const Size.fromHeight(100),
+              bottom: const PreferredSize(
+                preferredSize: Size.fromHeight(95),
                 child: Center(
                   child: Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: Column(
-                      children: [
-                        const CustomSearchBar(),
-                        Divider(
-                          endIndent: 30,
-                          indent: 30,
-                          color: Colors.grey.shade600,
-                          thickness: 2,
-                        ),
-                      ],
-                    ),
+                    padding: EdgeInsets.only(bottom: 10),
+                    child: CustomSearchBar(),
                   ),
                 ),
               ),
@@ -63,9 +53,7 @@ class SearchScreen extends StatelessWidget {
                   category: state.category,
                 );
               } else {
-                return SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.75,
-                );
+                return const SizedBox.shrink();
               }
             },
           ),

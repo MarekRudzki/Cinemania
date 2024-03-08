@@ -16,19 +16,22 @@ import '../features/account/model/datasources/local/account_hive.dart' as _i5;
 import '../features/account/model/datasources/remote/account_auth.dart' as _i3;
 import '../features/account/model/datasources/remote/account_firestore.dart'
     as _i4;
-import '../features/account/viewmodel/bloc/account_bloc.dart' as _i13;
+import '../features/account/viewmodel/bloc/account_bloc.dart' as _i14;
 import '../features/auth/model/auth_repository.dart' as _i10;
 import '../features/auth/model/datasources/local/auth_hive.dart' as _i9;
 import '../features/auth/model/datasources/remote/auth_auth.dart' as _i7;
 import '../features/auth/model/datasources/remote/auth_firestore.dart' as _i8;
-import '../features/auth/viewmodel/bloc/auth_bloc.dart' as _i14;
+import '../features/auth/viewmodel/bloc/auth_bloc.dart' as _i15;
 import '../features/details/model/datasources/remote/details_tmdb.dart' as _i11;
-import '../features/details/model/details_repository.dart' as _i15;
-import '../features/details/viewmodel/bloc/details_bloc.dart' as _i17;
-import '../features/search/model/datasources/remote/search_tmdb.dart' as _i12;
-import '../features/search/model/search_repository.dart' as _i16;
-import '../features/search/viewmodel/pagination/pagination_bloc.dart' as _i18;
-import '../features/search/viewmodel/search/search_bloc.dart' as _i19;
+import '../features/details/model/details_repository.dart' as _i16;
+import '../features/details/viewmodel/bloc/details_bloc.dart' as _i19;
+import '../features/home/model/datasources/remote/home_tmdb.dart' as _i12;
+import '../features/home/model/home_repository.dart' as _i17;
+import '../features/home/viewmodel/bloc/home_bloc.dart' as _i20;
+import '../features/search/model/datasources/remote/search_tmdb.dart' as _i13;
+import '../features/search/model/search_repository.dart' as _i18;
+import '../features/search/viewmodel/pagination/pagination_bloc.dart' as _i21;
+import '../features/search/viewmodel/search/search_bloc.dart' as _i22;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -58,21 +61,25 @@ extension GetItInjectableX on _i1.GetIt {
           authHive: gh<_i9.AuthHive>(),
         ));
     gh.lazySingleton<_i11.DetailsTMDB>(() => _i11.DetailsTMDB());
-    gh.lazySingleton<_i12.SearchTMDB>(() => _i12.SearchTMDB());
-    gh.factory<_i13.AccountBloc>(
-        () => _i13.AccountBloc(accountRepository: gh<_i6.AccountRepository>()));
-    gh.factory<_i14.AuthBloc>(
-        () => _i14.AuthBloc(authRepository: gh<_i10.AuthRepository>()));
-    gh.lazySingleton<_i15.DetailsRepository>(
-        () => _i15.DetailsRepository(detailsTMDB: gh<_i11.DetailsTMDB>()));
-    gh.lazySingleton<_i16.SearchRepository>(
-        () => _i16.SearchRepository(searchTMDB: gh<_i12.SearchTMDB>()));
-    gh.factory<_i17.DetailsBloc>(
-        () => _i17.DetailsBloc(gh<_i15.DetailsRepository>()));
-    gh.factory<_i18.PaginationBloc>(
-        () => _i18.PaginationBloc(gh<_i16.SearchRepository>()));
-    gh.factory<_i19.SearchBloc>(
-        () => _i19.SearchBloc(gh<_i16.SearchRepository>()));
+    gh.lazySingleton<_i12.HomeTMDB>(() => _i12.HomeTMDB());
+    gh.lazySingleton<_i13.SearchTMDB>(() => _i13.SearchTMDB());
+    gh.factory<_i14.AccountBloc>(
+        () => _i14.AccountBloc(accountRepository: gh<_i6.AccountRepository>()));
+    gh.factory<_i15.AuthBloc>(
+        () => _i15.AuthBloc(authRepository: gh<_i10.AuthRepository>()));
+    gh.lazySingleton<_i16.DetailsRepository>(
+        () => _i16.DetailsRepository(detailsTMDB: gh<_i11.DetailsTMDB>()));
+    gh.lazySingleton<_i17.HomeRepository>(
+        () => _i17.HomeRepository(homeTMDB: gh<_i12.HomeTMDB>()));
+    gh.lazySingleton<_i18.SearchRepository>(
+        () => _i18.SearchRepository(searchTMDB: gh<_i13.SearchTMDB>()));
+    gh.factory<_i19.DetailsBloc>(
+        () => _i19.DetailsBloc(gh<_i16.DetailsRepository>()));
+    gh.factory<_i20.HomeBloc>(() => _i20.HomeBloc(gh<_i17.HomeRepository>()));
+    gh.factory<_i21.PaginationBloc>(
+        () => _i21.PaginationBloc(gh<_i18.SearchRepository>()));
+    gh.factory<_i22.SearchBloc>(
+        () => _i22.SearchBloc(gh<_i18.SearchRepository>()));
     return this;
   }
 }

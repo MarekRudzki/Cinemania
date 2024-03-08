@@ -1,4 +1,5 @@
 import 'package:cinemania/common/models/genre.dart';
+import 'package:cinemania/features/details/view/widgets/common/genres.dart';
 import 'package:flutter/material.dart';
 
 class TVShowInfo extends StatelessWidget {
@@ -37,7 +38,6 @@ class TVShowInfo extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-
             if (voteAverage != 0.0)
               Row(
                 children: [
@@ -65,7 +65,6 @@ class TVShowInfo extends StatelessWidget {
                 ],
               ),
             const SizedBox(height: 5),
-
             Row(
               children: [
                 if (begginingDate != 'No data')
@@ -134,25 +133,7 @@ class TVShowInfo extends StatelessWidget {
                 ],
               ),
             const SizedBox(height: 15),
-            // if (genres.isNotEmpty)//TODO
-            //   Flex(
-
-            //     child: Expanded(
-            //       child: ListView.builder(
-            //         scrollDirection: Axis.horizontal,
-            //         itemCount: genres.length,
-            //         itemBuilder: (context, index) => Container(
-            //           decoration: BoxDecoration(
-            //             color: Colors.white,
-            //             borderRadius: BorderRadius.circular(15),
-            //           ),
-            //           child: Text(
-            //             genres[index].name,
-            //           ),
-            //         ),
-            //       ),
-            //     ),
-            //   )
+            if (genres.isNotEmpty) Genres(genres: genres)
           ],
         ),
       ),

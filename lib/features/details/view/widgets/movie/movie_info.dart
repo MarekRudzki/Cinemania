@@ -1,4 +1,5 @@
 import 'package:cinemania/common/models/genre.dart';
+import 'package:cinemania/features/details/view/widgets/common/genres.dart';
 import 'package:cinemania/features/details/viewmodel/bloc/details_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -143,27 +144,8 @@ class MovieInfo extends StatelessWidget {
                   ),
                 ],
               ),
-            const SizedBox(height: 15),
-
-            // if (genres.isNotEmpty)
-            //   Flex(
-
-            //     child: Expanded(
-            //       child: ListView.builder(
-            //         scrollDirection: Axis.horizontal,
-            //         itemCount: genres.length,
-            //         itemBuilder: (context, index) => Container(
-            //           decoration: BoxDecoration(
-            //             color: Colors.white,
-            //             borderRadius: BorderRadius.circular(15),
-            //           ),
-            //           child: Text(
-            //             genres[index].name,
-            //           ),
-            //         ),
-            //       ),
-            //     ),
-            //   )
+            const SizedBox(height: 25),
+            if (genres.isNotEmpty) Genres(genres: genres)
           ],
         ),
       ),

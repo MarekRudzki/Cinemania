@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:cinemania/common/models/basic_model_do_zmiany.dart';
+import 'package:cinemania/common/models/basic_model.dart';
 import 'package:cinemania/features/search/model/models/search_page_model.dart';
 import 'package:cinemania/features/search/model/search_repository.dart';
 import 'package:cinemania/common/enums.dart';

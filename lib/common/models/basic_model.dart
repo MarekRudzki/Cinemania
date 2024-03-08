@@ -12,7 +12,6 @@ class BasicModel extends Equatable {
   final String name;
 
   BasicModel({
-    //TODO renamey
     required this.id,
     this.gender,
     required this.imageUrl,

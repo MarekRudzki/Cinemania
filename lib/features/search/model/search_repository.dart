@@ -1,4 +1,4 @@
-import 'package:cinemania/common/models/basic_model_do_zmiany.dart';
+import 'package:cinemania/common/models/basic_model.dart';
 import 'package:cinemania/features/search/model/datasources/remote/search_tmdb.dart';
 import 'package:injectable/injectable.dart';
 

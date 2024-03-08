@@ -1,12 +1,13 @@
-import 'package:cinemania/features/search/viewmodel/search/search_bloc.dart';
 import 'package:cinemania/common/enums.dart';
+import 'package:cinemania/features/search/viewmodel/search/search_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class CategoryPicker extends StatelessWidget {
+class CategoryPicker extends HookWidget {
   final void Function() callback;
 
-  const CategoryPicker({
+  CategoryPicker({
     super.key,
     required this.callback,
   });
@@ -15,115 +16,107 @@ class CategoryPicker extends StatelessWidget {
   Widget build(BuildContext context) {
     final currentCategory = context.watch<SearchBloc>().currentCategory;
 
-    return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.9,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            child: Column(
-              children: [
-                const Text(
+    final animationController = useAnimationController(
+      duration: const Duration(milliseconds: 300),
+    );
+
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () {
+                  animationController.animateTo(0.toDouble());
+                  context
+                      .read<SearchBloc>()
+                      .add(ChangeCategoryPressed(category: Category.movies));
+
+                  context.read<SearchBloc>().add(ResetSearch());
+                  callback();
+                },
+                child: Text(
                   'Movies',
                   style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Container(
-                  height: 12,
-                  width: 12,
-                  decoration: BoxDecoration(
                     color: currentCategory == Category.movies
-                        ? Colors.greenAccent
-                        : Colors.grey,
-                    borderRadius: BorderRadius.circular(10),
+                        ? Colors.white
+                        : const Color.fromARGB(255, 130, 130, 130),
+                    fontSize: currentCategory == Category.movies ? 15 : 14,
                   ),
                 ),
-              ],
-            ),
-            onTap: () {
-              context
-                  .read<SearchBloc>()
-                  .add(ChangeCategoryPressed(category: Category.movies));
-
-              context.read<SearchBloc>().add(ResetSearch());
-              callback();
-            },
-          ),
-          GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Column(
-                children: [
-                  const Text(
-                    'TV Shows',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Container(
-                    height: 12,
-                    width: 12,
-                    decoration: BoxDecoration(
-                      color: currentCategory == Category.tvShows
-                          ? Colors.greenAccent
-                          : Colors.grey,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ],
               ),
-            ),
-            onTap: () {
-              context
-                  .read<SearchBloc>()
-                  .add(ChangeCategoryPressed(category: Category.tvShows));
+              GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () {
+                  animationController.animateTo(1.toDouble());
+                  context
+                      .read<SearchBloc>()
+                      .add(ChangeCategoryPressed(category: Category.tvShows));
 
-              context.read<SearchBloc>().add(ResetSearch());
-              callback();
-            },
-          ),
-          GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Column(
-                children: [
-                  const Text(
+                  context.read<SearchBloc>().add(ResetSearch());
+                  callback();
+                },
+                child: Text(
+                  'TV Shows',
+                  style: TextStyle(
+                    color: currentCategory == Category.tvShows
+                        ? Colors.white
+                        : const Color.fromARGB(255, 130, 130, 130),
+                    fontSize: currentCategory == Category.tvShows ? 15 : 14,
+                  ),
+                ),
+              ),
+              GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () {
+                  animationController.animateTo(2.toDouble());
+                  context
+                      .read<SearchBloc>()
+                      .add(ChangeCategoryPressed(category: Category.cast));
+
+                  context.read<SearchBloc>().add(ResetSearch());
+                  callback();
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: Text(
                     'Cast',
                     style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Container(
-                    height: 12,
-                    width: 12,
-                    decoration: BoxDecoration(
                       color: currentCategory == Category.cast
-                          ? Colors.greenAccent
-                          : Colors.grey,
-                      borderRadius: BorderRadius.circular(10),
+                          ? Colors.white
+                          : const Color.fromARGB(255, 130, 130, 130),
+                      fontSize: currentCategory == Category.cast ? 15 : 14,
                     ),
                   ),
-                ],
+                ),
               ),
-            ),
-            onTap: () {
-              context
-                  .read<SearchBloc>()
-                  .add(ChangeCategoryPressed(category: Category.cast));
-
-              context.read<SearchBloc>().add(ResetSearch());
-              callback();
-            },
+            ],
           ),
-        ],
-      ),
+        ),
+        const SizedBox(height: 5),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            alignment: Alignment(
+              currentCategory == Category.movies
+                  ? -1
+                  : currentCategory == Category.tvShows
+                      ? 0
+                      : 1,
+              1,
+            ),
+            child: Container(
+              width: MediaQuery.sizeOf(context).width * 0.22,
+              height: 2,
+              color: Colors.green,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
