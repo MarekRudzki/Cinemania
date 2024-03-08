@@ -1,21 +1,28 @@
 import 'package:cinemania/common/enums.dart';
-import 'package:cinemania/common/models/movie_basic.dart';
-import 'package:cinemania/common/models/tv_show_basic.dart';
+import 'package:cinemania/common/models/basic_model_do_zmiany.dart';
+import 'package:cinemania/features/details/view/details_screen.dart';
 import 'package:cinemania/features/details/view/widgets/common/entity_photo.dart';
+import 'package:cinemania/features/details/viewmodel/bloc/details_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SimilarTitles extends StatelessWidget {
-  final List<MovieBasic>? movies;
-  final List<TVShowBasic>? tvShows;
+  final List<BasicModel>? movies;
+  final List<BasicModel>? tvShows;
+  final int sourceId;
 
   const SimilarTitles({
     super.key,
     this.movies,
     this.tvShows,
+    required this.sourceId,
   });
 
   @override
   Widget build(BuildContext context) {
+    final Category category =
+        movies != null ? Category.movies : Category.tvShows;
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -34,44 +41,69 @@ class SimilarTitles extends StatelessWidget {
             child: ListView.builder(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
-              itemCount: movies != null ? movies!.length : tvShows!.length,
+              itemCount: category == Category.movies
+                  ? movies!.length
+                  : tvShows!.length,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 3),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.white,
+                  child: GestureDetector(
+                    onTap: () {
+                      if (category == Category.movies) {
+                        context.read<DetailsBloc>().add(
+                              FetchMovieDataPressed(
+                                id: movies![index].id,
+                              ),
+                            );
+                      } else {
+                        context.read<DetailsBloc>().add(
+                              FetchTVShowDataPressed(
+                                id: tvShows![index].id,
+                              ),
+                            );
+                      }
+                      context.read<DetailsBloc>().add(AddToHistoryPressed(
+                          id: sourceId, category: category));
+
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => DetailsScreen(
+                          category: category,
+                        ),
+                      ));
+                    },
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.white,
+                            ),
+                          ),
+                          child: EntityPhoto(
+                            photoUrl: category == Category.movies
+                                ? movies![index].imageUrl
+                                : tvShows![index].imageUrl,
+                            category: category,
                           ),
                         ),
-                        child: EntityPhoto(
-                          photoUrl: movies != null
-                              ? movies![index].imageUrl
-                              : tvShows![index].imageUrl,
-                          category: movies != null
-                              ? Category.movies
-                              : Category.tvShows,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      SizedBox(
-                        width: MediaQuery.sizeOf(context).width * 0.33,
-                        child: Text(
-                          movies != null
-                              ? movies![index].title
-                              : tvShows![index].title,
-                          textAlign: TextAlign.center,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
-                          style: const TextStyle(
-                            color: Colors.white,
+                        const SizedBox(height: 4),
+                        SizedBox(
+                          width: MediaQuery.sizeOf(context).width * 0.33,
+                          child: Text(
+                            category == Category.movies
+                                ? movies![index].name
+                                : tvShows![index].name,
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 3,
+                            style: const TextStyle(
+                              color: Colors.white,
+                            ),
                           ),
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 );
               },

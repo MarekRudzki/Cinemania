@@ -1,9 +1,9 @@
 part of 'pagination_bloc.dart';
 
 class PaginationState extends Equatable {
-  final List<MovieBasic>? searchedMovies;
-  final List<TVShowBasic>? searchedTVShows;
-  final List<PersonBasic>? searchedCast;
+  final List<BasicModel>? searchedMovies;
+  final List<BasicModel>? searchedTVShows;
+  final List<BasicModel>? searchedCast;
   final dynamic error;
   final int? page;
 

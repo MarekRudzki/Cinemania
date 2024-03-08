@@ -49,6 +49,7 @@ class TVShowDetails extends StatelessWidget {
           if (tvShow.similarTVShows.isNotEmpty)
             SimilarTitles(
               tvShows: tvShow.similarTVShows,
+              sourceId: tvShow.id,
             ),
         ],
       ),

@@ -52,6 +52,7 @@ class MovieDetails extends StatelessWidget {
           if (movie.similarMovies.isNotEmpty)
             SimilarTitles(
               movies: movie.similarMovies,
+              sourceId: movie.id,
             ),
         ],
       ),

@@ -1,5 +1,5 @@
+import 'package:cinemania/common/models/basic_model_do_zmiany.dart';
 import 'package:cinemania/common/models/genre.dart';
-import 'package:cinemania/common/models/movie_basic.dart';
 import 'package:cinemania/features/details/model/models/cast_member.dart';
 import 'package:equatable/equatable.dart';
 
@@ -16,7 +16,7 @@ class Movie extends Equatable {
   final double voteAverage;
   final List<String> images;
   final List<CastMember> cast;
-  final List<MovieBasic> similarMovies;
+  final List<BasicModel> similarMovies;
 
   Movie({
     required this.id,
@@ -40,7 +40,7 @@ class Movie extends Equatable {
     final List<String> images = [];
     final List<CastMember> cast = [];
     final List<Genre> genres = [];
-    final List<MovieBasic> recommendations = [];
+    final List<BasicModel> recommendations = [];
 
     final imagesDynamic = (detailsJson['images']
         as Map<String, dynamic>)['backdrops'] as List<dynamic>;
@@ -76,7 +76,7 @@ class Movie extends Equatable {
     }
 
     for (final recommendation in similarDataList) {
-      recommendations.add(MovieBasic.fromJson(recommendation));
+      recommendations.add(BasicModel.fromJson(recommendation));
     }
 
     final String basicUrl = detailsJson['poster_path'] != null

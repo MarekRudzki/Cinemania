@@ -1,6 +1,4 @@
-import 'package:cinemania/common/models/movie_basic.dart';
-import 'package:cinemania/common/models/person_basic.dart';
-import 'package:cinemania/common/models/tv_show_basic.dart';
+import 'package:cinemania/common/models/basic_model_do_zmiany.dart';
 import 'package:cinemania/features/search/model/datasources/remote/search_tmdb.dart';
 import 'package:injectable/injectable.dart';
 
@@ -12,12 +10,12 @@ class SearchRepository {
     required this.searchTMDB,
   });
 
-  Future<List<MovieBasic>> fetchMovies({
+  Future<List<BasicModel>> fetchMovies({
     required String query,
     required int page,
   }) async {
     try {
-      final List<MovieBasic> movies = [];
+      final List<BasicModel> movies = [];
 
       final Map<String, dynamic> moviesData = await searchTMDB.fetchMovies(
         query: query,
@@ -27,7 +25,7 @@ class SearchRepository {
           moviesData['results'] as List<dynamic>;
 
       for (final movie in moviesDynamic) {
-        movies.add(MovieBasic.fromJson(movie as Map<String, dynamic>));
+        movies.add(BasicModel.fromJson(movie as Map<String, dynamic>));
       }
 
       return movies;
@@ -36,12 +34,12 @@ class SearchRepository {
     }
   }
 
-  Future<List<TVShowBasic>> fetchTvShows({
+  Future<List<BasicModel>> fetchTvShows({
     required String query,
     required int page,
   }) async {
     try {
-      final List<TVShowBasic> tvShows = [];
+      final List<BasicModel> tvShows = [];
 
       final Map<String, dynamic> tvShowsData = await searchTMDB.fetchTvShows(
         query: query,
@@ -51,7 +49,7 @@ class SearchRepository {
           tvShowsData['results'] as List<dynamic>;
 
       for (final tvShow in tvShowsDynamic) {
-        tvShows.add(TVShowBasic.fromJson(tvShow as Map<String, dynamic>));
+        tvShows.add(BasicModel.fromJson(tvShow as Map<String, dynamic>));
       }
 
       return tvShows;
@@ -60,12 +58,12 @@ class SearchRepository {
     }
   }
 
-  Future<List<PersonBasic>> fetchCast({
+  Future<List<BasicModel>> fetchCast({
     required String query,
     required int page,
   }) async {
     try {
-      final List<PersonBasic> cast = [];
+      final List<BasicModel> cast = [];
 
       final Map<String, dynamic> castData = await searchTMDB.fetchCast(
         query: query,
@@ -74,7 +72,7 @@ class SearchRepository {
       final List<dynamic> castDynamic = castData['results'] as List<dynamic>;
 
       for (final person in castDynamic) {
-        cast.add(PersonBasic.fromJson(person as Map<String, dynamic>));
+        cast.add(BasicModel.fromJson(person as Map<String, dynamic>));
       }
 
       return cast;

@@ -13,6 +13,7 @@ class ResultItem extends StatelessWidget {
   final String url;
 
   const ResultItem({
+    //TODO rename
     super.key,
     required this.category,
     required this.id,

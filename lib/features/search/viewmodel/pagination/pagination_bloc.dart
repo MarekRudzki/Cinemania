@@ -1,8 +1,6 @@
 import 'dart:async';
 
-import 'package:cinemania/common/models/movie_basic.dart';
-import 'package:cinemania/common/models/person_basic.dart';
-import 'package:cinemania/common/models/tv_show_basic.dart';
+import 'package:cinemania/common/models/basic_model_do_zmiany.dart';
 import 'package:cinemania/features/search/model/models/search_page_model.dart';
 import 'package:cinemania/features/search/model/search_repository.dart';
 import 'package:cinemania/common/enums.dart';
@@ -71,7 +69,7 @@ class PaginationBloc extends Bloc<PaginationEvent, PaginationState> {
           page: nextPageKey,
           searchedMovies: [
             ...lastListingState.searchedMovies ?? [],
-            ...newItems as List<MovieBasic>,
+            ...newItems as List<BasicModel>,
           ],
         );
       } else if (searchPage.category == Category.tvShows) {
@@ -79,7 +77,7 @@ class PaginationBloc extends Bloc<PaginationEvent, PaginationState> {
           page: nextPageKey,
           searchedTVShows: [
             ...lastListingState.searchedTVShows ?? [],
-            ...newItems as List<TVShowBasic>,
+            ...newItems as List<BasicModel>,
           ],
         );
       } else {
@@ -87,7 +85,7 @@ class PaginationBloc extends Bloc<PaginationEvent, PaginationState> {
           page: nextPageKey,
           searchedCast: [
             ...lastListingState.searchedCast ?? [],
-            ...newItems as List<PersonBasic>,
+            ...newItems as List<BasicModel>,
           ],
         );
       }

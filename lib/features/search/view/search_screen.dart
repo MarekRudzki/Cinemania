@@ -1,9 +1,6 @@
-import 'package:cinemania/features/search/view/widgets/cast_result.dart';
+import 'package:cinemania/features/search/view/widgets/search_result.dart';
 import 'package:cinemania/features/search/view/widgets/custom_search_bar.dart';
-import 'package:cinemania/features/search/view/widgets/movies_result.dart';
-import 'package:cinemania/features/search/view/widgets/tv_shows_result.dart';
 import 'package:cinemania/features/search/viewmodel/search/search_bloc.dart';
-import 'package:cinemania/common/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -61,13 +58,10 @@ class SearchScreen extends StatelessWidget {
             builder: (context, state) {
               if (state is SearchSuccess) {
                 final String query = context.read<SearchBloc>().searchQuery;
-                if (state.category == Category.movies) {
-                  return MoviesResult(query: query);
-                } else if (state.category == Category.tvShows) {
-                  return TVShowsResult(query: query);
-                } else {
-                  return CastResult(query: query);
-                }
+                return SearchResult(
+                  query: query,
+                  category: state.category,
+                );
               } else {
                 return SizedBox(
                   height: MediaQuery.of(context).size.height * 0.75,

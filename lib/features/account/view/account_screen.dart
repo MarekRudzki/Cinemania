@@ -5,7 +5,7 @@ import 'package:cinemania/features/account/view/widgets/delete_account.dart';
 import 'package:cinemania/features/account/view/widgets/favorite_picker.dart';
 import 'package:cinemania/features/account/view/widgets/logout.dart';
 import 'package:cinemania/features/account/viewmodel/bloc/account_bloc.dart';
-import 'package:cinemania/features/search/view/widgets/result_item.dart';
+import 'package:cinemania/common/result_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -98,24 +98,24 @@ class AccountScreen extends HookWidget {
                   child: CircularProgressIndicator(),
                 );
               } else if (state is AccountSuccess) {
-                final allfavorites = state.favorites!;
                 context
                     .read<AccountBloc>()
-                    .addListToLocalFavorites(allfavorites: allfavorites);
+                    .addListToLocalFavorites(allfavorites: state.favorites!);
                 final currentCategoryFavorites =
                     context.read<AccountBloc>().pickFavoritesByCategory(
-                          favorites: allfavorites,
+                          favorites: state.favorites!,
                           currentCategory: favCategory.value,
                         );
                 if (currentCategoryFavorites.isEmpty) {
                   final noCategoryText = context
                       .read<AccountBloc>()
                       .getNoFavoriteText(category: favCategory.value);
+
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Don\'t have any favorite $noCategoryText yet!',
+                        'You don\'t have any favorite $noCategoryText yet!',
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16,

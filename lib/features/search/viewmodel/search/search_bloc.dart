@@ -1,6 +1,4 @@
-import 'package:cinemania/common/models/movie_basic.dart';
-import 'package:cinemania/common/models/person_basic.dart';
-import 'package:cinemania/common/models/tv_show_basic.dart';
+import 'package:cinemania/common/models/basic_model_do_zmiany.dart';
 import 'package:cinemania/features/search/model/search_repository.dart';
 import 'package:cinemania/common/enums.dart';
 import 'package:equatable/equatable.dart';

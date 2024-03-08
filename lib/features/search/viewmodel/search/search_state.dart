@@ -15,9 +15,9 @@ final class SearchLoading extends SearchState {}
 
 final class SearchSuccess extends SearchState {
   final Category category;
-  final List<MovieBasic>? movies;
-  final List<TVShowBasic>? tvShows;
-  final List<PersonBasic>? cast;
+  final List<BasicModel>? movies;
+  final List<BasicModel>? tvShows;
+  final List<BasicModel>? cast;
 
   SearchSuccess({
     required this.category,

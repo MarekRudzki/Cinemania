@@ -27,12 +27,12 @@ class Description extends StatelessWidget {
         moreStyle: const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.bold,
-          color: Colors.grey,
+          color: Color.fromARGB(255, 121, 214, 114),
         ),
         lessStyle: const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.bold,
-          color: Colors.grey,
+          color: Color.fromARGB(255, 121, 214, 114),
         ),
       ),
     );

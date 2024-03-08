@@ -1,32 +1,34 @@
 import 'dart:async';
 
-import 'package:cinemania/common/models/movie_basic.dart';
+import 'package:cinemania/common/models/basic_model_do_zmiany.dart';
 import 'package:cinemania/features/search/model/models/search_page_model.dart';
-import 'package:cinemania/features/search/view/widgets/result_item.dart';
+import 'package:cinemania/common/result_item.dart';
 import 'package:cinemania/features/search/viewmodel/pagination/pagination_bloc.dart';
 import 'package:cinemania/utils/di.dart';
 import 'package:cinemania/common/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-class MoviesResult extends StatefulWidget {
+class SearchResult extends StatefulWidget {
   final String query;
+  final Category category;
 
-  const MoviesResult({
+  const SearchResult({
     super.key,
     required this.query,
+    required this.category,
   });
 
   @override
-  State<MoviesResult> createState() => _MoviesResultState();
+  State<SearchResult> createState() => _SearchResultState();
 }
 
-class _MoviesResultState extends State<MoviesResult> {
+class _SearchResultState extends State<SearchResult> {
   final PaginationBloc _bloc = getIt<PaginationBloc>();
 
   late StreamSubscription<PaginationState> _blocListingStateSubscription;
 
-  final PagingController<int, MovieBasic> _pagingController =
+  final PagingController<int, BasicModel> _pagingController =
       PagingController(firstPageKey: 1);
 
   @override
@@ -36,7 +38,7 @@ class _MoviesResultState extends State<MoviesResult> {
         SearchPageModel(
           page: pageKey,
           query: widget.query,
-          category: Category.movies,
+          category: widget.category,
         ),
       );
     });
@@ -46,7 +48,11 @@ class _MoviesResultState extends State<MoviesResult> {
       _pagingController.value = PagingState(
         nextPageKey: listingState.page,
         error: listingState.error,
-        itemList: listingState.searchedMovies,
+        itemList: widget.category == Category.movies
+            ? listingState.searchedMovies
+            : widget.category == Category.tvShows
+                ? listingState.searchedTVShows
+                : listingState.searchedCast,
       );
     });
     super.initState();
@@ -69,7 +75,7 @@ class _MoviesResultState extends State<MoviesResult> {
         crossAxisCount: 2,
         mainAxisExtent: MediaQuery.sizeOf(context).height * 0.45,
       ),
-      builderDelegate: PagedChildBuilderDelegate<MovieBasic>(
+      builderDelegate: PagedChildBuilderDelegate<BasicModel>(
         firstPageProgressIndicatorBuilder: (context) => const Center(
           child: CircularProgressIndicator(
             color: Colors.white,
@@ -96,10 +102,11 @@ class _MoviesResultState extends State<MoviesResult> {
         ),
         itemBuilder: (context, item, i) {
           return ResultItem(
-            category: Category.movies,
+            category: widget.category,
             id: item.id,
+            gender: item.gender,
             url: item.imageUrl,
-            name: item.title,
+            name: item.name,
           );
         },
       ),

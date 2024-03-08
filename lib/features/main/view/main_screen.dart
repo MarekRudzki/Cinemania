@@ -29,7 +29,7 @@ class MainScreen extends HookWidget {
           selectedIndex: pageIndex.value,
           gap: 10,
           backgroundColor: const Color.fromARGB(255, 45, 15, 50),
-          color: Colors.grey,
+          color: const Color.fromRGBO(130, 130, 130, 1),
           activeColor: Colors.white,
           padding: const EdgeInsets.symmetric(
             horizontal: 20,
