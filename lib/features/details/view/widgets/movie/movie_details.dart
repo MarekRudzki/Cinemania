@@ -1,6 +1,7 @@
 import 'package:cinemania/common/enums.dart';
 import 'package:cinemania/features/details/model/models/movie.dart';
 import 'package:cinemania/features/details/view/widgets/common/description.dart';
+import 'package:cinemania/features/details/view/widgets/common/genres.dart';
 import 'package:cinemania/features/details/view/widgets/common/primary_photo.dart';
 import 'package:cinemania/features/details/view/widgets/common/cast.dart';
 import 'package:cinemania/features/details/view/widgets/common/similar_titles.dart';
@@ -31,14 +32,23 @@ class MovieDetails extends StatelessWidget {
                 name: movie.title,
                 id: movie.id,
               ),
-              MovieInfo(
-                budget: movie.budget,
-                genres: movie.genres,
-                releaseDate: movie.releaseDate,
-                revenue: movie.revenue,
-                runtime: movie.runtime,
-                title: movie.title,
-                voteAverage: movie.voteAverage,
+              Column(
+                children: [
+                  MovieInfo(
+                    budget: movie.budget,
+                    releaseDate: movie.releaseDate,
+                    revenue: movie.revenue,
+                    runtime: movie.runtime,
+                    title: movie.title,
+                    voteAverage: movie.voteAverage,
+                  ),
+                  if (movie.genres.isNotEmpty)
+                    Genres(
+                      genres: movie.genres,
+                      category: Category.movies,
+                      sourceId: movie.id,
+                    )
+                ],
               ),
             ],
           ),

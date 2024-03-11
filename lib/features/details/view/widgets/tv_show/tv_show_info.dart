@@ -1,12 +1,9 @@
-import 'package:cinemania/common/models/genre.dart';
-import 'package:cinemania/features/details/view/widgets/common/genres.dart';
 import 'package:flutter/material.dart';
 
 class TVShowInfo extends StatelessWidget {
   final String begginingDate;
   final String endingDate;
   final int episodesNumber;
-  final List<Genre> genres;
   final String title;
   final int seasonsNumber;
   final double voteAverage;
@@ -16,7 +13,6 @@ class TVShowInfo extends StatelessWidget {
     required this.begginingDate,
     required this.endingDate,
     required this.episodesNumber,
-    required this.genres,
     required this.title,
     required this.seasonsNumber,
     required this.voteAverage,
@@ -133,7 +129,6 @@ class TVShowInfo extends StatelessWidget {
                 ],
               ),
             const SizedBox(height: 15),
-            if (genres.isNotEmpty) Genres(genres: genres)
           ],
         ),
       ),

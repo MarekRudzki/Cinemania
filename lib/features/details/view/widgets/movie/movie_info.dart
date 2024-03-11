@@ -1,12 +1,9 @@
-import 'package:cinemania/common/models/genre.dart';
-import 'package:cinemania/features/details/view/widgets/common/genres.dart';
 import 'package:cinemania/features/details/viewmodel/bloc/details_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MovieInfo extends StatelessWidget {
   final int budget;
-  final List<Genre> genres;
   final String releaseDate;
   final int revenue;
   final int runtime;
@@ -16,7 +13,6 @@ class MovieInfo extends StatelessWidget {
   const MovieInfo({
     super.key,
     required this.budget,
-    required this.genres,
     required this.releaseDate,
     required this.revenue,
     required this.runtime,
@@ -145,7 +141,6 @@ class MovieInfo extends StatelessWidget {
                 ],
               ),
             const SizedBox(height: 25),
-            if (genres.isNotEmpty) Genres(genres: genres)
           ],
         ),
       ),

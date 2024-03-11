@@ -13,14 +13,14 @@ class HomeRepository {
   Future<List<Genre>> fetchMovieGenres() async {
     final List<Genre> genres = [];
     try {
-      final Map<String, dynamic> movieGenres =
-          await homeTMDB.fetchMovieGenres();
-      final List<dynamic> genresDynamic =
-          movieGenres['genres'] as List<dynamic>;
+      // final Map<String, dynamic> movieGenres =
+      //     await homeTMDB.fetchMovieGenres();
+      // final List<dynamic> genresDynamic =
+      //     movieGenres['genres'] as List<dynamic>;
 
-      for (final genre in genresDynamic) {
-        genres.add(Genre.fromJson(genre as Map<String, dynamic>));
-      }
+      // for (final genre in genresDynamic) {
+      //   genres.add(Genre.fromJson(genre as Map<String, dynamic>));
+      // }
       return genres;
     } catch (e) {
       rethrow;
@@ -30,14 +30,14 @@ class HomeRepository {
   Future<List<Genre>> fetchTvShowGenres() async {
     final List<Genre> genres = [];
     try {
-      final Map<String, dynamic> tvShowGenres =
-          await homeTMDB.fetchTvShowGenres();
-      final List<dynamic> genresDynamic =
-          tvShowGenres['genres'] as List<dynamic>;
+      // final Map<String, dynamic> tvShowGenres =
+      //     await homeTMDB.fetchTvShowGenres();
+      // final List<dynamic> genresDynamic =
+      //     tvShowGenres['genres'] as List<dynamic>;
 
-      for (final genre in genresDynamic) {
-        genres.add(Genre.fromJson(genre as Map<String, dynamic>));
-      }
+      // for (final genre in genresDynamic) {
+      //   genres.add(Genre.fromJson(genre as Map<String, dynamic>));
+      // }
       return genres;
     } catch (e) {
       rethrow;

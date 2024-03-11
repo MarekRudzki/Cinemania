@@ -2,6 +2,7 @@ import 'package:cinemania/features/account/viewmodel/bloc/account_bloc.dart';
 import 'package:cinemania/features/auth/view/auth_screen.dart';
 import 'package:cinemania/config/firebase_options.dart';
 import 'package:cinemania/features/auth/viewmodel/bloc/auth_bloc.dart';
+import 'package:cinemania/features/category/viewmodel/bloc/category_bloc.dart';
 import 'package:cinemania/features/details/viewmodel/bloc/details_bloc.dart';
 import 'package:cinemania/features/home/viewmodel/bloc/home_bloc.dart';
 import 'package:cinemania/features/main/view/main_screen.dart';
@@ -35,6 +36,7 @@ void main() async {
         BlocProvider(create: (context) => getIt<PaginationBloc>()),
         BlocProvider(create: (context) => getIt<DetailsBloc>()),
         BlocProvider(create: (context) => getIt<HomeBloc>()),
+        BlocProvider(create: (context) => getIt<CategoryBloc>())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

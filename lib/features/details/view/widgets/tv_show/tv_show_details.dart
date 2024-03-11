@@ -2,6 +2,7 @@ import 'package:cinemania/common/enums.dart';
 import 'package:cinemania/features/details/model/models/tv_show.dart';
 import 'package:cinemania/features/details/view/widgets/common/cast.dart';
 import 'package:cinemania/features/details/view/widgets/common/description.dart';
+import 'package:cinemania/features/details/view/widgets/common/genres.dart';
 import 'package:cinemania/features/details/view/widgets/common/photos.dart';
 import 'package:cinemania/features/details/view/widgets/common/primary_photo.dart';
 import 'package:cinemania/features/details/view/widgets/common/similar_titles.dart';
@@ -28,14 +29,23 @@ class TVShowDetails extends StatelessWidget {
                 name: tvShow.title,
                 id: tvShow.id,
               ),
-              TVShowInfo(
-                begginingDate: tvShow.begginingDate,
-                endingDate: tvShow.endingDate,
-                episodesNumber: tvShow.episodesNumber,
-                genres: tvShow.genres,
-                title: tvShow.title,
-                seasonsNumber: tvShow.seasonsNumber,
-                voteAverage: tvShow.voteAverage,
+              Column(
+                children: [
+                  TVShowInfo(
+                    begginingDate: tvShow.begginingDate,
+                    endingDate: tvShow.endingDate,
+                    episodesNumber: tvShow.episodesNumber,
+                    title: tvShow.title,
+                    seasonsNumber: tvShow.seasonsNumber,
+                    voteAverage: tvShow.voteAverage,
+                  ),
+                  if (tvShow.genres.isNotEmpty)
+                    Genres(
+                      genres: tvShow.genres,
+                      category: Category.tvShows,
+                      sourceId: tvShow.id,
+                    )
+                ],
               ),
             ],
           ),

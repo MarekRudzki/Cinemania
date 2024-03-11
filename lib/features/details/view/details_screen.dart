@@ -1,7 +1,7 @@
+import 'package:cinemania/common/back_button_fun.dart';
 import 'package:cinemania/common/custom_snackbar.dart';
 import 'package:cinemania/common/enums.dart';
 import 'package:cinemania/features/account/viewmodel/bloc/account_bloc.dart';
-import 'package:cinemania/features/details/model/models/details_history.dart';
 import 'package:cinemania/features/details/view/widgets/movie/movie_details.dart';
 import 'package:cinemania/features/details/view/widgets/person/person_details.dart';
 import 'package:cinemania/features/details/view/widgets/tv_show/tv_show_details.dart';
@@ -22,30 +22,7 @@ class DetailsScreen extends StatelessWidget {
         body: WillPopScope(
           onWillPop: () async {
             context.read<AccountBloc>().add(UserFavoritesRequested());
-            final List<DetailsHistory> history =
-                context.read<DetailsBloc>().history;
-
-            if (history.isNotEmpty) {
-              if (history.last.category == Category.movies) {
-                context
-                    .read<DetailsBloc>()
-                    .add(FetchMovieDataPressed(id: history.last.id));
-              } else if (history.last.category == Category.tvShows) {
-                context
-                    .read<DetailsBloc>()
-                    .add(FetchTVShowDataPressed(id: history.last.id));
-              } else {
-                context
-                    .read<DetailsBloc>()
-                    .add(FetchPersonDataPressed(id: history.last.id));
-              }
-              Navigator.of(context).pop();
-              context
-                  .read<DetailsBloc>()
-                  .add(DeleteLastHistoryElementPressed());
-            } else {
-              Navigator.of(context).pop();
-            }
+            backButtonFun(context: context);
             return true;
           },
           child: Container(
