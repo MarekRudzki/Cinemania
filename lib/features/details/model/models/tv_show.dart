@@ -47,8 +47,8 @@ class TVShow extends Equatable {
     final imagesDataList =
         imagesDynamic.map((e) => e as Map<String, dynamic>).toList();
 
-    final castDynamic = (detailsJson['credits'] as Map<String, dynamic>)['cast']
-        as List<dynamic>;
+    final castDynamic = (detailsJson['aggregate_credits']
+        as Map<String, dynamic>)['cast'] as List<dynamic>;
     final castDataList =
         castDynamic.map((e) => e as Map<String, dynamic>).toList();
 

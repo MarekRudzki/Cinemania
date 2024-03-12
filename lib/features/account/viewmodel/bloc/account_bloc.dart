@@ -20,29 +20,71 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     on<ChangeUsernamePressed>(_onChangeUsernamePressed);
   }
 
-  List<int> favoritesId = [];
+  List<Favorite> favorites = [];
+  late bool isCategoryScrollable;
 
   void addListToLocalFavorites({
-    required List<Favorite> allfavorites,
+    required List<Favorite> allFavorites,
   }) {
-    final List<int> newList = [];
-    for (final favorite in allfavorites) {
-      newList.add(favorite.id);
-    }
-    favoritesId = newList;
+    favorites = List.from(allFavorites);
   }
 
   bool checkIfLocalFavoritesContains({required int id}) {
-    return favoritesId.contains(id);
+    return favorites.any((favorite) => favorite.id == id);
   }
 
-  void addSingleFavToLocalFavorites({required int id}) {
-    favoritesId.add(id);
+  void addSingleFavToLocalFavorites({required Favorite favorite}) {
+    favorites.add(favorite);
   }
 
   void deleteSingleFavFromLocalFavorites({required int id}) {
-    favoritesId.remove(id);
+    favorites.removeWhere((favorite) => favorite.id == id);
   }
+
+  void checkIfCategoryIsScrollable({required String category}) {
+    final Category inputCategory;
+    if (category == 'movies') {
+      inputCategory = Category.movies;
+    } else if (category == 'tv_shows') {
+      inputCategory = Category.tvShows;
+    } else {
+      inputCategory = Category.cast;
+    }
+
+    final categoryFavorites =
+        favorites.where((favorite) => favorite.category == inputCategory);
+    final categoryCount = categoryFavorites.length;
+
+    if (categoryCount > 2) {
+      isCategoryScrollable = true;
+    } else {
+      isCategoryScrollable = false;
+    }
+  }
+
+  // List<int> favoritesId = [];
+
+  // void addListToLocalFavorites({
+  //   required List<Favorite> allFavorites,
+  // }) {
+  //   final List<int> newList = [];
+  //   for (final favorite in allFavorites) {
+  //     newList.add(favorite.id);
+  //   }
+  //   favoritesId = newList;
+  // }
+
+  // bool checkIfLocalFavoritesContains({required int id}) {
+  //   return favoritesId.contains(id);
+  // }
+
+  // void addSingleFavToLocalFavorites({required int id}) {
+  //   favoritesId.add(id);
+  // }
+
+  // void deleteSingleFavFromLocalFavorites({required int id}) {
+  //   favoritesId.remove(id);
+  // }
 
   Future<void> _onUserFavoritesRequested(
     UserFavoritesRequested event,
@@ -51,6 +93,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     emit(AccountLoading());
     try {
       final List<Favorite> favorites = await accountRepository.getFavorites();
+      addListToLocalFavorites(allFavorites: favorites);
 
       emit(AccountSuccess(
         favorites: favorites,

@@ -53,11 +53,12 @@ class Person extends Equatable {
 
     for (final entity in filmographyDataList) {
       // Delete duplicates
-      if (!filmography.any((item) => item.title == entity['original_name']) ||
+      if (!filmography.any((item) => item.title == entity['original_name']) &&
           !filmography.any((item) => item.title == entity['title'])) {
         filmography.add(PersonFilmography.fromJson(entity));
       }
     }
+
     filmography.sort((a, b) => b.popularity.compareTo(a.popularity));
 
     final double height =

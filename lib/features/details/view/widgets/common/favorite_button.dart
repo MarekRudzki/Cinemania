@@ -1,4 +1,5 @@
 import 'package:cinemania/common/enums.dart';
+import 'package:cinemania/features/account/model/models/favorite_model.dart';
 import 'package:cinemania/features/account/viewmodel/bloc/account_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,7 +43,13 @@ class FavoriteButton extends StatelessWidget {
                 gender: gender,
               ),
             );
-        context.read<AccountBloc>().addSingleFavToLocalFavorites(id: id);
+        context.read<AccountBloc>().addSingleFavToLocalFavorites(
+                favorite: Favorite(
+              category: category,
+              id: id,
+              name: name,
+              url: url,
+            ));
       }
       return !isLiked;
     }

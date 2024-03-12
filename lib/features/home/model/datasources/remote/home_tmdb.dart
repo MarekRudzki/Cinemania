@@ -25,8 +25,6 @@ class HomeTMDB {
     required int page,
   }) async {
     try {
-      //najpop z danej kategorii - query =  &with_genres=$genre&sort_by=vote_count.desc
-      // release soon - query = &primary_release_date.gte=2024-03-11&primary_release_date.lte=2024-05-11, category tylko movie
       final response = await Dio().get(
         'https://api.themoviedb.org/3/discover/$type?page=$page$query&include_adult=false&api_key=$tmbdKey',
       );
@@ -57,7 +55,6 @@ class HomeTMDB {
     required int id,
   }) async {
     try {
-      // tylko jeśli favorites.length > 2
       final response = await Dio().get(
         'https://api.themoviedb.org/3/$type/$id/recommendations?api_key=$tmbdKey',
       );

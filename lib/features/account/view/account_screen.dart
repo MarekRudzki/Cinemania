@@ -15,14 +15,20 @@ class AccountScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<AccountBloc>().add(UserFavoritesRequested());
     final favCategory = useState('movies');
+    context
+        .watch<AccountBloc>()
+        .checkIfCategoryIsScrollable(category: favCategory.value);
+    final bool isScrollable = context.watch<AccountBloc>().isCategoryScrollable;
 
     final passwordChangeVisible =
         context.read<AccountBloc>().passwordChangePossible();
 
     return Scaffold(
       body: NestedScrollView(
+        physics: isScrollable
+            ? const AlwaysScrollableScrollPhysics()
+            : const NeverScrollableScrollPhysics(),
         floatHeaderSlivers: true,
         headerSliverBuilder: (
           BuildContext context,
@@ -98,9 +104,6 @@ class AccountScreen extends HookWidget {
                   child: CircularProgressIndicator(),
                 );
               } else if (state is AccountSuccess) {
-                context
-                    .read<AccountBloc>()
-                    .addListToLocalFavorites(allfavorites: state.favorites!);
                 final currentCategoryFavorites =
                     context.read<AccountBloc>().pickFavoritesByCategory(
                           favorites: state.favorites!,
@@ -132,8 +135,10 @@ class AccountScreen extends HookWidget {
                   );
                 } else {
                   return SizedBox(
-                    height: MediaQuery.sizeOf(context).height,
                     child: GridView.builder(
+                      physics: isScrollable
+                          ? const AlwaysScrollableScrollPhysics()
+                          : const NeverScrollableScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         mainAxisExtent:

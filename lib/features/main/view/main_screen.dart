@@ -12,7 +12,12 @@ class MainScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<AccountBloc>().saveUsernameFromFirebaseToHive();
+    useEffect(() {
+      context.read<AccountBloc>().saveUsernameFromFirebaseToHive();
+      context.read<AccountBloc>().add(UserFavoritesRequested());
+      return null;
+    }, []);
+
     final pageIndex = useState(0);
 
     final List<Widget> pages = [

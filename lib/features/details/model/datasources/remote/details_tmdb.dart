@@ -24,7 +24,7 @@ class DetailsTMDB {
   }) async {
     try {
       final response = await Dio().get(
-          'https://api.themoviedb.org/3/tv/$id?api_key=$tmbdKey&append_to_response=images,credits,recommendations');
+          'https://api.themoviedb.org/3/tv/$id?api_key=$tmbdKey&append_to_response=images,aggregate_credits,recommendations');
 
       return response.data as Map<String, dynamic>;
     } on DioException {
