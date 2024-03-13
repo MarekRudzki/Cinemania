@@ -1,4 +1,4 @@
-import 'package:cinemania/features/search/view/widgets/category_picker.dart';
+import 'package:cinemania/features/search/view/widgets/search_category_picker.dart';
 import 'package:cinemania/features/search/viewmodel/search/search_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -84,7 +84,7 @@ class CustomSearchBar extends HookWidget {
             ],
           ),
           const SizedBox(height: 10),
-          CategoryPicker(
+          SearchCategoryPicker(
             callback: () {
               searchController.clear();
             },

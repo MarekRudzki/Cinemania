@@ -3,14 +3,24 @@ import 'package:cinemania/features/search/view/widgets/custom_search_bar.dart';
 import 'package:cinemania/features/search/viewmodel/search/search_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class SearchScreen extends StatelessWidget {
+class SearchScreen extends HookWidget {
   const SearchScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final bool isScrollable =
+        context.watch<SearchBloc>().searchQuery.isNotEmpty ||
+            context.watch<SearchBloc>().searchQuery != '';
+    print(isScrollable);
+    //TODO nie powinno sie przewijac
+
     return Scaffold(
       body: NestedScrollView(
+        physics: isScrollable
+            ? const AlwaysScrollableScrollPhysics()
+            : const NeverScrollableScrollPhysics(),
         floatHeaderSlivers: true,
         headerSliverBuilder: (
           BuildContext context,
@@ -46,7 +56,11 @@ class SearchScreen extends StatelessWidget {
           ),
           child: BlocBuilder<SearchBloc, SearchState>(
             builder: (context, state) {
-              if (state is SearchSuccess) {
+              if (state is SearchLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (state is SearchSuccess) {
                 final String query = context.read<SearchBloc>().searchQuery;
                 return SearchResult(
                   query: query,

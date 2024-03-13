@@ -1,6 +1,8 @@
+import 'package:cinemania/features/home/view/widgets/home_category_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends HookWidget {
   const HomeScreen({super.key});
 
   @override
@@ -17,24 +19,9 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
         ),
-        child: const SingleChildScrollView(
-          child: Column(
-            children: [
-              Placeholder(
-                strokeWidth: double.infinity,
-                fallbackHeight: 200,
-              ),
-              // TextButton(
-              //     onPressed: () {
-              //       context.read<HomeBloc>().add(FetchMovieGenresPressed());
-              //     },
-              //     child: const Text('test1')),
-              // TextButton(
-              //     onPressed: () {
-              //       context.read<HomeBloc>().add(FetchTVShowGenresPressed());
-              //     },
-              //     child: const Text('test2'))
-            ],
+        child: SingleChildScrollView(
+          child: HomeCategoryPicker(
+            callback: () {},
           ),
         ),
       ),

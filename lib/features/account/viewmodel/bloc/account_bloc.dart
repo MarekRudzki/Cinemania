@@ -41,6 +41,22 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     favorites.removeWhere((favorite) => favorite.id == id);
   }
 
+  int getCurrentCategoryLength({required String category}) {
+    final Category inputCategory;
+    if (category == 'movies') {
+      inputCategory = Category.movies;
+    } else if (category == 'tv_shows') {
+      inputCategory = Category.tvShows;
+    } else {
+      inputCategory = Category.cast;
+    }
+    final int categoryLength = favorites
+        .where((favorite) => favorite.category == inputCategory)
+        .length;
+
+    return categoryLength;
+  }
+
   void checkIfCategoryIsScrollable({required String category}) {
     final Category inputCategory;
     if (category == 'movies') {

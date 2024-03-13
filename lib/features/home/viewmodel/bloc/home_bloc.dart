@@ -12,21 +12,32 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final HomeRepository homeRepository;
 
   HomeBloc(this.homeRepository) : super(HomeInitial()) {
-    on<FetchMovieGenresPressed>(_onFetchMovieGenresPressed);
-    on<FetchTVShowGenresPressed>(_onFetchTVShowGenresPressed);
+    on<FetchGenres>(_onFetchGenres);
   }
+  final List<String> categories = [
+    'Popular Movies',
+    'Coming Soon',
+    'Recommended Movies',
+    'Recommended TV Shows',
+    'Best Movies',
+    'Best TV Shows',
+    'Movie Categories',
+    'TV Show Categories',
+  ];
 
-  Future<void> _onFetchMovieGenresPressed(
-    FetchMovieGenresPressed event,
+  Future<void> _onFetchGenres(
+    FetchGenres event,
     Emitter<HomeState> emit,
   ) async {
     final List<Genre> movieGenres = await homeRepository.fetchMovieGenres();
-  }
-
-  Future<void> _onFetchTVShowGenresPressed(
-    FetchTVShowGenresPressed event,
-    Emitter<HomeState> emit,
-  ) async {
     final List<Genre> tvShowGenres = await homeRepository.fetchTvShowGenres();
+
+    // for (final movieGenre in movieGenres) {
+    //   categories.add('Best ${movieGenre.name} Movies');
+    // }
+
+    // for (final tvShowGenre in tvShowGenres) {
+    //   categories.add('Best ${tvShowGenre.name} TV Shows');
+    // }
   }
 }

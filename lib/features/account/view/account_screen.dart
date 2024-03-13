@@ -16,6 +16,7 @@ class AccountScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final favCategory = useState('movies');
+    final scrollController = useScrollController();
     context
         .watch<AccountBloc>()
         .checkIfCategoryIsScrollable(category: favCategory.value);
@@ -24,8 +25,21 @@ class AccountScreen extends HookWidget {
     final passwordChangeVisible =
         context.read<AccountBloc>().passwordChangePossible();
 
+    final int categoryLength = context
+        .read<AccountBloc>()
+        .getCurrentCategoryLength(category: favCategory.value);
+
+    if (categoryLength == 2) {
+      scrollController.animateTo(
+        0.0,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    }
+
     return Scaffold(
       body: NestedScrollView(
+        controller: scrollController,
         physics: isScrollable
             ? const AlwaysScrollableScrollPhysics()
             : const NeverScrollableScrollPhysics(),

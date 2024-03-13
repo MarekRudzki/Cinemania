@@ -19,14 +19,13 @@ class HomeTMDB {
     }
   }
 
-  Future<Map<String, dynamic>> fetchCategoryTitles({
+  Future<Map<String, dynamic>> fetchTitlesByQuery({
     required String type,
     required String query,
-    required int page,
   }) async {
     try {
       final response = await Dio().get(
-        'https://api.themoviedb.org/3/discover/$type?page=$page$query&include_adult=false&api_key=$tmbdKey',
+        'https://api.themoviedb.org/3/discover/$type?$query&include_adult=false&api_key=$tmbdKey',
       );
 
       return response.data as Map<String, dynamic>;
@@ -35,13 +34,10 @@ class HomeTMDB {
     }
   }
 
-  Future<Map<String, dynamic>> fetchTrendingTitles({
-    required String type,
-    required int page,
-  }) async {
+  Future<Map<String, dynamic>> fetchTrendingMovies() async {
     try {
       final response = await Dio().get(
-        'https://api.themoviedb.org/3/trending/$type/day?include_adult=false&api_key=$tmbdKey',
+        'https://api.themoviedb.org/3/trending/movie/day?include_adult=false&api_key=$tmbdKey',
       );
 
       return response.data as Map<String, dynamic>;

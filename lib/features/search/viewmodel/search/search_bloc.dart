@@ -81,6 +81,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     Emitter<SearchState> emit,
   ) {
     emit(CategoryChanged());
+    searchQuery = '';
     currentCategory = event.category;
   }
 

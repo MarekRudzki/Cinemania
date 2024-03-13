@@ -48,7 +48,7 @@ class FavoritePicker extends StatelessWidget {
                       child: Icon(
                         MyIcons.movie,
                         color: currentCategory == 'movies'
-                            ? Colors.white
+                            ? const Color.fromRGBO(55, 164, 94, 1)
                             : const Color.fromARGB(255, 130, 130, 130),
                         size: currentCategory == 'movies' ? 32 : 28,
                       ),
@@ -67,7 +67,7 @@ class FavoritePicker extends StatelessWidget {
                       child: Icon(
                         MyIcons.tv_show,
                         color: currentCategory == 'tv_shows'
-                            ? Colors.white
+                            ? const Color.fromRGBO(55, 164, 94, 1)
                             : const Color.fromARGB(255, 130, 130, 130),
                         size: currentCategory == 'tv_shows' ? 32 : 28,
                       ),
@@ -86,7 +86,7 @@ class FavoritePicker extends StatelessWidget {
                       child: Icon(
                         Icons.person,
                         color: currentCategory == 'person'
-                            ? Colors.white
+                            ? const Color.fromRGBO(55, 164, 94, 1)
                             : const Color.fromARGB(255, 130, 130, 130),
                         size: currentCategory == 'person' ? 32 : 28,
                       ),

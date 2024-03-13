@@ -35,7 +35,7 @@ class MainScreen extends HookWidget {
           gap: 10,
           backgroundColor: const Color.fromARGB(255, 45, 15, 50),
           color: const Color.fromRGBO(130, 130, 130, 1),
-          activeColor: Colors.white,
+          activeColor: const Color.fromRGBO(55, 164, 94, 1),
           padding: const EdgeInsets.symmetric(
             horizontal: 20,
             vertical: 15,

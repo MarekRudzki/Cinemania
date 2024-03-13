@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-class CategoryPicker extends HookWidget {
+class SearchCategoryPicker extends HookWidget {
   final void Function() callback;
 
-  CategoryPicker({
+  SearchCategoryPicker({
     super.key,
     required this.callback,
   });
@@ -112,7 +112,7 @@ class CategoryPicker extends HookWidget {
             child: Container(
               width: MediaQuery.sizeOf(context).width * 0.22,
               height: 2,
-              color: Colors.green,
+              color: const Color.fromRGBO(55, 164, 94, 1),
             ),
           ),
         ),

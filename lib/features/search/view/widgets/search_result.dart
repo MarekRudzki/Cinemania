@@ -69,6 +69,7 @@ class _SearchResultState extends State<SearchResult> {
   @override
   Widget build(BuildContext context) {
     return PagedGridView(
+      physics: const NeverScrollableScrollPhysics(),
       showNewPageProgressIndicatorAsGridChild: false,
       pagingController: _pagingController,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
