@@ -13,8 +13,6 @@ class SearchScreen extends HookWidget {
     final bool isScrollable =
         context.watch<SearchBloc>().searchQuery.isNotEmpty ||
             context.watch<SearchBloc>().searchQuery != '';
-    print(isScrollable);
-    //TODO nie powinno sie przewijac
 
     return Scaffold(
       body: NestedScrollView(

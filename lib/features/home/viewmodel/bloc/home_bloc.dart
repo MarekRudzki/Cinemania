@@ -1,4 +1,3 @@
-import 'package:cinemania/common/models/genre.dart';
 import 'package:cinemania/features/home/model/home_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,8 +28,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     FetchGenres event,
     Emitter<HomeState> emit,
   ) async {
-    final List<Genre> movieGenres = await homeRepository.fetchMovieGenres();
-    final List<Genre> tvShowGenres = await homeRepository.fetchTvShowGenres();
+    // final List<Genre> movieGenres = await homeRepository.fetchMovieGenres();
+    // final List<Genre> tvShowGenres = await homeRepository.fetchTvShowGenres();
 
     // for (final movieGenre in movieGenres) {
     //   categories.add('Best ${movieGenre.name} Movies');

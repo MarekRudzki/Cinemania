@@ -6,6 +6,7 @@ import 'package:cinemania/features/details/view/widgets/common/genres.dart';
 import 'package:cinemania/features/details/view/widgets/common/photos.dart';
 import 'package:cinemania/features/details/view/widgets/common/primary_photo.dart';
 import 'package:cinemania/features/details/view/widgets/common/similar_titles.dart';
+import 'package:cinemania/features/details/view/widgets/tv_show/seasons_and_episodes.dart';
 import 'package:cinemania/features/details/view/widgets/tv_show/tv_show_info.dart';
 import 'package:flutter/material.dart';
 
@@ -50,6 +51,11 @@ class TVShowDetails extends StatelessWidget {
             ],
           ),
           Description(description: tvShow.overview),
+          SeasonsAndEpisodes(
+            id: tvShow.id,
+            seasonsNumber: tvShow.seasonsNumber,
+            title: tvShow.title,
+          ),
           Cast(
             cast: tvShow.cast,
             sourceCategory: Category.tvShows,

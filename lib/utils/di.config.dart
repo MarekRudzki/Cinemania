@@ -16,26 +16,30 @@ import '../features/account/model/datasources/local/account_hive.dart' as _i5;
 import '../features/account/model/datasources/remote/account_auth.dart' as _i3;
 import '../features/account/model/datasources/remote/account_firestore.dart'
     as _i4;
-import '../features/account/viewmodel/bloc/account_bloc.dart' as _i15;
+import '../features/account/viewmodel/bloc/account_bloc.dart' as _i16;
 import '../features/auth/model/auth_repository.dart' as _i10;
 import '../features/auth/model/datasources/local/auth_hive.dart' as _i9;
 import '../features/auth/model/datasources/remote/auth_auth.dart' as _i7;
 import '../features/auth/model/datasources/remote/auth_firestore.dart' as _i8;
-import '../features/auth/viewmodel/bloc/auth_bloc.dart' as _i16;
-import '../features/category/model/category_repository.dart' as _i17;
+import '../features/auth/viewmodel/bloc/auth_bloc.dart' as _i17;
+import '../features/category/model/category_repository.dart' as _i18;
 import '../features/category/model/datasources/remote/category_tmdb.dart'
     as _i11;
-import '../features/category/viewmodel/bloc/category_bloc.dart' as _i21;
+import '../features/category/viewmodel/bloc/category_bloc.dart' as _i24;
 import '../features/details/model/datasources/remote/details_tmdb.dart' as _i12;
-import '../features/details/model/details_repository.dart' as _i18;
-import '../features/details/viewmodel/bloc/details_bloc.dart' as _i22;
+import '../features/details/model/details_repository.dart' as _i19;
+import '../features/details/viewmodel/bloc/details_bloc.dart' as _i25;
 import '../features/home/model/datasources/remote/home_tmdb.dart' as _i13;
-import '../features/home/model/home_repository.dart' as _i19;
-import '../features/home/viewmodel/bloc/home_bloc.dart' as _i23;
+import '../features/home/model/home_repository.dart' as _i20;
+import '../features/home/viewmodel/bloc/home_bloc.dart' as _i26;
 import '../features/search/model/datasources/remote/search_tmdb.dart' as _i14;
-import '../features/search/model/search_repository.dart' as _i20;
-import '../features/search/viewmodel/pagination/pagination_bloc.dart' as _i24;
-import '../features/search/viewmodel/search/search_bloc.dart' as _i25;
+import '../features/search/model/search_repository.dart' as _i21;
+import '../features/search/viewmodel/pagination/pagination_bloc.dart' as _i27;
+import '../features/search/viewmodel/search/search_bloc.dart' as _i28;
+import '../features/tv_seasons/model/datasources/remote_datasources/tv_seasons_tmdb.dart'
+    as _i15;
+import '../features/tv_seasons/model/tv_seasons_repository.dart' as _i22;
+import '../features/tv_seasons/viewmodel/bloc/tv_seasons_bloc.dart' as _i23;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -68,27 +72,32 @@ extension GetItInjectableX on _i1.GetIt {
     gh.lazySingleton<_i12.DetailsTMDB>(() => _i12.DetailsTMDB());
     gh.lazySingleton<_i13.HomeTMDB>(() => _i13.HomeTMDB());
     gh.lazySingleton<_i14.SearchTMDB>(() => _i14.SearchTMDB());
-    gh.factory<_i15.AccountBloc>(
-        () => _i15.AccountBloc(accountRepository: gh<_i6.AccountRepository>()));
-    gh.factory<_i16.AuthBloc>(
-        () => _i16.AuthBloc(authRepository: gh<_i10.AuthRepository>()));
-    gh.lazySingleton<_i17.CategoryRepository>(
-        () => _i17.CategoryRepository(categoryTMDB: gh<_i11.CategoryTMDB>()));
-    gh.lazySingleton<_i18.DetailsRepository>(
-        () => _i18.DetailsRepository(detailsTMDB: gh<_i12.DetailsTMDB>()));
-    gh.lazySingleton<_i19.HomeRepository>(
-        () => _i19.HomeRepository(homeTMDB: gh<_i13.HomeTMDB>()));
-    gh.lazySingleton<_i20.SearchRepository>(
-        () => _i20.SearchRepository(searchTMDB: gh<_i14.SearchTMDB>()));
-    gh.factory<_i21.CategoryBloc>(
-        () => _i21.CategoryBloc(gh<_i17.CategoryRepository>()));
-    gh.factory<_i22.DetailsBloc>(
-        () => _i22.DetailsBloc(gh<_i18.DetailsRepository>()));
-    gh.factory<_i23.HomeBloc>(() => _i23.HomeBloc(gh<_i19.HomeRepository>()));
-    gh.factory<_i24.PaginationBloc>(
-        () => _i24.PaginationBloc(gh<_i20.SearchRepository>()));
-    gh.factory<_i25.SearchBloc>(
-        () => _i25.SearchBloc(gh<_i20.SearchRepository>()));
+    gh.lazySingleton<_i15.TVSeasonsTMDB>(() => _i15.TVSeasonsTMDB());
+    gh.factory<_i16.AccountBloc>(
+        () => _i16.AccountBloc(accountRepository: gh<_i6.AccountRepository>()));
+    gh.factory<_i17.AuthBloc>(
+        () => _i17.AuthBloc(authRepository: gh<_i10.AuthRepository>()));
+    gh.lazySingleton<_i18.CategoryRepository>(
+        () => _i18.CategoryRepository(categoryTMDB: gh<_i11.CategoryTMDB>()));
+    gh.lazySingleton<_i19.DetailsRepository>(
+        () => _i19.DetailsRepository(detailsTMDB: gh<_i12.DetailsTMDB>()));
+    gh.lazySingleton<_i20.HomeRepository>(
+        () => _i20.HomeRepository(homeTMDB: gh<_i13.HomeTMDB>()));
+    gh.lazySingleton<_i21.SearchRepository>(
+        () => _i21.SearchRepository(searchTMDB: gh<_i14.SearchTMDB>()));
+    gh.lazySingleton<_i22.TVSeasonsRepository>(
+        () => _i22.TVSeasonsRepository(tmdb: gh<_i15.TVSeasonsTMDB>()));
+    gh.factory<_i23.TVSeasonsBloc>(
+        () => _i23.TVSeasonsBloc(gh<_i22.TVSeasonsRepository>()));
+    gh.factory<_i24.CategoryBloc>(
+        () => _i24.CategoryBloc(gh<_i18.CategoryRepository>()));
+    gh.factory<_i25.DetailsBloc>(
+        () => _i25.DetailsBloc(gh<_i19.DetailsRepository>()));
+    gh.factory<_i26.HomeBloc>(() => _i26.HomeBloc(gh<_i20.HomeRepository>()));
+    gh.factory<_i27.PaginationBloc>(
+        () => _i27.PaginationBloc(gh<_i21.SearchRepository>()));
+    gh.factory<_i28.SearchBloc>(
+        () => _i28.SearchBloc(gh<_i21.SearchRepository>()));
     return this;
   }
 }

@@ -24,7 +24,7 @@ class SimilarTitles extends StatelessWidget {
         movies != null ? Category.movies : Category.tvShows;
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

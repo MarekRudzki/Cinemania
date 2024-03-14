@@ -128,7 +128,7 @@ class TVShowInfo extends StatelessWidget {
                   ),
                 ],
               ),
-            const SizedBox(height: 15),
+            const SizedBox(height: 5),
           ],
         ),
       ),

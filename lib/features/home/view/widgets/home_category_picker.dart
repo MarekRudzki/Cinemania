@@ -18,9 +18,9 @@ class HomeCategoryPicker extends HookWidget {
     final selectedCategory = useState(categories[0]);
     final currentCategory = Category.movies;
 
-    final animationController = useAnimationController(
-      duration: const Duration(milliseconds: 300),
-    );
+    // final animationController = useAnimationController(
+    //   duration: const Duration(milliseconds: 300),
+    // );
 
     return Column(
       children: [

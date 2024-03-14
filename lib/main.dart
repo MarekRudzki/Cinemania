@@ -8,6 +8,7 @@ import 'package:cinemania/features/home/viewmodel/bloc/home_bloc.dart';
 import 'package:cinemania/features/main/view/main_screen.dart';
 import 'package:cinemania/features/search/viewmodel/pagination/pagination_bloc.dart';
 import 'package:cinemania/features/search/viewmodel/search/search_bloc.dart';
+import 'package:cinemania/features/tv_seasons/viewmodel/bloc/tv_seasons_bloc.dart';
 import 'package:cinemania/utils/di.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,8 @@ void main() async {
         BlocProvider(create: (context) => getIt<PaginationBloc>()),
         BlocProvider(create: (context) => getIt<DetailsBloc>()),
         BlocProvider(create: (context) => getIt<HomeBloc>()),
-        BlocProvider(create: (context) => getIt<CategoryBloc>())
+        BlocProvider(create: (context) => getIt<CategoryBloc>()),
+        BlocProvider(create: (context) => getIt<TVSeasonsBloc>())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

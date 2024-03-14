@@ -45,7 +45,7 @@ class Photos extends StatelessWidget {
                         ),
                         child: SizedBox(
                           width: MediaQuery.sizeOf(context).width * 0.85,
-                          height: MediaQuery.sizeOf(context).height * 0.25,
+                          height: MediaQuery.sizeOf(context).height * 0.26,
                           child: FadeInImage(
                             placeholder: AssetImage(
                               context.read<DetailsBloc>().getAssetAdress(),
