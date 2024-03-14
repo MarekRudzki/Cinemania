@@ -2,22 +2,22 @@ import 'dart:async';
 
 import 'package:cinemania/common/enums.dart';
 import 'package:cinemania/common/models/basic_model.dart';
-import 'package:cinemania/features/category/model/category_repository.dart';
-import 'package:cinemania/features/category/model/models/category_page_model.dart';
+import 'package:cinemania/features/genre/model/genre_repository.dart';
+import 'package:cinemania/features/genre/model/models/genre_page_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
 
-part 'category_event.dart';
-part 'category_state.dart';
+part 'genre_event.dart';
+part 'genre_state.dart';
 
 @injectable
-class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
-  final CategoryRepository categoryRepository;
+class GenreBloc extends Bloc<GenreEvent, GenreState> {
+  final GenreRepository genreRepository;
 
-  CategoryBloc(this.categoryRepository) : super(CategoryState()) {
-    on<FetchCategoryPressed>(_onFetchCategoryPressed);
+  GenreBloc(this.genreRepository) : super(GenreState()) {
+    on<FetchGenrePressed>(_onFetchGenrePressed);
 
     _onPageRequest.stream
         .flatMap(_fetchCategory)
@@ -25,13 +25,12 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
         .addTo(_subscriptions);
   }
 
-  Future<void> _onFetchCategoryPressed(
-    FetchCategoryPressed event,
-    Emitter<CategoryState> emit,
+  Future<void> _onFetchGenrePressed(
+    FetchGenrePressed event,
+    Emitter<GenreState> emit,
   ) async {
-    final query = '&with_genres=${event.query}&sort_by=vote_count.desc';
-    await categoryRepository.fetchCategoryTitles(
-      query: query,
+    await genreRepository.fetchGenreTitles(
+      genreId: event.genreId,
       page: 1,
       type: event.type == Category.movies ? 'movie' : 'tv',
     );
@@ -41,31 +40,31 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
 
   final _subscriptions = CompositeSubscription();
 
-  final _onNewListingStateController = BehaviorSubject<CategoryState>.seeded(
-    CategoryState(),
+  final _onNewListingStateController = BehaviorSubject<GenreState>.seeded(
+    GenreState(),
   );
 
-  Stream<CategoryState> get onNewListingState =>
+  Stream<GenreState> get onNewListingState =>
       _onNewListingStateController.stream;
 
-  final _onPageRequest = StreamController<CategoryPageModel>();
+  final _onPageRequest = StreamController<GenrePageModel>();
 
-  Sink<CategoryPageModel> get onPageRequestSink => _onPageRequest.sink;
+  Sink<GenrePageModel> get onPageRequestSink => _onPageRequest.sink;
 
-  Stream<CategoryState> _fetchCategory(CategoryPageModel categoryPage) async* {
+  Stream<GenreState> _fetchCategory(GenrePageModel categoryPage) async* {
     final lastListingState = _onNewListingStateController.value;
 
     try {
       List<dynamic> newItems = [];
       if (categoryPage.category == Category.movies) {
-        newItems = await categoryRepository.fetchCategoryTitles(
-          query: '&with_genres=${categoryPage.genre}&sort_by=vote_count.desc',
+        newItems = await genreRepository.fetchGenreTitles(
+          genreId: categoryPage.genre!,
           page: categoryPage.page,
           type: 'movie',
         );
       } else {
-        newItems = await categoryRepository.fetchCategoryTitles(
-          query: '&with_genres=${categoryPage.genre}&sort_by=vote_count.desc',
+        newItems = await genreRepository.fetchGenreTitles(
+          genreId: categoryPage.genre!,
           page: categoryPage.page,
           type: 'tv',
         );
@@ -75,7 +74,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       final nextPageKey = isLastPage ? null : categoryPage.page + 1;
 
       if (categoryPage.category == Category.movies) {
-        yield CategoryState(
+        yield GenreState(
           page: nextPageKey,
           movies: [
             ...lastListingState.movies ?? [],
@@ -83,7 +82,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
           ],
         );
       } else {
-        yield CategoryState(
+        yield GenreState(
           page: nextPageKey,
           tvShows: [
             ...lastListingState.tvShows ?? [],
@@ -93,13 +92,13 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       }
     } catch (e) {
       if (categoryPage.category == Category.movies) {
-        yield CategoryState(
+        yield GenreState(
           error: e,
           page: lastListingState.page,
           movies: lastListingState.movies,
         );
       } else {
-        yield CategoryState(
+        yield GenreState(
           error: e,
           page: lastListingState.page,
           tvShows: lastListingState.tvShows,

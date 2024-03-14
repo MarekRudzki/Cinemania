@@ -1,12 +1,12 @@
 import 'package:cinemania/common/enums.dart';
 import 'package:equatable/equatable.dart';
 
-class CategoryPageModel extends Equatable {
+class GenrePageModel extends Equatable {
   final int page;
   final int? genre;
   final Category category;
 
-  CategoryPageModel({
+  GenrePageModel({
     required this.page,
     this.genre,
     required this.category,

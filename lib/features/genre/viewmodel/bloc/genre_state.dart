@@ -1,12 +1,12 @@
-part of 'category_bloc.dart';
+part of 'genre_bloc.dart';
 
-class CategoryState extends Equatable {
+class GenreState extends Equatable {
   final List<BasicModel>? movies;
   final List<BasicModel>? tvShows;
   final dynamic error;
   final int? page;
 
-  CategoryState({
+  GenreState({
     this.movies,
     this.tvShows,
     this.error,

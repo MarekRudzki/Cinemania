@@ -1,27 +1,26 @@
 import 'package:cinemania/common/models/basic_model.dart';
-import 'package:cinemania/features/category/model/datasources/remote/category_tmdb.dart';
+import 'package:cinemania/features/genre/model/datasources/remote/genre_tmdb.dart';
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
-class CategoryRepository {
-  final CategoryTMDB categoryTMDB;
+class GenreRepository {
+  final GenreTMDB genreTMDB;
 
-  CategoryRepository({
-    required this.categoryTMDB,
+  GenreRepository({
+    required this.genreTMDB,
   });
 
-  Future<List<BasicModel>> fetchCategoryTitles({
-    required String query,
+  Future<List<BasicModel>> fetchGenreTitles({
+    required int genreId,
     required int page,
     required String type,
   }) async {
     try {
       final List<BasicModel> movies = [];
 
-      final Map<String, dynamic> moviesData =
-          await categoryTMDB.fetchCategoryTitles(
+      final Map<String, dynamic> moviesData = await genreTMDB.fetchGenreTitles(
         type: type,
-        query: query,
+        genreId: genreId,
         page: page,
       );
 

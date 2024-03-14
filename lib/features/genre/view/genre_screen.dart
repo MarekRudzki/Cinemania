@@ -4,19 +4,19 @@ import 'package:cinemania/common/back_button_fun.dart';
 import 'package:cinemania/common/enums.dart';
 import 'package:cinemania/common/models/basic_model.dart';
 import 'package:cinemania/common/result_item.dart';
-import 'package:cinemania/features/category/model/models/category_page_model.dart';
-import 'package:cinemania/features/category/viewmodel/bloc/category_bloc.dart';
+import 'package:cinemania/features/genre/model/models/genre_page_model.dart';
+import 'package:cinemania/features/genre/viewmodel/bloc/genre_bloc.dart';
 import 'package:cinemania/utils/di.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-class CategoryScreen extends StatefulWidget {
+class GenreScreen extends StatefulWidget {
   final Category category;
   final String title;
   final int? genreId;
   final int page;
 
-  const CategoryScreen({
+  const GenreScreen({
     super.key,
     required this.category,
     required this.title,
@@ -25,13 +25,13 @@ class CategoryScreen extends StatefulWidget {
   });
 
   @override
-  State<CategoryScreen> createState() => _CategoryScreenState();
+  State<GenreScreen> createState() => _GenreScreenState();
 }
 
-class _CategoryScreenState extends State<CategoryScreen> {
-  final CategoryBloc _bloc = getIt<CategoryBloc>();
+class _GenreScreenState extends State<GenreScreen> {
+  final GenreBloc _bloc = getIt<GenreBloc>();
 
-  late StreamSubscription<CategoryState> _blocListingStateSubscription;
+  late StreamSubscription<GenreState> _blocListingStateSubscription;
 
   final PagingController<int, BasicModel> _pagingController =
       PagingController(firstPageKey: 1);
@@ -40,7 +40,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
   void initState() {
     _pagingController.addPageRequestListener((pageKey) {
       _bloc.onPageRequestSink.add(
-        CategoryPageModel(
+        GenrePageModel(
           page: pageKey,
           genre: widget.genreId,
           category: widget.category,

@@ -1,7 +1,7 @@
 import 'package:cinemania/common/enums.dart';
 import 'package:cinemania/common/models/genre.dart';
-import 'package:cinemania/features/category/view/category_screen.dart';
-import 'package:cinemania/features/category/viewmodel/bloc/category_bloc.dart';
+import 'package:cinemania/features/genre/view/genre_screen.dart';
+import 'package:cinemania/features/genre/viewmodel/bloc/genre_bloc.dart';
 import 'package:cinemania/features/details/viewmodel/bloc/details_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,14 +40,14 @@ class Genres extends StatelessWidget {
                   ),
                 );
 
-            context.read<CategoryBloc>().add(FetchCategoryPressed(
-                  query: '${genres[index].id}',
+            context.read<GenreBloc>().add(FetchGenrePressed(
+                  genreId: genres[index].id,
                   type: category,
                 ));
 
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => CategoryScreen(
+                builder: (context) => GenreScreen(
                   category: category,
                   title: genres[index].name,
                   page: 1,
