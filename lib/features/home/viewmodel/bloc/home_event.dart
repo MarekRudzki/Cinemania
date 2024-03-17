@@ -7,4 +7,18 @@ sealed class HomeEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class FetchGenres extends HomeEvent {}
+class CategoryChangePressed extends HomeEvent {
+  final String selectedTab;
+  final Category category;
+
+  CategoryChangePressed({
+    required this.selectedTab,
+    required this.category,
+  });
+
+  @override
+  List<Object> get props => [
+        selectedTab,
+        category,
+      ];
+}

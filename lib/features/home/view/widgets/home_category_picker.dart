@@ -5,24 +5,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class HomeCategoryPicker extends HookWidget {
-  final void Function() callback;
+  final List<String> categories;
 
   HomeCategoryPicker({
     super.key,
-    required this.callback,
+    required this.categories,
   });
 
   @override
   Widget build(BuildContext context) {
-    final List<String> categories = context.read<HomeBloc>().categories;
-    final selectedCategory = useState(categories[0]);
-    final currentCategory = Category.movies;
+    final selectedTab = context.watch<HomeBloc>().currentTab;
+    final selectedCategory = context.watch<HomeBloc>().currentCategory;
 
-    // final animationController = useAnimationController(
-    //   duration: const Duration(milliseconds: 300),
-    // );
+    final animationController = useAnimationController(
+      duration: const Duration(milliseconds: 300),
+    );
 
     return Column(
+      //TODO category picker scrolling issue
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -35,12 +35,17 @@ class HomeCategoryPicker extends HookWidget {
                 padding: const EdgeInsets.fromLTRB(5, 20, 5, 15),
                 child: GestureDetector(
                   onTap: () {
-                    selectedCategory.value = categories[index];
+                    context.read<HomeBloc>().add(
+                          CategoryChangePressed(
+                            selectedTab: categories[index],
+                            category: selectedCategory,
+                          ),
+                        );
                   },
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      color: selectedCategory.value == categories[index]
+                      color: selectedTab == categories[index]
                           ? const Color.fromRGBO(55, 164, 94, 1)
                           : Colors.grey.shade600,
                     ),
@@ -65,49 +70,48 @@ class HomeCategoryPicker extends HookWidget {
         Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              padding: const EdgeInsets.only(bottom: 8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   GestureDetector(
                     behavior: HitTestBehavior.opaque,
                     onTap: () {
-                      // animationController.animateTo(0.toDouble());
-                      // context
-                      //     .read<SearchBloc>()
-                      //     .add(ChangeCategoryPressed(category: Category.movies));
-
-                      // context.read<SearchBloc>().add(ResetSearch());
-                      // callback();
+                      animationController.animateTo(0.toDouble());
+                      context.read<HomeBloc>().add(
+                            CategoryChangePressed(
+                              selectedTab: selectedTab,
+                              category: Category.movies,
+                            ),
+                          );
                     },
                     child: Text(
                       'Movies',
                       style: TextStyle(
-                        color: currentCategory == Category.movies
+                        color: selectedCategory == Category.movies
                             ? Colors.white
                             : const Color.fromARGB(255, 130, 130, 130),
-                        fontSize: currentCategory == Category.movies ? 15 : 14,
+                        fontSize: selectedCategory == Category.movies ? 15 : 14,
                       ),
                     ),
                   ),
                   GestureDetector(
                     behavior: HitTestBehavior.opaque,
                     onTap: () {
-                      // animationController.animateTo(1.toDouble());
-                      // context
-                      //     .read<SearchBloc>()
-                      //     .add(ChangeCategoryPressed(category: Category.tvShows));
-
-                      // context.read<SearchBloc>().add(ResetSearch());
-                      // callback();
+                      animationController.animateTo(1.toDouble());
+                      context.read<HomeBloc>().add(CategoryChangePressed(
+                            selectedTab: selectedTab,
+                            category: Category.tvShows,
+                          ));
                     },
                     child: Text(
                       'TV Shows',
                       style: TextStyle(
-                        color: currentCategory == Category.tvShows
+                        color: selectedCategory == Category.tvShows
                             ? Colors.white
                             : const Color.fromARGB(255, 130, 130, 130),
-                        fontSize: currentCategory == Category.tvShows ? 15 : 14,
+                        fontSize:
+                            selectedCategory == Category.tvShows ? 15 : 14,
                       ),
                     ),
                   ),
@@ -116,20 +120,23 @@ class HomeCategoryPicker extends HookWidget {
             ),
             const SizedBox(height: 5),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
+              padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.sizeOf(context).width * 0.15,
+              ),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
                 alignment: Alignment(
-                  currentCategory == Category.movies ? -1 : 1,
+                  selectedCategory == Category.movies ? -1 : 1,
                   1,
                 ),
                 child: Container(
-                  width: MediaQuery.sizeOf(context).width * 0.22,
+                  width: MediaQuery.sizeOf(context).width * 0.33,
                   height: 2,
                   color: const Color.fromRGBO(55, 164, 94, 1),
                 ),
               ),
             ),
+            const SizedBox(height: 5),
           ],
         ),
       ],
