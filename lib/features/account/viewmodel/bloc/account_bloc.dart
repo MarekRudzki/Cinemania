@@ -78,30 +78,6 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     }
   }
 
-  // List<int> favoritesId = [];
-
-  // void addListToLocalFavorites({
-  //   required List<Favorite> allFavorites,
-  // }) {
-  //   final List<int> newList = [];
-  //   for (final favorite in allFavorites) {
-  //     newList.add(favorite.id);
-  //   }
-  //   favoritesId = newList;
-  // }
-
-  // bool checkIfLocalFavoritesContains({required int id}) {
-  //   return favoritesId.contains(id);
-  // }
-
-  // void addSingleFavToLocalFavorites({required int id}) {
-  //   favoritesId.add(id);
-  // }
-
-  // void deleteSingleFavFromLocalFavorites({required int id}) {
-  //   favoritesId.remove(id);
-  // }
-
   Future<void> _onUserFavoritesRequested(
     UserFavoritesRequested event,
     Emitter<AccountState> emit,
@@ -171,7 +147,12 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
         currentPassword: event.currentPassword,
         newPassword: event.newPassword,
       );
-      emit(AccountSuccess());
+      final List<Favorite> favorites = await accountRepository.getFavorites();
+      addListToLocalFavorites(allFavorites: favorites);
+
+      emit(AccountSuccess(
+        favorites: favorites,
+      ));
     } catch (error) {
       emit(AccountError(errorMessage: error.toString()));
       emit(AccountInitial());
@@ -210,7 +191,12 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
 
     try {
       await accountRepository.changeUsername(username: event.username);
-      emit(AccountSuccess());
+      final List<Favorite> favorites = await accountRepository.getFavorites();
+      addListToLocalFavorites(allFavorites: favorites);
+
+      emit(AccountSuccess(
+        favorites: favorites,
+      ));
     } catch (error) {
       emit(AccountError(errorMessage: error.toString()));
       emit(AccountInitial());

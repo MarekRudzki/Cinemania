@@ -22,13 +22,13 @@ class LoginRegisterButton extends StatelessWidget {
         height: MediaQuery.sizeOf(context).height * 0.05,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.primary,
         ),
         child: Center(
           child: Text(
             isLoginView ? 'Log In' : 'Register',
-            style: const TextStyle(
-              color: Color.fromARGB(255, 62, 19, 69),
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.background,
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),

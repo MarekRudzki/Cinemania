@@ -224,4 +224,20 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     _subscriptions.dispose();
     _onPageRequest.close();
   }
+
+  double calculateScrollOffset({
+    required double screenWidth,
+  }) {
+    if (currentTab == 'Popular' || currentTab == 'Coming Soon') {
+      return 0.0;
+    } else if (currentTab == 'Recommended') {
+      return screenWidth / 5;
+    } else if (currentTab == 'Greatest Hits') {
+      return screenWidth / 2;
+    } else if (currentTab.contains('s Hits')) {
+      return (screenWidth / 3) * 2;
+    } else {
+      return screenWidth;
+    }
+  }
 }

@@ -29,33 +29,33 @@ class PersonalData extends StatelessWidget {
           children: [
             Text(
               name,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 18,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
             const SizedBox(height: 15),
             Row(
               children: [
-                const Text(
+                Text(
                   'Born:',
                   style: TextStyle(
-                    color: Color.fromARGB(255, 133, 128, 128),
+                    color: Theme.of(context).colorScheme.secondary,
                   ),
                 ),
                 const SizedBox(width: 5),
                 Text(
                   birthday,
-                  style: const TextStyle(
-                    color: Colors.white,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
                 const SizedBox(width: 5),
                 if (placeOfBirth != 'No data')
-                  const Text(
+                  Text(
                     'in',
                     style: TextStyle(
-                      color: Color.fromARGB(255, 133, 128, 128),
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
               ],
@@ -65,24 +65,24 @@ class PersonalData extends StatelessWidget {
                 placeOfBirth,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
             if (deathday != 'No data')
               Row(
                 children: [
-                  const Text(
+                  Text(
                     'Date of death:',
                     style: TextStyle(
-                      color: Color.fromARGB(255, 133, 128, 128),
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
                   const SizedBox(width: 5),
                   Text(
                     deathday,
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 ],
@@ -91,10 +91,10 @@ class PersonalData extends StatelessWidget {
             if (birthday != 'Unknown date')
               Row(
                 children: [
-                  const Text(
+                  Text(
                     'Age:',
                     style: TextStyle(
-                      color: Color.fromARGB(255, 133, 128, 128),
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
                   const SizedBox(width: 5),
@@ -106,8 +106,8 @@ class PersonalData extends StatelessWidget {
                           deathday: deathday,
                         )
                         .toString(),
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 ],
@@ -116,17 +116,17 @@ class PersonalData extends StatelessWidget {
             if (height != 0)
               Row(
                 children: [
-                  const Text(
+                  Text(
                     'Height:',
                     style: TextStyle(
-                      color: Color.fromARGB(255, 133, 128, 128),
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
                   const SizedBox(width: 5),
                   Text(
                     '$height cm',
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 ],

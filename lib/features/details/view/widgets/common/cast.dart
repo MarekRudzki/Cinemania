@@ -25,10 +25,10 @@ class Cast extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             'Cast:',
             style: TextStyle(
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.primary,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -63,7 +63,7 @@ class Cast extends StatelessWidget {
                         Container(
                           decoration: BoxDecoration(
                             border: Border.all(
-                              color: Colors.white,
+                              color: Theme.of(context).colorScheme.primary,
                             ),
                           ),
                           child: EntityPhoto(
@@ -82,18 +82,19 @@ class Cast extends StatelessWidget {
                                 textAlign: TextAlign.center,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 3,
-                                style: const TextStyle(
-                                  color: Colors.white,
+                                style: TextStyle(
+                                  color: Theme.of(context).colorScheme.primary,
                                 ),
                               ),
                               if (person.character.isNotEmpty)
                                 Column(
                                   children: [
-                                    const Text(
+                                    Text(
                                       'as',
                                       style: TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 133, 128, 128),
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary,
                                       ),
                                     ),
                                     Text(
@@ -101,8 +102,10 @@ class Cast extends StatelessWidget {
                                       textAlign: TextAlign.center,
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 2,
-                                      style: const TextStyle(
-                                        color: Colors.white,
+                                      style: TextStyle(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
                                       ),
                                     )
                                   ],

@@ -88,35 +88,35 @@ class _GenreScreenState extends State<GenreScreen> {
               return [
                 SliverAppBar(
                   elevation: 5,
-                  backgroundColor: const Color.fromARGB(255, 45, 15, 50),
+                  backgroundColor: Theme.of(context).colorScheme.background,
                   forceElevated: innerBoxIsScrolled,
                   centerTitle: true,
                   leading: IconButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.arrow_back,
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                   title: Text(
                     widget.title,
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 ),
               ];
             },
             body: Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: FractionalOffset.bottomCenter,
                   colors: [
-                    Color.fromARGB(255, 45, 15, 50),
-                    Color.fromARGB(255, 87, 25, 98),
+                    Theme.of(context).colorScheme.background,
+                    Theme.of(context).colorScheme.onBackground,
                   ],
                 ),
               ),
@@ -128,14 +128,14 @@ class _GenreScreenState extends State<GenreScreen> {
                   mainAxisExtent: MediaQuery.sizeOf(context).height * 0.45,
                 ),
                 builderDelegate: PagedChildBuilderDelegate<BasicModel>(
-                  firstPageProgressIndicatorBuilder: (context) => const Center(
+                  firstPageProgressIndicatorBuilder: (context) => Center(
                     child: CircularProgressIndicator(
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
-                  newPageProgressIndicatorBuilder: (context) => const Center(
+                  newPageProgressIndicatorBuilder: (context) => Center(
                     child: CircularProgressIndicator(
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                   noItemsFoundIndicatorBuilder: (context) => Column(
@@ -143,11 +143,11 @@ class _GenreScreenState extends State<GenreScreen> {
                       SizedBox(
                         height: MediaQuery.sizeOf(context).height * 0.2,
                       ),
-                      const Text(
+                      Text(
                         'No items found.',
                         style: TextStyle(
                           fontSize: 18,
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                       ),
                     ],

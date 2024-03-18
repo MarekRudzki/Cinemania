@@ -9,19 +9,19 @@ class Logout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      child: const Row(
+      child: Row(
         children: [
-          Spacer(),
+          const Spacer(),
           Text(
             'Logout',
             style: TextStyle(
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Icon(
             Icons.logout,
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.primary,
           ),
         ],
       ),

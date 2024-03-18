@@ -27,13 +27,13 @@ class DetailsScreen extends StatelessWidget {
           },
           child: Container(
             height: double.infinity,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: FractionalOffset.bottomCenter,
                 colors: [
-                  Color.fromARGB(255, 45, 15, 50),
-                  Color.fromARGB(255, 87, 25, 98),
+                  Theme.of(context).colorScheme.background,
+                  Theme.of(context).colorScheme.onBackground,
                 ],
               ),
             ),
@@ -44,7 +44,7 @@ class DetailsScreen extends StatelessWidget {
                     ScaffoldMessenger.of(context).showSnackBar(
                       CustomSnackbar.showSnackBar(
                         message: state.errorMessage,
-                        backgroundColor: Colors.red,
+                        backgroundColor: Theme.of(context).colorScheme.error,
                       ),
                     );
                   }
@@ -53,9 +53,9 @@ class DetailsScreen extends StatelessWidget {
                   if (state is DetailsLoading) {
                     return SizedBox(
                       height: MediaQuery.sizeOf(context).height,
-                      child: const Center(
+                      child: Center(
                         child: CircularProgressIndicator(
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                       ),
                     );

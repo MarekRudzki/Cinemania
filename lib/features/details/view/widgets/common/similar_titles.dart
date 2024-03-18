@@ -28,10 +28,10 @@ class SimilarTitles extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             'You may also like:',
             style: TextStyle(
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.primary,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -77,7 +77,7 @@ class SimilarTitles extends StatelessWidget {
                         Container(
                           decoration: BoxDecoration(
                             border: Border.all(
-                              color: Colors.white,
+                              color: Theme.of(context).colorScheme.primary,
                             ),
                           ),
                           child: EntityPhoto(
@@ -97,8 +97,8 @@ class SimilarTitles extends StatelessWidget {
                             textAlign: TextAlign.center,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 3,
-                            style: const TextStyle(
-                              color: Colors.white,
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.primary,
                             ),
                           ),
                         )

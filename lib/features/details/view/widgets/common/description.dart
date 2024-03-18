@@ -19,20 +19,20 @@ class Description extends StatelessWidget {
         trimMode: TrimMode.Line,
         trimLines: 4,
         textAlign: TextAlign.justify,
-        style: const TextStyle(
-          color: Colors.white,
+        style: TextStyle(
+          color: Theme.of(context).colorScheme.primary,
         ),
         trimCollapsedText: ' Read more',
         trimExpandedText: ' Show less',
-        moreStyle: const TextStyle(
+        moreStyle: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.bold,
-          color: const Color.fromRGBO(55, 164, 94, 1),
+          color: Theme.of(context).colorScheme.onPrimary,
         ),
-        lessStyle: const TextStyle(
+        lessStyle: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.bold,
-          color: const Color.fromRGBO(55, 164, 94, 1),
+          color: Theme.of(context).colorScheme.onPrimary,
         ),
       ),
     );

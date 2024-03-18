@@ -23,7 +23,7 @@ class CustomTextField extends HookWidget {
       children: [
         Icon(
           icon,
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.primary,
           size: 20,
         ),
         const SizedBox(width: 15),
@@ -33,16 +33,16 @@ class CustomTextField extends HookWidget {
             obscureText: !isPasswordVisible.value && icon == Icons.key,
             controller: controller,
             textInputAction: inputAction,
-            cursorColor: Colors.white,
+            cursorColor: Theme.of(context).colorScheme.primary,
             decoration: InputDecoration(
-              enabledBorder: const UnderlineInputBorder(
+              enabledBorder: UnderlineInputBorder(
                 borderSide: BorderSide(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
-              focusedBorder: const UnderlineInputBorder(
+              focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
               labelText: labelText,
@@ -51,8 +51,8 @@ class CustomTextField extends HookWidget {
                 fontSize: 14,
               ),
             ),
-            style: const TextStyle(
-              color: Colors.white,
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
         ),
@@ -63,7 +63,7 @@ class CustomTextField extends HookWidget {
             },
             icon: Icon(
               isPasswordVisible.value ? Icons.visibility_off : Icons.visibility,
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
       ],

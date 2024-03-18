@@ -31,9 +31,9 @@ class MovieInfo extends StatelessWidget {
           children: [
             Text(
               title,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 18,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
             if (voteAverage != 0.0)
@@ -47,16 +47,16 @@ class MovieInfo extends StatelessWidget {
                   const SizedBox(width: 4),
                   Text(
                     voteAverage.toStringAsFixed(1),
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.w600,
                       fontSize: 15,
                     ),
                   ),
-                  const Text(
+                  Text(
                     '/10',
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
                       fontSize: 15,
                     ),
                   )
@@ -66,17 +66,17 @@ class MovieInfo extends StatelessWidget {
             if (releaseDate != 'No data')
               Row(
                 children: [
-                  const Text(
+                  Text(
                     'Release:',
                     style: TextStyle(
-                      color: Color.fromARGB(255, 133, 128, 128),
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
                   const SizedBox(width: 5),
                   Text(
                     releaseDate,
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 ],
@@ -85,10 +85,10 @@ class MovieInfo extends StatelessWidget {
             if (runtime != 0)
               Row(
                 children: [
-                  const Text(
+                  Text(
                     'Runtime:',
                     style: TextStyle(
-                      color: Color.fromARGB(255, 133, 128, 128),
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
                   const SizedBox(width: 5),
@@ -96,8 +96,8 @@ class MovieInfo extends StatelessWidget {
                     context
                         .read<DetailsBloc>()
                         .calculateMovieLength(minutes: runtime),
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 ],
@@ -106,17 +106,17 @@ class MovieInfo extends StatelessWidget {
             if (budget != 0)
               Row(
                 children: [
-                  const Text(
+                  Text(
                     'Budget:',
                     style: TextStyle(
-                      color: Color.fromARGB(255, 133, 128, 128),
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
                   const SizedBox(width: 5),
                   Text(
                     context.read<DetailsBloc>().showBigNumer(number: budget),
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 ],
@@ -125,17 +125,17 @@ class MovieInfo extends StatelessWidget {
             if (revenue != 0)
               Row(
                 children: [
-                  const Text(
+                  Text(
                     'Revenue:',
                     style: TextStyle(
-                      color: Color.fromARGB(255, 133, 128, 128),
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
                   const SizedBox(width: 5),
                   Text(
                     context.read<DetailsBloc>().showBigNumer(number: revenue),
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 ],

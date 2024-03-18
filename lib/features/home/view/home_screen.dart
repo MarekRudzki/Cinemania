@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
           return [
             SliverAppBar(
               elevation: 5,
-              backgroundColor: const Color.fromARGB(255, 45, 15, 50),
+              backgroundColor: Theme.of(context).colorScheme.background,
               forceElevated: innerBoxIsScrolled,
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(75),
@@ -39,9 +39,9 @@ class HomeScreen extends StatelessWidget {
                             categories: snapshot.data!,
                           );
                         } else {
-                          return const Center(
+                          return Center(
                             child: CircularProgressIndicator(
-                              color: Colors.white,
+                              color: Theme.of(context).colorScheme.primary,
                             ),
                           );
                         }
@@ -54,22 +54,22 @@ class HomeScreen extends StatelessWidget {
           ];
         },
         body: Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: FractionalOffset.bottomCenter,
               colors: [
-                Color.fromARGB(255, 45, 15, 50),
-                Color.fromARGB(255, 87, 25, 98),
+                Theme.of(context).colorScheme.background,
+                Theme.of(context).colorScheme.onBackground,
               ],
             ),
           ),
           child: BlocBuilder<HomeBloc, HomeState>(
             builder: (context, state) {
               if (state is HomeLoading) {
-                return const Center(
+                return Center(
                   child: CircularProgressIndicator(
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 );
               } else {

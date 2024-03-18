@@ -14,7 +14,7 @@ class EpisodePhoto extends StatelessWidget {
       width: MediaQuery.sizeOf(context).width * 0.95,
       decoration: BoxDecoration(
         border: Border.all(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.primary,
         ),
       ),
       child: SizedBox(
@@ -33,11 +33,11 @@ class EpisodePhoto extends StatelessWidget {
                     left: 0,
                     right: 0,
                     top: MediaQuery.sizeOf(context).height * 0.22,
-                    child: const Center(
+                    child: Center(
                       child: Text(
                         'NO IMAGE',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.primary,
                           fontSize: 16,
                         ),
                       ),

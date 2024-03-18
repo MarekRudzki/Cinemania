@@ -13,19 +13,19 @@ class ChangeUsername extends HookWidget {
     final usernameController = useTextEditingController();
 
     return InkWell(
-      child: const Row(
+      child: Row(
         children: [
-          Spacer(),
+          const Spacer(),
           Text(
             'Change username',
             style: TextStyle(
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Icon(
             Icons.person,
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.primary,
           ),
         ],
       ),
@@ -41,12 +41,12 @@ class ChangeUsername extends HookWidget {
                 content: Container(
                   padding: const EdgeInsets.fromLTRB(15, 20, 15, 10),
                   decoration: BoxDecoration(
-                    gradient: const LinearGradient(
+                    gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: FractionalOffset.bottomCenter,
                       colors: [
-                        Color.fromARGB(255, 45, 15, 50),
-                        Color.fromARGB(255, 87, 25, 98),
+                        Theme.of(context).colorScheme.background,
+                        Theme.of(context).colorScheme.onBackground,
                       ],
                     ),
                     borderRadius: BorderRadius.circular(20),
@@ -54,20 +54,20 @@ class ChangeUsername extends HookWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text(
+                      Text(
                         'Change username?',
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                       ),
                       const SizedBox(height: 10),
-                      const Text(
+                      Text(
                         softWrap: true,
                         'Enter new username you want to use.',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.primary,
                           fontSize: 14,
                         ),
                       ),
@@ -81,7 +81,9 @@ class ChangeUsername extends HookWidget {
                             ScaffoldMessenger.of(context).showSnackBar(
                               CustomSnackbar.showSnackBar(
                                 message: 'Username changed successfully',
-                                backgroundColor: Colors.green,
+                                backgroundColor: Theme.of(context)
+                                    .colorScheme
+                                    .onPrimaryContainer,
                               ),
                             );
                           }
@@ -98,15 +100,17 @@ class ChangeUsername extends HookWidget {
                                   },
                                 );
                                 return Container(
-                                  color: Colors.red,
+                                  color: Theme.of(context).colorScheme.error,
                                   padding: const EdgeInsets.all(12),
                                   child: Wrap(
                                     children: [
                                       Center(
                                         child: Text(
                                           state.errorMessage,
-                                          style: const TextStyle(
-                                            color: Colors.white,
+                                          style: TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary,
                                             fontSize: 15,
                                           ),
                                         ),
@@ -149,9 +153,11 @@ class ChangeUsername extends HookWidget {
                                     ),
                                   );
                             },
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.done,
-                              color: Colors.green,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onPrimaryContainer,
                             ),
                           ),
                           const SizedBox(width: 8),

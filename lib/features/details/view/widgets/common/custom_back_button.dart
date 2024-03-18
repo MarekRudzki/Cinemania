@@ -12,18 +12,18 @@ class CustomBackButton extends StatelessWidget {
       top: 00,
       left: 00,
       child: IconButton(
-        icon: const Icon(
+        icon: Icon(
           Icons.arrow_back,
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.primary,
           shadows: [
-            Shadow(
+            const Shadow(
               blurRadius: 6.0,
               offset: Offset(
                 0.0,
                 3.0,
               ),
             ),
-            Shadow(
+            const Shadow(
               blurRadius: 6.0,
               offset: Offset(
                 3.0,

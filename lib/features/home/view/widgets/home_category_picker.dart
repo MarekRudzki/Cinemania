@@ -17,18 +17,24 @@ class HomeCategoryPicker extends HookWidget {
     final selectedTab = context.watch<HomeBloc>().currentTab;
     final selectedCategory = context.watch<HomeBloc>().currentCategory;
 
+    final scrollController = useScrollController(
+      initialScrollOffset: context.read<HomeBloc>().calculateScrollOffset(
+            screenWidth: MediaQuery.sizeOf(context).width,
+          ),
+    );
+
     final animationController = useAnimationController(
       duration: const Duration(milliseconds: 300),
     );
 
     return Column(
-      //TODO category picker scrolling issue
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5),
           child: SizedBox(
             height: 80,
             child: ListView.builder(
+              controller: scrollController,
               itemCount: categories.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) => Padding(
@@ -46,16 +52,16 @@ class HomeCategoryPicker extends HookWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       color: selectedTab == categories[index]
-                          ? const Color.fromRGBO(55, 164, 94, 1)
-                          : Colors.grey.shade600,
+                          ? Theme.of(context).colorScheme.onPrimary
+                          : Theme.of(context).colorScheme.scrim,
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Center(
                         child: Text(
                           categories[index],
-                          style: const TextStyle(
-                            color: Colors.white,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -89,8 +95,8 @@ class HomeCategoryPicker extends HookWidget {
                       'Movies',
                       style: TextStyle(
                         color: selectedCategory == Category.movies
-                            ? Colors.white
-                            : const Color.fromARGB(255, 130, 130, 130),
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).colorScheme.secondary,
                         fontSize: selectedCategory == Category.movies ? 15 : 14,
                       ),
                     ),
@@ -108,8 +114,8 @@ class HomeCategoryPicker extends HookWidget {
                       'TV Shows',
                       style: TextStyle(
                         color: selectedCategory == Category.tvShows
-                            ? Colors.white
-                            : const Color.fromARGB(255, 130, 130, 130),
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).colorScheme.secondary,
                         fontSize:
                             selectedCategory == Category.tvShows ? 15 : 14,
                       ),
@@ -132,7 +138,7 @@ class HomeCategoryPicker extends HookWidget {
                 child: Container(
                   width: MediaQuery.sizeOf(context).width * 0.33,
                   height: 2,
-                  color: const Color.fromRGBO(55, 164, 94, 1),
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
               ),
             ),

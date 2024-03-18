@@ -74,14 +74,14 @@ class _HomeTitlesState extends State<HomeTitles> {
         mainAxisExtent: MediaQuery.sizeOf(context).height * 0.45,
       ),
       builderDelegate: PagedChildBuilderDelegate<BasicModel>(
-        firstPageProgressIndicatorBuilder: (context) => const Center(
+        firstPageProgressIndicatorBuilder: (context) => Center(
           child: CircularProgressIndicator(
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.primary,
           ),
         ),
-        newPageProgressIndicatorBuilder: (context) => const Center(
+        newPageProgressIndicatorBuilder: (context) => Center(
           child: CircularProgressIndicator(
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.primary,
           ),
         ),
         noItemsFoundIndicatorBuilder: (context) => Column(
@@ -89,11 +89,11 @@ class _HomeTitlesState extends State<HomeTitles> {
             SizedBox(
               height: MediaQuery.sizeOf(context).height * 0.2,
             ),
-            const Text(
+            Text(
               'No items found.',
               style: TextStyle(
                 fontSize: 18,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
           ],

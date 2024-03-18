@@ -22,13 +22,13 @@ class AuthScreen extends HookWidget {
 
     return SafeArea(
       child: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: FractionalOffset.bottomCenter,
             colors: [
-              Color.fromARGB(255, 45, 15, 50),
-              Color.fromARGB(255, 87, 25, 98),
+              Theme.of(context).colorScheme.background,
+              Theme.of(context).colorScheme.onBackground,
             ],
           ),
         ),
@@ -55,12 +55,15 @@ class AuthScreen extends HookWidget {
                     SnackBar(
                       content: Text(
                         state.errorMessage,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                         textAlign: TextAlign.center,
                       ),
                       duration: const Duration(
                         seconds: 3,
                       ),
-                      backgroundColor: Colors.red,
+                      backgroundColor: Theme.of(context).colorScheme.error,
                     ),
                   );
                 } else if (state is AuthSuccess &&

@@ -26,7 +26,7 @@ class SwitchViewButton extends StatelessWidget {
           onPressed: callback,
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.primary,
               borderRadius: BorderRadius.circular(15),
             ),
             padding: const EdgeInsets.symmetric(

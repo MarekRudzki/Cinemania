@@ -33,10 +33,10 @@ class CustomSearchBar extends HookWidget {
                         const EdgeInsets.symmetric(horizontal: 20, vertical: 2),
                     child: TextField(
                       controller: searchController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         hintText: 'Search...',
                         hintStyle: TextStyle(
-                          color: Color.fromARGB(255, 87, 46, 95),
+                          color: Theme.of(context).colorScheme.onBackground,
                         ),
                         border: InputBorder.none,
                       ),
@@ -74,9 +74,9 @@ class CustomSearchBar extends HookWidget {
                             ),
                           );
                     },
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.search,
-                      color: Color.fromARGB(255, 45, 15, 50),
+                      color: Theme.of(context).colorScheme.background,
                     ),
                   ),
                 ),

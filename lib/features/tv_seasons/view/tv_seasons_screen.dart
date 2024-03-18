@@ -32,13 +32,13 @@ class TVSeasonsScreen extends HookWidget {
             return [
               SliverAppBar(
                 elevation: 5,
-                backgroundColor: const Color.fromARGB(255, 45, 15, 50),
+                backgroundColor: Theme.of(context).colorScheme.background,
                 forceElevated: innerBoxIsScrolled,
                 centerTitle: true,
                 title: Text(
                   showTitle,
-                  style: const TextStyle(
-                    color: Colors.white,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
                     fontSize: 18,
                   ),
                 ),
@@ -46,9 +46,9 @@ class TVSeasonsScreen extends HookWidget {
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.arrow_back,
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
                 bottom: PreferredSize(
@@ -75,13 +75,13 @@ class TVSeasonsScreen extends HookWidget {
             ];
           },
           body: Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: FractionalOffset.bottomCenter,
                 colors: [
-                  Color.fromARGB(255, 45, 15, 50),
-                  Color.fromARGB(255, 87, 25, 98),
+                  Theme.of(context).colorScheme.background,
+                  Theme.of(context).colorScheme.onBackground,
                 ],
               ),
             ),
@@ -92,7 +92,7 @@ class TVSeasonsScreen extends HookWidget {
                   ScaffoldMessenger.of(context).showSnackBar(
                     CustomSnackbar.showSnackBar(
                       message: state.errorMessage,
-                      backgroundColor: Colors.red,
+                      backgroundColor: Theme.of(context).colorScheme.error,
                     ),
                   );
                 }
@@ -121,8 +121,10 @@ class TVSeasonsScreen extends HookWidget {
                                         Text(
                                           overview,
                                           textAlign: TextAlign.justify,
-                                          style: const TextStyle(
-                                            color: Colors.white,
+                                          style: TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary,
                                           ),
                                         ),
                                         const SizedBox(height: 20),

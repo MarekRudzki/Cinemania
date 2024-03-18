@@ -51,27 +51,39 @@ class AccountScreen extends HookWidget {
           return [
             SliverAppBar(
               elevation: 5,
-              backgroundColor: const Color.fromARGB(255, 45, 15, 50),
+              backgroundColor: Theme.of(context).colorScheme.background,
               forceElevated: innerBoxIsScrolled,
               centerTitle: true,
               title: Text(
                 context.watch<AccountBloc>().getUsername(),
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
                   fontSize: 18,
                 ),
               ),
               actions: [
                 PopupMenuButton(
-                  iconColor: Colors.white,
-                  color: const Color.fromARGB(255, 87, 25, 98),
+                  iconColor: Theme.of(context).colorScheme.primary,
+                  color: Theme.of(context).colorScheme.onBackground,
                   itemBuilder: (context) {
                     return [
-                      const PopupMenuItem(child: ChangeUsername()),
+                      const PopupMenuItem(
+                        child: ChangeUsername(),
+                        enabled: false,
+                      ),
                       if (passwordChangeVisible)
-                        const PopupMenuItem(child: ChangePassword()),
-                      const PopupMenuItem(child: DeleteAccount()),
-                      const PopupMenuItem(child: Logout()),
+                        const PopupMenuItem(
+                          child: ChangePassword(),
+                          enabled: false,
+                        ),
+                      const PopupMenuItem(
+                        child: DeleteAccount(),
+                        enabled: false,
+                      ),
+                      const PopupMenuItem(
+                        child: Logout(),
+                        enabled: false,
+                      ),
                     ];
                   },
                 ),
@@ -90,13 +102,13 @@ class AccountScreen extends HookWidget {
           ];
         },
         body: Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: FractionalOffset.bottomCenter,
               colors: [
-                Color.fromARGB(255, 45, 15, 50),
-                Color.fromARGB(255, 87, 25, 98),
+                Theme.of(context).colorScheme.background,
+                Theme.of(context).colorScheme.onBackground,
               ],
             ),
           ),
@@ -107,7 +119,7 @@ class AccountScreen extends HookWidget {
                 ScaffoldMessenger.of(context).showSnackBar(
                   CustomSnackbar.showSnackBar(
                     message: state.errorMessage,
-                    backgroundColor: Colors.red,
+                    backgroundColor: Theme.of(context).colorScheme.error,
                   ),
                 );
               }
@@ -133,15 +145,15 @@ class AccountScreen extends HookWidget {
                     children: [
                       Text(
                         'You don\'t have any favorite $noCategoryText yet!',
-                        style: const TextStyle(
-                          color: Colors.white,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
                           fontSize: 16,
                         ),
                       ),
-                      const Text(
+                      Text(
                         'Try add some!',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.primary,
                           fontSize: 16,
                         ),
                       ),

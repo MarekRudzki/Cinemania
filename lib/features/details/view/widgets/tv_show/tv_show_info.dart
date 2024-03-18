@@ -29,9 +29,9 @@ class TVShowInfo extends StatelessWidget {
           children: [
             Text(
               title,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 18,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
             if (voteAverage != 0.0)
@@ -45,16 +45,16 @@ class TVShowInfo extends StatelessWidget {
                   const SizedBox(width: 4),
                   Text(
                     voteAverage.toStringAsFixed(1),
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.w600,
                       fontSize: 15,
                     ),
                   ),
-                  const Text(
+                  Text(
                     '/10',
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
                       fontSize: 15,
                     ),
                   )
@@ -68,22 +68,22 @@ class TVShowInfo extends StatelessWidget {
                     children: [
                       Text(
                         begginingDate.substring(0, 4),
-                        style: const TextStyle(
-                          color: Colors.white,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                       ),
                       const SizedBox(height: 5),
-                      const Text(
+                      Text(
                         ' - ',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                       ),
                       if (endingDate != 'No data')
                         Text(
                           endingDate.substring(0, 4),
-                          style: const TextStyle(
-                            color: Colors.white,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
                           ),
                         ),
                     ],
@@ -94,17 +94,17 @@ class TVShowInfo extends StatelessWidget {
             if (seasonsNumber != 0)
               Row(
                 children: [
-                  const Text(
+                  Text(
                     'Seasons:',
                     style: TextStyle(
-                      color: Color.fromARGB(255, 133, 128, 128),
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
                   const SizedBox(width: 5),
                   Text(
                     '$seasonsNumber',
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 ],
@@ -113,17 +113,17 @@ class TVShowInfo extends StatelessWidget {
             if (episodesNumber != 0)
               Row(
                 children: [
-                  const Text(
+                  Text(
                     'Episodes:',
                     style: TextStyle(
-                      color: Color.fromARGB(255, 133, 128, 128),
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
                   const SizedBox(width: 5),
                   Text(
                     '$episodesNumber',
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 ],

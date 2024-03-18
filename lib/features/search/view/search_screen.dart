@@ -27,7 +27,7 @@ class SearchScreen extends HookWidget {
           return [
             SliverAppBar(
               elevation: 5,
-              backgroundColor: const Color.fromARGB(255, 45, 15, 50),
+              backgroundColor: Theme.of(context).colorScheme.background,
               forceElevated: innerBoxIsScrolled,
               bottom: const PreferredSize(
                 preferredSize: Size.fromHeight(95),
@@ -42,13 +42,13 @@ class SearchScreen extends HookWidget {
           ];
         },
         body: Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: FractionalOffset.bottomCenter,
               colors: [
-                Color.fromARGB(255, 45, 15, 50),
-                Color.fromARGB(255, 87, 25, 98),
+                Theme.of(context).colorScheme.background,
+                Theme.of(context).colorScheme.onBackground,
               ],
             ),
           ),

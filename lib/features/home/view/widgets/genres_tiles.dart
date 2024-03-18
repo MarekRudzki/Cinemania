@@ -47,7 +47,7 @@ class GenresTiles extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               border: Border.all(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.primary,
                 width: 0.5,
               ),
               gradient: const LinearGradient(
@@ -63,8 +63,8 @@ class GenresTiles extends StatelessWidget {
               child: Text(
                 genres[index].name,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
             ),

@@ -46,7 +46,7 @@ class ResultItem extends StatelessWidget {
               height: MediaQuery.sizeOf(context).height * 0.37,
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
               child: url.contains('No data')
@@ -64,11 +64,11 @@ class ResultItem extends StatelessWidget {
                           left: 0,
                           right: 0,
                           top: MediaQuery.sizeOf(context).height * 0.22,
-                          child: const Center(
+                          child: Center(
                             child: Text(
                               'NO IMAGE',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: Theme.of(context).colorScheme.primary,
                                 fontSize: 16,
                               ),
                             ),
@@ -98,8 +98,8 @@ class ResultItem extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.center,
                     maxLines: 2,
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.w500,
                       fontSize: 16,
                     ),

@@ -35,11 +35,11 @@ class EntityPhoto extends StatelessWidget {
                   left: 0,
                   right: 0,
                   top: MediaQuery.sizeOf(context).height * 0.17,
-                  child: const Center(
+                  child: Center(
                     child: Text(
                       'NO IMAGE',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.primary,
                         fontSize: 16,
                       ),
                     ),

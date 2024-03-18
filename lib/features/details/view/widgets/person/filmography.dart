@@ -33,10 +33,10 @@ class Filmography extends HookWidget {
         children: [
           Row(
             children: [
-              const Text(
+              Text(
                 'Known for:',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.primary,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -50,8 +50,8 @@ class Filmography extends HookWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     color: currentCategory.value == 'movie'
-                        ? Colors.white
-                        : const Color.fromARGB(255, 133, 128, 128),
+                        ? Theme.of(context).colorScheme.primary
+                        : Theme.of(context).colorScheme.secondary,
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Padding(
@@ -61,8 +61,8 @@ class Filmography extends HookWidget {
                       'Movies',
                       style: TextStyle(
                         color: currentCategory.value == 'movie'
-                            ? const Color.fromARGB(255, 45, 15, 50)
-                            : Colors.white,
+                            ? Theme.of(context).colorScheme.background
+                            : Theme.of(context).colorScheme.primary,
                         fontWeight: FontWeight.w500,
                         fontSize: 15,
                       ),
@@ -80,8 +80,8 @@ class Filmography extends HookWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     color: currentCategory.value == 'tv'
-                        ? Colors.white
-                        : const Color.fromARGB(255, 133, 128, 128),
+                        ? Theme.of(context).colorScheme.primary
+                        : Theme.of(context).colorScheme.secondary,
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Padding(
@@ -91,8 +91,8 @@ class Filmography extends HookWidget {
                       'TV Shows',
                       style: TextStyle(
                         color: currentCategory.value == 'tv'
-                            ? const Color.fromARGB(255, 45, 15, 50)
-                            : Colors.white,
+                            ? Theme.of(context).colorScheme.background
+                            : Theme.of(context).colorScheme.primary,
                         fontWeight: FontWeight.w500,
                         fontSize: 15,
                       ),
@@ -152,7 +152,7 @@ class Filmography extends HookWidget {
                         Container(
                           decoration: BoxDecoration(
                             border: Border.all(
-                              color: Colors.white,
+                              color: Theme.of(context).colorScheme.primary,
                             ),
                           ),
                           child: EntityPhoto(
@@ -170,8 +170,8 @@ class Filmography extends HookWidget {
                             textAlign: TextAlign.center,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 3,
-                            style: const TextStyle(
-                              color: Colors.white,
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.primary,
                             ),
                           ),
                         )

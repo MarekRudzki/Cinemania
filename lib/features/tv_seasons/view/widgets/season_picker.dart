@@ -39,16 +39,16 @@ class SeasonPicker extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   color: selectedSeason == index + 1
-                      ? const Color.fromRGBO(55, 164, 94, 1)
-                      : Colors.grey.shade600,
+                      ? Theme.of(context).colorScheme.onPrimary
+                      : Theme.of(context).colorScheme.scrim,
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Center(
                     child: Text(
                       'Season ${index + 1}',
-                      style: const TextStyle(
-                        color: Colors.white,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
                         fontWeight: FontWeight.w500,
                       ),
                     ),

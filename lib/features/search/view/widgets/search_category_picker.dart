@@ -42,8 +42,8 @@ class SearchCategoryPicker extends HookWidget {
                   'Movies',
                   style: TextStyle(
                     color: currentCategory == Category.movies
-                        ? Colors.white
-                        : const Color.fromARGB(255, 130, 130, 130),
+                        ? Theme.of(context).colorScheme.primary
+                        : Theme.of(context).colorScheme.secondary,
                     fontSize: currentCategory == Category.movies ? 15 : 14,
                   ),
                 ),
@@ -63,8 +63,8 @@ class SearchCategoryPicker extends HookWidget {
                   'TV Shows',
                   style: TextStyle(
                     color: currentCategory == Category.tvShows
-                        ? Colors.white
-                        : const Color.fromARGB(255, 130, 130, 130),
+                        ? Theme.of(context).colorScheme.primary
+                        : Theme.of(context).colorScheme.secondary,
                     fontSize: currentCategory == Category.tvShows ? 15 : 14,
                   ),
                 ),
@@ -86,8 +86,8 @@ class SearchCategoryPicker extends HookWidget {
                     'Cast',
                     style: TextStyle(
                       color: currentCategory == Category.cast
-                          ? Colors.white
-                          : const Color.fromARGB(255, 130, 130, 130),
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.secondary,
                       fontSize: currentCategory == Category.cast ? 15 : 14,
                     ),
                   ),
@@ -112,7 +112,7 @@ class SearchCategoryPicker extends HookWidget {
             child: Container(
               width: MediaQuery.sizeOf(context).width * 0.22,
               height: 2,
-              color: const Color.fromRGBO(55, 164, 94, 1),
+              color: Theme.of(context).colorScheme.onPrimary,
             ),
           ),
         ),

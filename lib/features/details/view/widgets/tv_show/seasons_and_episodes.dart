@@ -42,14 +42,14 @@ class SeasonsAndEpisodes extends StatelessWidget {
           height: MediaQuery.sizeOf(context).height * 0.05,
           decoration: BoxDecoration(
             border: Border.all(
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
-          child: const Center(
+          child: Center(
             child: Text(
               'Seasons & Episodes',
               style: TextStyle(
-                color: Color.fromRGBO(55, 164, 94, 1),
+                color: Theme.of(context).colorScheme.onPrimary,
                 fontWeight: FontWeight.bold,
               ),
             ),

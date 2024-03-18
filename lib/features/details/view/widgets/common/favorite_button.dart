@@ -64,7 +64,7 @@ class FavoriteButton extends StatelessWidget {
         likeBuilder: (bool isLiked) {
           return GlowIcon(
             Icons.favorite,
-            color: isLiked ? Colors.red : Colors.grey,
+            color: isLiked ? Theme.of(context).colorScheme.error : Colors.grey,
             size: 30,
             glowColor: Colors.black,
             blurRadius: 5,

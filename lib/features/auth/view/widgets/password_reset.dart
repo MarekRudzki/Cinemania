@@ -49,12 +49,12 @@ class PasswordReset extends HookWidget {
                     content: Container(
                       padding: const EdgeInsets.fromLTRB(15, 20, 15, 10),
                       decoration: BoxDecoration(
-                        gradient: const LinearGradient(
+                        gradient: LinearGradient(
                           begin: Alignment.topCenter,
                           end: FractionalOffset.bottomCenter,
                           colors: [
-                            Color.fromARGB(255, 45, 15, 50),
-                            Color.fromARGB(255, 87, 25, 98),
+                            Theme.of(context).colorScheme.background,
+                            Theme.of(context).colorScheme.onBackground,
                           ],
                         ),
                         borderRadius: BorderRadius.circular(20),
@@ -62,20 +62,20 @@ class PasswordReset extends HookWidget {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Text(
+                          Text(
                             'Reset your password?',
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                              color: Theme.of(context).colorScheme.primary,
                             ),
                           ),
                           const SizedBox(height: 10),
-                          const Text(
+                          Text(
                             softWrap: true,
                             'Enter the email adress associated with your account.',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: Theme.of(context).colorScheme.primary,
                               fontSize: 14,
                             ),
                           ),
@@ -90,7 +90,9 @@ class PasswordReset extends HookWidget {
                                   CustomSnackbar.showSnackBar(
                                     message:
                                         'You should find link to reset your password in your mailbox.',
-                                    backgroundColor: Colors.green,
+                                    backgroundColor: Theme.of(context)
+                                        .colorScheme
+                                        .onPrimaryContainer,
                                   ),
                                 );
                               }
@@ -108,15 +110,18 @@ class PasswordReset extends HookWidget {
                                       },
                                     );
                                     return Container(
-                                      color: Colors.red,
+                                      color:
+                                          Theme.of(context).colorScheme.error,
                                       padding: const EdgeInsets.all(12),
                                       child: Wrap(
                                         children: [
                                           Center(
                                             child: Text(
                                               state.errorMessage,
-                                              style: const TextStyle(
-                                                color: Colors.white,
+                                              style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary,
                                                 fontSize: 15,
                                               ),
                                             ),
@@ -160,9 +165,11 @@ class PasswordReset extends HookWidget {
                                         ),
                                       );
                                 },
-                                icon: const Icon(
+                                icon: Icon(
                                   Icons.done,
-                                  color: Colors.green,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onPrimaryContainer,
                                 ),
                               ),
                               const SizedBox(width: 8),

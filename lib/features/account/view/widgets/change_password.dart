@@ -14,19 +14,19 @@ class ChangePassword extends HookWidget {
     final newPasswordController = useTextEditingController();
 
     return InkWell(
-      child: const Row(
+      child: Row(
         children: [
-          Spacer(),
+          const Spacer(),
           Text(
             'Change password',
             style: TextStyle(
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Icon(
             Icons.key,
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.primary,
           ),
         ],
       ),
@@ -42,12 +42,12 @@ class ChangePassword extends HookWidget {
                 content: Container(
                   padding: const EdgeInsets.fromLTRB(15, 20, 15, 10),
                   decoration: BoxDecoration(
-                    gradient: const LinearGradient(
+                    gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: FractionalOffset.bottomCenter,
                       colors: [
-                        Color.fromARGB(255, 45, 15, 50),
-                        Color.fromARGB(255, 87, 25, 98),
+                        Theme.of(context).colorScheme.background,
+                        Theme.of(context).colorScheme.onBackground,
                       ],
                     ),
                     borderRadius: BorderRadius.circular(20),
@@ -55,20 +55,20 @@ class ChangePassword extends HookWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text(
+                      Text(
                         'Change password?',
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                       ),
                       const SizedBox(height: 10),
-                      const Text(
+                      Text(
                         softWrap: true,
                         'Please type in your current and new password.',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.primary,
                           fontSize: 14,
                         ),
                       ),
@@ -83,7 +83,9 @@ class ChangePassword extends HookWidget {
                             ScaffoldMessenger.of(context).showSnackBar(
                               CustomSnackbar.showSnackBar(
                                 message: 'Password changed successfully',
-                                backgroundColor: Colors.green,
+                                backgroundColor: Theme.of(context)
+                                    .colorScheme
+                                    .onPrimaryContainer,
                               ),
                             );
                           }
@@ -100,15 +102,17 @@ class ChangePassword extends HookWidget {
                                   },
                                 );
                                 return Container(
-                                  color: Colors.red,
+                                  color: Theme.of(context).colorScheme.error,
                                   padding: const EdgeInsets.all(12),
                                   child: Wrap(
                                     children: [
                                       Center(
                                         child: Text(
                                           state.errorMessage,
-                                          style: const TextStyle(
-                                            color: Colors.white,
+                                          style: TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary,
                                             fontSize: 15,
                                           ),
                                         ),
@@ -159,9 +163,11 @@ class ChangePassword extends HookWidget {
                                     ),
                                   );
                             },
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.done,
-                              color: Colors.green,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onPrimaryContainer,
                             ),
                           ),
                           const SizedBox(width: 8),
@@ -171,9 +177,9 @@ class ChangePassword extends HookWidget {
                               newPasswordController.clear();
                               Navigator.of(context).pop();
                             },
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.close,
-                              color: Colors.red,
+                              color: Theme.of(context).colorScheme.error,
                             ),
                           ),
                         ],

@@ -17,10 +17,10 @@ class Photos extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             'Photos:',
             style: TextStyle(
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.primary,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -40,7 +40,7 @@ class Photos extends StatelessWidget {
                       Container(
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: Colors.white,
+                            color: Theme.of(context).colorScheme.primary,
                           ),
                         ),
                         child: SizedBox(

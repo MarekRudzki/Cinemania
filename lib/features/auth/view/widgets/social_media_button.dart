@@ -23,7 +23,7 @@ class SocialMediaButton extends StatelessWidget {
         ),
         child: Container(
           height: 45,
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.primary,
           child: Row(
             children: [
               const SizedBox(width: 7),

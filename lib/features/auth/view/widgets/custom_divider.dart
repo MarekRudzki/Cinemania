@@ -16,14 +16,14 @@ class CustomDivider extends StatelessWidget {
         Container(
           height: 2.0,
           width: constraints.maxWidth * 0.35,
-          color: Colors.grey.shade600,
+          color: Theme.of(context).colorScheme.scrim,
         ),
-        const Padding(
-          padding: EdgeInsets.all(16),
+        Padding(
+          padding: const EdgeInsets.all(16),
           child: Text(
             'Or',
             style: TextStyle(
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.primary,
               fontSize: 15,
             ),
           ),
@@ -31,7 +31,7 @@ class CustomDivider extends StatelessWidget {
         Container(
           height: 2.0,
           width: constraints.maxWidth * 0.35,
-          color: Colors.grey.shade600,
+          color: Theme.of(context).colorScheme.scrim,
         ),
       ],
     );

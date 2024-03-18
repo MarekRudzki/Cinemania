@@ -15,21 +15,21 @@ class FavoritePicker extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Center(
+        Center(
           child: Text(
             'Favorites',
             style: TextStyle(
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.primary,
               fontSize: 20,
             ),
           ),
         ),
         const SizedBox(height: 10),
         Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             border: Border.symmetric(
               horizontal: BorderSide(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.primary,
                 width: 0.7,
               ),
             ),
@@ -48,16 +48,16 @@ class FavoritePicker extends StatelessWidget {
                       child: Icon(
                         MyIcons.movie,
                         color: currentCategory == 'movies'
-                            ? const Color.fromRGBO(55, 164, 94, 1)
-                            : const Color.fromARGB(255, 130, 130, 130),
+                            ? Theme.of(context).colorScheme.onPrimary
+                            : Theme.of(context).colorScheme.secondary,
                         size: currentCategory == 'movies' ? 32 : 28,
                       ),
                     ),
                   ),
-                  const VerticalDivider(
+                  VerticalDivider(
                     thickness: 2,
                     width: 4,
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                   Expanded(
                     child: InkWell(
@@ -67,16 +67,16 @@ class FavoritePicker extends StatelessWidget {
                       child: Icon(
                         MyIcons.tv_show,
                         color: currentCategory == 'tv_shows'
-                            ? const Color.fromRGBO(55, 164, 94, 1)
-                            : const Color.fromARGB(255, 130, 130, 130),
+                            ? Theme.of(context).colorScheme.onPrimary
+                            : Theme.of(context).colorScheme.secondary,
                         size: currentCategory == 'tv_shows' ? 32 : 28,
                       ),
                     ),
                   ),
-                  const VerticalDivider(
+                  VerticalDivider(
                     thickness: 2,
                     width: 4,
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                   Expanded(
                     child: InkWell(
@@ -86,8 +86,8 @@ class FavoritePicker extends StatelessWidget {
                       child: Icon(
                         Icons.person,
                         color: currentCategory == 'person'
-                            ? const Color.fromRGBO(55, 164, 94, 1)
-                            : const Color.fromARGB(255, 130, 130, 130),
+                            ? Theme.of(context).colorScheme.onPrimary
+                            : Theme.of(context).colorScheme.secondary,
                         size: currentCategory == 'person' ? 32 : 28,
                       ),
                     ),

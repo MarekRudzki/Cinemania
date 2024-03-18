@@ -21,16 +21,16 @@ class EpisodeInfo extends StatelessWidget {
           children: [
             Text(
               '${episode.number}. ',
-              style: const TextStyle(
-                color: Colors.white,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
                 fontWeight: FontWeight.w500,
                 fontSize: 16,
               ),
             ),
             Text(
               episode.title,
-              style: const TextStyle(
-                color: Colors.white,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
                 fontWeight: FontWeight.w500,
                 fontSize: 16,
               ),
@@ -44,8 +44,8 @@ class EpisodeInfo extends StatelessWidget {
             if (episode.releaseDate != 'No data')
               Text(
                 episode.releaseDate,
-                style: const TextStyle(
-                  color: Color.fromARGB(255, 133, 128, 128),
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
               ),
             if (episode.runtime != 0)
@@ -53,8 +53,8 @@ class EpisodeInfo extends StatelessWidget {
                 context
                     .read<TVSeasonsBloc>()
                     .calculateLength(minutes: episode.runtime),
-                style: const TextStyle(
-                  color: Color.fromARGB(255, 133, 128, 128),
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
               ),
             if (episode.voteAverage != 0.0)
@@ -70,14 +70,14 @@ class EpisodeInfo extends StatelessWidget {
                     const SizedBox(width: 4),
                     Text(
                       episode.voteAverage.toStringAsFixed(1),
-                      style: const TextStyle(
-                        color: Color.fromARGB(255, 133, 128, 128),
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
-                    const Text(
+                    Text(
                       '/10',
-                      style: const TextStyle(
-                        color: Color.fromARGB(255, 133, 128, 128),
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     )
                   ],
@@ -91,8 +91,8 @@ class EpisodeInfo extends StatelessWidget {
             child: Text(
               episode.overview,
               textAlign: TextAlign.justify,
-              style: const TextStyle(
-                color: Colors.white,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
           ),
