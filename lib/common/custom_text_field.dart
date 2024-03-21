@@ -34,6 +34,9 @@ class CustomTextField extends HookWidget {
             controller: controller,
             textInputAction: inputAction,
             cursorColor: Theme.of(context).colorScheme.primary,
+            keyboardType: labelText == 'Enter your email'
+                ? TextInputType.emailAddress
+                : TextInputType.text,
             decoration: InputDecoration(
               enabledBorder: UnderlineInputBorder(
                 borderSide: BorderSide(

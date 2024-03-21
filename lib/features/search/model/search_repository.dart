@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_dynamic_calls
+
 import 'package:cinemania/common/models/basic_model.dart';
 import 'package:cinemania/features/search/model/datasources/remote/search_tmdb.dart';
 import 'package:injectable/injectable.dart';
@@ -23,6 +25,8 @@ class SearchRepository {
       );
       final List<dynamic> moviesDynamic =
           moviesData['results'] as List<dynamic>;
+      moviesDynamic.sort((a, b) =>
+          (b['popularity'] as double).compareTo(a['popularity'] as double));
 
       for (final movie in moviesDynamic) {
         movies.add(BasicModel.fromJson(movie as Map<String, dynamic>));
@@ -47,6 +51,8 @@ class SearchRepository {
       );
       final List<dynamic> tvShowsDynamic =
           tvShowsData['results'] as List<dynamic>;
+      tvShowsDynamic.sort((a, b) =>
+          (b['popularity'] as double).compareTo(a['popularity'] as double));
 
       for (final tvShow in tvShowsDynamic) {
         tvShows.add(BasicModel.fromJson(tvShow as Map<String, dynamic>));
@@ -70,6 +76,8 @@ class SearchRepository {
         page: page,
       );
       final List<dynamic> castDynamic = castData['results'] as List<dynamic>;
+      castDynamic.sort((a, b) =>
+          (b['popularity'] as double).compareTo(a['popularity'] as double));
 
       for (final person in castDynamic) {
         cast.add(BasicModel.fromJson(person as Map<String, dynamic>));

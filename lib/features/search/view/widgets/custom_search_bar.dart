@@ -9,8 +9,8 @@ class CustomSearchBar extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final searchController =
-        useTextEditingController(text: context.watch<SearchBloc>().searchQuery);
+    final searchController = useTextEditingController(
+        text: context.watch<SearchBloc>().searchQuery.replaceAll('-', ' '));
     final currentCategory = context.watch<SearchBloc>().currentCategory;
 
     return Padding(
@@ -32,6 +32,11 @@ class CustomSearchBar extends HookWidget {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 20, vertical: 2),
                     child: TextField(
+                      textCapitalization: TextCapitalization.words,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.background,
+                      ),
+                      cursorColor: Theme.of(context).colorScheme.background,
                       controller: searchController,
                       decoration: InputDecoration(
                         hintText: 'Search...',

@@ -28,11 +28,29 @@ class ResultItem extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           if (category == Category.movies) {
-            context.read<DetailsBloc>().add(FetchMovieDataPressed(id: id));
+            context.read<DetailsBloc>().add(
+                  FetchMovieDataPressed(
+                    id: id,
+                    scrollableListCategory: 'cast',
+                    scrollableListIndex: 0,
+                  ),
+                );
           } else if (category == Category.tvShows) {
-            context.read<DetailsBloc>().add(FetchTVShowDataPressed(id: id));
+            context.read<DetailsBloc>().add(
+                  FetchTVShowDataPressed(
+                    id: id,
+                    scrollableListCategory: 'cast',
+                    scrollableListIndex: 0,
+                  ),
+                );
           } else {
-            context.read<DetailsBloc>().add(FetchPersonDataPressed(id: id));
+            context.read<DetailsBloc>().add(
+                  FetchPersonDataPressed(
+                    id: id,
+                    scrollableListCategory: 'movie',
+                    scrollableListIndex: 0,
+                  ),
+                );
           }
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => DetailsScreen(

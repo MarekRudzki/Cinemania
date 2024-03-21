@@ -32,7 +32,7 @@ class TVSeasonsBloc extends Bloc<TVSeasonsEvent, TVSeasonsState> {
   }
 
   double getSeasonsBarHeight({required int seasonsNumber}) {
-    return 60 * (1 + ((seasonsNumber - 1) ~/ 4).toDouble());
+    return 45 * (1 + ((seasonsNumber - 1) ~/ 4).toDouble());
   }
 
   String calculateLength({

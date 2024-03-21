@@ -15,11 +15,15 @@ final class DetailsSuccess extends DetailsState {
   final Movie? movie;
   final TVShow? tvShow;
   final Person? person;
+  final String scrollableListCategory;
+  final int scrollableListIndex;
 
   DetailsSuccess({
     this.movie,
     this.tvShow,
     this.person,
+    required this.scrollableListCategory,
+    required this.scrollableListIndex,
   });
 
   @override
@@ -27,6 +31,8 @@ final class DetailsSuccess extends DetailsState {
         movie ?? Object(),
         tvShow ?? Object(),
         person ?? Object(),
+        scrollableListCategory,
+        scrollableListIndex,
       ];
 }
 

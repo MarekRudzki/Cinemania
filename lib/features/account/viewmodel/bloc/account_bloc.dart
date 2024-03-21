@@ -18,6 +18,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     on<ChangePasswordPressed>(_onChangePasswordPressed);
     on<DeleteAccountPressed>(_onDeleteAccountPressed);
     on<ChangeUsernamePressed>(_onChangeUsernamePressed);
+    on<PhotoValidationPressed>(_onPhotoValidation);
   }
 
   List<Favorite> favorites = [];
@@ -140,6 +141,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     if (event.currentPassword.isEmpty || event.newPassword.isEmpty) {
       emit(AccountError(errorMessage: 'Please fill in all fields'));
       emit(AccountInitial());
+      return;
     }
 
     try {
@@ -167,6 +169,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     if (event.password.isEmpty) {
       emit(AccountError(errorMessage: 'Password field cannot be empty'));
       emit(AccountInitial());
+      return;
     }
 
     try {
@@ -187,6 +190,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     if (event.username.isEmpty) {
       emit(AccountError(errorMessage: 'Username field cannot be empty'));
       emit(AccountInitial());
+      return;
     }
 
     try {
@@ -200,6 +204,24 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     } catch (error) {
       emit(AccountError(errorMessage: error.toString()));
       emit(AccountInitial());
+    }
+  }
+
+  Future<void> _onPhotoValidation(
+    PhotoValidationPressed event,
+    Emitter<AccountState> emit,
+  ) async {
+    final isFavorite = checkIfLocalFavoritesContains(id: event.id);
+    if (isFavorite) {
+      final savedPhotoUrl =
+          await accountRepository.getItemPhotoUrl(itemId: event.id);
+
+      if (savedPhotoUrl != event.url) {
+        await accountRepository.updatePhotoUrl(
+          itemId: event.id,
+          newUrl: event.url,
+        );
+      }
     }
   }
 

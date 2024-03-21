@@ -8,14 +8,16 @@ import 'package:cinemania/features/details/view/widgets/tv_show/tv_show_details.
 import 'package:cinemania/features/details/viewmodel/bloc/details_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class DetailsScreen extends StatelessWidget {
+class DetailsScreen extends HookWidget {
   final Category category;
 
   const DetailsScreen({required this.category});
 
   @override
   Widget build(BuildContext context) {
+    final scrollController = useScrollController();
     return SafeArea(
       child: Scaffold(
         // ignore: deprecated_member_use
@@ -38,6 +40,7 @@ class DetailsScreen extends StatelessWidget {
               ),
             ),
             child: SingleChildScrollView(
+              controller: scrollController,
               child: BlocConsumer<DetailsBloc, DetailsState>(
                 listener: (context, state) {
                   if (state is DetailsError) {
@@ -60,6 +63,12 @@ class DetailsScreen extends StatelessWidget {
                       ),
                     );
                   } else if (state is DetailsSuccess) {
+                    if (state.scrollableListCategory == 'similar' &&
+                        state.scrollableListIndex != 0) {
+                      scrollController
+                          .jumpTo(MediaQuery.sizeOf(context).height);
+                    }
+
                     if (category == Category.movies) {
                       return state.movie != null
                           ? MovieDetails(movie: state.movie!)

@@ -39,7 +39,7 @@ class SearchCategoryPicker extends HookWidget {
                   callback();
                 },
                 child: Text(
-                  'Movies',
+                  'Movie',
                   style: TextStyle(
                     color: currentCategory == Category.movies
                         ? Theme.of(context).colorScheme.primary
@@ -60,7 +60,7 @@ class SearchCategoryPicker extends HookWidget {
                   callback();
                 },
                 child: Text(
-                  'TV Shows',
+                  'TV Show',
                   style: TextStyle(
                     color: currentCategory == Category.tvShows
                         ? Theme.of(context).colorScheme.primary
@@ -83,7 +83,7 @@ class SearchCategoryPicker extends HookWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(right: 10),
                   child: Text(
-                    'Cast',
+                    'Person',
                     style: TextStyle(
                       color: currentCategory == Category.cast
                           ? Theme.of(context).colorScheme.primary
@@ -103,10 +103,10 @@ class SearchCategoryPicker extends HookWidget {
             duration: const Duration(milliseconds: 300),
             alignment: Alignment(
               currentCategory == Category.movies
-                  ? -1
+                  ? -0.95
                   : currentCategory == Category.tvShows
-                      ? 0
-                      : 1,
+                      ? -0.05
+                      : 0.92,
               1,
             ),
             child: Container(

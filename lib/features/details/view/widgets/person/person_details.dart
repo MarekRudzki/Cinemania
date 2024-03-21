@@ -1,11 +1,14 @@
 import 'package:cinemania/common/enums.dart';
+import 'package:cinemania/features/account/viewmodel/bloc/account_bloc.dart';
 import 'package:cinemania/features/details/model/models/person.dart';
 import 'package:cinemania/features/details/view/widgets/common/primary_photo.dart';
 import 'package:cinemania/features/details/view/widgets/common/description.dart';
 import 'package:cinemania/features/details/view/widgets/person/filmography.dart';
 import 'package:cinemania/features/details/view/widgets/person/person_photos.dart';
 import 'package:cinemania/features/details/view/widgets/person/personal_data.dart';
+import 'package:cinemania/features/details/viewmodel/bloc/details_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PersonDetails extends StatelessWidget {
   final Person person;
@@ -14,6 +17,10 @@ class PersonDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<AccountBloc>().add(PhotoValidationPressed(
+          url: person.photoUrl,
+          id: person.id,
+        ));
     return Container(
       width: double.infinity,
       child: Column(
@@ -38,10 +45,20 @@ class PersonDetails extends StatelessWidget {
             ],
           ),
           Description(description: person.biography),
-          Filmography(
-            filmography: person.filmography,
-            sourceId: person.id,
-          ),
+          if (person.filmography.isNotEmpty)
+            BlocBuilder<DetailsBloc, DetailsState>(
+              builder: (context, state) {
+                if (state is DetailsSuccess) {
+                  return Filmography(
+                    filmography: person.filmography,
+                    sourceId: person.id,
+                    scrollCategory: state.scrollableListCategory,
+                    scrollIndex: state.scrollableListIndex,
+                  );
+                } else
+                  return const SizedBox.shrink();
+              },
+            ),
           if (person.images.length > 1)
             PersonPhotos(
               images: person.images,

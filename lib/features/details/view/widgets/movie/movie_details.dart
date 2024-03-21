@@ -53,12 +53,13 @@ class MovieDetails extends StatelessWidget {
             ],
           ),
           Description(description: movie.overview),
-          Cast(
-            cast: movie.cast,
-            sourceCategory: Category.movies,
-            sourceId: movie.id,
-          ),
-          Photos(photos: movie.images),
+          if (movie.cast.isNotEmpty)
+            Cast(
+              cast: movie.cast,
+              sourceCategory: Category.movies,
+              sourceId: movie.id,
+            ),
+          if (movie.images.isNotEmpty) Photos(photos: movie.images),
           if (movie.similarMovies.isNotEmpty)
             SimilarTitles(
               movies: movie.similarMovies,

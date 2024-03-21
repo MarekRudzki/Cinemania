@@ -63,6 +63,7 @@ class AccountFirestore {
 
         favorites = data?['favorites'] as List<dynamic>;
       }
+
       return favorites;
     } on Exception catch (e) {
       throw e.toString();
@@ -101,6 +102,56 @@ class AccountFirestore {
     }
   }
 
+  Future<void> updatePhotoUrl({
+    required String uid,
+    required int itemId,
+    required String newUrl,
+  }) async {
+    try {
+      List<dynamic> favorites = [];
+      final collection = _firestore.collection('users');
+      final docSnapshot = await collection.doc(uid).get();
+      if (docSnapshot.exists) {
+        final Map<String, dynamic>? data = docSnapshot.data();
+
+        favorites = data?['favorites'] as List<dynamic>;
+        final int id =
+            favorites.indexWhere((element) => element['id'] == itemId);
+        favorites[id]['url'] = newUrl;
+      }
+      await collection.doc(uid).update({
+        'favorites': favorites,
+      });
+    } on Exception catch (e) {
+      throw e.toString();
+    }
+  }
+
+  Future<String> getItemPhotoUrl({
+    required String uid,
+    required int itemId,
+  }) async {
+    try {
+      String itemUrl = '';
+      final collection = _firestore.collection('users');
+      final docSnapshot = await collection.doc(uid).get();
+      if (docSnapshot.exists) {
+        final Map<String, dynamic>? data = docSnapshot.data();
+
+        final favorites = data?['favorites'] as List<dynamic>;
+
+        final int id =
+            favorites.indexWhere((element) => element['id'] == itemId);
+
+        itemUrl = favorites[id]['url'] as String;
+      }
+
+      return itemUrl;
+    } on Exception catch (e) {
+      throw e.toString();
+    }
+  }
+
   Future<void> deleteFavorite({
     required String uid,
     required int id,
@@ -123,25 +174,6 @@ class AccountFirestore {
         });
       }
     } on Exception catch (e) {
-      throw e.toString();
-    }
-  }
-
-  Future<bool> isFavorite({
-    required String uid,
-    required int id,
-  }) async {
-    try {
-      final collection = _firestore.collection('users');
-
-      final docSnapshot = await collection.doc(uid).get();
-      if (!docSnapshot.exists) return false;
-
-      final data = docSnapshot.data();
-      final List<dynamic> favorites = data?['favorites'] as List<dynamic>;
-
-      return favorites.any((fav) => fav['id'] == id);
-    } catch (e) {
       throw e.toString();
     }
   }

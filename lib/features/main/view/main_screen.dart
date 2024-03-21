@@ -26,46 +26,49 @@ class MainScreen extends HookWidget {
       const AccountScreen(),
     ];
 
-    return SafeArea(
-      child: Scaffold(
-        body: pages[pageIndex.value],
-        bottomNavigationBar: GNav(
-          haptic: false,
-          selectedIndex: pageIndex.value,
-          gap: 10,
-          backgroundColor: Theme.of(context).colorScheme.background,
-          color: Theme.of(context).colorScheme.secondary,
-          activeColor: Theme.of(context).colorScheme.onPrimary,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 15,
+    return PopScope(
+      canPop: false,
+      child: SafeArea(
+        child: Scaffold(
+          body: pages[pageIndex.value],
+          bottomNavigationBar: GNav(
+            haptic: false,
+            selectedIndex: pageIndex.value,
+            gap: 10,
+            backgroundColor: Theme.of(context).colorScheme.background,
+            color: Theme.of(context).colorScheme.tertiary,
+            activeColor: const Color.fromRGBO(55, 164, 94, 1),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 15,
+            ),
+            tabs: [
+              GButton(
+                icon: Icons.home,
+                text: 'Home',
+                onPressed: () {
+                  pageIndex.value = 0;
+                },
+                iconSize: 30,
+              ),
+              GButton(
+                icon: Icons.search,
+                text: 'Search',
+                onPressed: () {
+                  pageIndex.value = 1;
+                },
+                iconSize: 30,
+              ),
+              GButton(
+                icon: Icons.person,
+                text: 'Account',
+                onPressed: () {
+                  pageIndex.value = 2;
+                },
+                iconSize: 30,
+              ),
+            ],
           ),
-          tabs: [
-            GButton(
-              icon: Icons.home,
-              text: 'Home',
-              onPressed: () {
-                pageIndex.value = 0;
-              },
-              iconSize: 30,
-            ),
-            GButton(
-              icon: Icons.search,
-              text: 'Search',
-              onPressed: () {
-                pageIndex.value = 1;
-              },
-              iconSize: 30,
-            ),
-            GButton(
-              icon: Icons.person,
-              text: 'Account',
-              onPressed: () {
-                pageIndex.value = 2;
-              },
-              iconSize: 30,
-            ),
-          ],
         ),
       ),
     );

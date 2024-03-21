@@ -21,10 +21,10 @@ class SeasonPicker extends StatelessWidget {
           .read<TVSeasonsBloc>()
           .getSeasonsBarHeight(seasonsNumber: seasonsNumber),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+        padding: const EdgeInsets.symmetric(horizontal: 8),
         child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 120,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 4,
             childAspectRatio: 2.2,
             crossAxisSpacing: 5,
             mainAxisSpacing: 5,

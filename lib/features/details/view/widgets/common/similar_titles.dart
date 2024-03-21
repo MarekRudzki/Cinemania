@@ -5,6 +5,7 @@ import 'package:cinemania/features/details/view/widgets/common/entity_photo.dart
 import 'package:cinemania/features/details/viewmodel/bloc/details_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class SimilarTitles extends StatelessWidget {
   final List<BasicModel>? movies;
@@ -38,74 +39,100 @@ class SimilarTitles extends StatelessWidget {
           const SizedBox(height: 10),
           SizedBox(
             height: MediaQuery.sizeOf(context).height * 0.34,
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: category == Category.movies
-                  ? movies!.length
-                  : tvShows!.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 3),
-                  child: GestureDetector(
-                    onTap: () {
-                      if (category == Category.movies) {
-                        context.read<DetailsBloc>().add(
-                              FetchMovieDataPressed(
-                                id: movies![index].id,
-                              ),
-                            );
-                      } else {
-                        context.read<DetailsBloc>().add(
-                              FetchTVShowDataPressed(
-                                id: tvShows![index].id,
-                              ),
-                            );
-                      }
-                      context.read<DetailsBloc>().add(AddToHistoryPressed(
-                          id: sourceId, category: category));
+            child: BlocBuilder<DetailsBloc, DetailsState>(
+              builder: (context, state) {
+                if (state is DetailsSuccess) {
+                  final String scrollCategory = state.scrollableListCategory;
+                  final int scrollIndex = state.scrollableListIndex;
 
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => DetailsScreen(
-                          category: category,
+                  return ScrollablePositionedList.builder(
+                    initialScrollIndex:
+                        scrollCategory == 'similar' && scrollIndex != 0
+                            ? state.scrollableListIndex - 1
+                            : 0,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: category == Category.movies
+                        ? movies!.length
+                        : tvShows!.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 3),
+                        child: GestureDetector(
+                          onTap: () {
+                            if (category == Category.movies) {
+                              context.read<DetailsBloc>().add(
+                                    FetchMovieDataPressed(
+                                      id: movies![index].id,
+                                      scrollableListCategory: 'similar',
+                                      scrollableListIndex: 0,
+                                    ),
+                                  );
+                            } else {
+                              context.read<DetailsBloc>().add(
+                                    FetchTVShowDataPressed(
+                                      id: tvShows![index].id,
+                                      scrollableListCategory: 'similar',
+                                      scrollableListIndex: 0,
+                                    ),
+                                  );
+                            }
+                            context.read<DetailsBloc>().add(
+                                  AddToHistoryPressed(
+                                    id: sourceId,
+                                    category: category,
+                                    scrollableListIndex: index,
+                                    scrollableListCategory: 'similar',
+                                  ),
+                                );
+
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => DetailsScreen(
+                                category: category,
+                              ),
+                            ));
+                          },
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
+                                ),
+                                child: EntityPhoto(
+                                  photoUrl: category == Category.movies
+                                      ? movies![index].imageUrl
+                                      : tvShows![index].imageUrl,
+                                  category: category,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              SizedBox(
+                                width: MediaQuery.sizeOf(context).width * 0.33,
+                                child: Text(
+                                  category == Category.movies
+                                      ? movies![index].name
+                                      : tvShows![index].name,
+                                  textAlign: TextAlign.center,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 3,
+                                  style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
-                      ));
+                      );
                     },
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
-                          ),
-                          child: EntityPhoto(
-                            photoUrl: category == Category.movies
-                                ? movies![index].imageUrl
-                                : tvShows![index].imageUrl,
-                            category: category,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        SizedBox(
-                          width: MediaQuery.sizeOf(context).width * 0.33,
-                          child: Text(
-                            category == Category.movies
-                                ? movies![index].name
-                                : tvShows![index].name,
-                            textAlign: TextAlign.center,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 3,
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                );
+                  );
+                }
+                return const SizedBox.shrink();
               },
             ),
           ),

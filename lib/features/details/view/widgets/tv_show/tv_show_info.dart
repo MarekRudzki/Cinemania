@@ -23,7 +23,7 @@ class TVShowInfo extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.sizeOf(context).width * 0.5,
       child: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.fromLTRB(10, 5, 5, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -63,7 +63,7 @@ class TVShowInfo extends StatelessWidget {
             const SizedBox(height: 5),
             Row(
               children: [
-                if (begginingDate != 'No data')
+                if (begginingDate != 'No data' && begginingDate.isNotEmpty)
                   Row(
                     children: [
                       Text(

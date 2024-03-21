@@ -56,12 +56,13 @@ class TVShowDetails extends StatelessWidget {
             seasonsNumber: tvShow.seasonsNumber,
             title: tvShow.title,
           ),
-          Cast(
-            cast: tvShow.cast,
-            sourceCategory: Category.tvShows,
-            sourceId: tvShow.id,
-          ),
-          Photos(photos: tvShow.images),
+          if (tvShow.cast.isNotEmpty)
+            Cast(
+              cast: tvShow.cast,
+              sourceCategory: Category.tvShows,
+              sourceId: tvShow.id,
+            ),
+          if (tvShow.images.isNotEmpty) Photos(photos: tvShow.images),
           if (tvShow.similarTVShows.isNotEmpty)
             SimilarTitles(
               tvShows: tvShow.similarTVShows,

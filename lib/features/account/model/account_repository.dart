@@ -120,14 +120,24 @@ class AccountRepository {
     );
   }
 
-  Future<bool> isFavorite({
-    required int id,
+  Future<void> updatePhotoUrl({
+    required int itemId,
+    required String newUrl,
   }) async {
-    final isFavorite = await accountFirestore.isFavorite(
+    await accountFirestore.updatePhotoUrl(
       uid: accountAuth.getUid(),
-      id: id,
+      itemId: itemId,
+      newUrl: newUrl,
     );
+  }
 
-    return isFavorite;
+  Future<String> getItemPhotoUrl({
+    required int itemId,
+  }) async {
+    final photoUrl = await accountFirestore.getItemPhotoUrl(
+      uid: accountAuth.getUid(),
+      itemId: itemId,
+    );
+    return photoUrl;
   }
 }

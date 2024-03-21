@@ -1,4 +1,6 @@
 import 'package:cinemania/common/enums.dart';
+import 'package:cinemania/features/account/model/models/favorite_model.dart';
+import 'package:cinemania/features/account/viewmodel/bloc/account_bloc.dart';
 import 'package:cinemania/features/home/view/widgets/genres_tiles.dart';
 import 'package:cinemania/features/home/view/widgets/home_category_picker.dart';
 import 'package:cinemania/features/home/view/widgets/home_titles.dart';
@@ -13,80 +15,71 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final Category category = context.watch<HomeBloc>().currentCategory;
     final String tab = context.watch<HomeBloc>().currentTab;
+    final List<Favorite> favorites = context.watch<AccountBloc>().favorites;
+    final categoriesList =
+        context.read<HomeBloc>().getCategories(favorites: favorites);
 
-    return Scaffold(
-      body: NestedScrollView(
-        floatHeaderSlivers: true,
-        headerSliverBuilder: (
-          BuildContext context,
-          bool innerBoxIsScrolled,
-        ) {
-          return [
-            SliverAppBar(
-              elevation: 5,
-              backgroundColor: Theme.of(context).colorScheme.background,
-              forceElevated: innerBoxIsScrolled,
-              bottom: PreferredSize(
-                preferredSize: const Size.fromHeight(75),
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: FutureBuilder(
-                      future: context.read<HomeBloc>().getCategoriesList(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          return HomeCategoryPicker(
-                            categories: snapshot.data!,
-                          );
-                        } else {
-                          return Center(
-                            child: CircularProgressIndicator(
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
-                          );
-                        }
-                      },
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        body: NestedScrollView(
+          headerSliverBuilder: (
+            BuildContext context,
+            bool innerBoxIsScrolled,
+          ) {
+            return [
+              SliverAppBar(
+                elevation: 5,
+                backgroundColor: Theme.of(context).colorScheme.background,
+                bottom: PreferredSize(
+                  preferredSize: const Size.fromHeight(75),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: HomeCategoryPicker(
+                        categories: categoriesList,
+                      ),
                     ),
                   ),
                 ),
               ),
+            ];
+          },
+          body: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: FractionalOffset.bottomCenter,
+                colors: [
+                  Theme.of(context).colorScheme.background,
+                  Theme.of(context).colorScheme.onBackground,
+                ],
+              ),
             ),
-          ];
-        },
-        body: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: FractionalOffset.bottomCenter,
-              colors: [
-                Theme.of(context).colorScheme.background,
-                Theme.of(context).colorScheme.onBackground,
-              ],
-            ),
-          ),
-          child: BlocBuilder<HomeBloc, HomeState>(
-            builder: (context, state) {
-              if (state is HomeLoading) {
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                );
-              } else {
-                if (state.genres == null) {
-                  return HomeTitles(
-                    category: category,
-                    tab: tab,
+            child: BlocBuilder<HomeBloc, HomeState>(
+              builder: (context, state) {
+                if (state is HomeLoading) {
+                  return Center(
+                    child: CircularProgressIndicator(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   );
                 } else {
-                  final genres = state.genres!;
-                  return GenresTiles(
-                    genres: genres,
-                    category: category,
-                  );
+                  if (state.genres == null) {
+                    return HomeTitles(
+                      category: category,
+                      tab: tab,
+                    );
+                  } else {
+                    final genres = state.genres!;
+                    return GenresTiles(
+                      genres: genres,
+                      category: category,
+                    );
+                  }
                 }
-              }
-            },
+              },
+            ),
           ),
         ),
       ),

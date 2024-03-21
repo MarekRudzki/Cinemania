@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cinemania/common/enums.dart';
 import 'package:cinemania/common/models/basic_model.dart';
 import 'package:cinemania/common/models/genre.dart';
+import 'package:cinemania/features/account/model/models/favorite_model.dart';
 import 'package:cinemania/features/home/model/datasources/models/home_page_model.dart';
 import 'package:cinemania/features/home/model/home_repository.dart';
 import 'package:cinemania/features/home/viewmodel/random_dates_generator.dart';
@@ -30,7 +31,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Category currentCategory = Category.movies;
   String currentTab = 'Popular';
 
-  Future<List<String>> getCategoriesList() async {
+  List<String> getCategories({
+    required List<Favorite> favorites,
+  }) {
     final List<String> categories = [
       'Popular',
       'Coming Soon',
@@ -40,9 +43,18 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       'Categories',
     ];
 
-    final userHasFavorites = await homeRepository.userHaveFavorites();
+    bool hasFavMovie = false;
+    bool hasFavTvShow = false;
 
-    if (userHasFavorites) {
+    for (final favorite in favorites) {
+      if (favorite.category == Category.movies) {
+        hasFavMovie = true;
+      } else if (favorite.category == Category.tvShows) {
+        hasFavTvShow = true;
+      }
+    }
+
+    if (hasFavMovie && hasFavTvShow) {
       categories.insert(2, 'Recommended');
     }
 

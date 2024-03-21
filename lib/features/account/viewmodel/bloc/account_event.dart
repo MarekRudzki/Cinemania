@@ -88,3 +88,19 @@ class DeleteFavoritePressed extends AccountEvent {
         id,
       ];
 }
+
+class PhotoValidationPressed extends AccountEvent {
+  final String url;
+  final int id;
+
+  PhotoValidationPressed({
+    required this.url,
+    required this.id,
+  });
+
+  @override
+  List<Object> get props => [
+        url,
+        id,
+      ];
+}

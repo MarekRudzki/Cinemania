@@ -1,6 +1,6 @@
 import 'package:cinemania/common/enums.dart';
 import 'package:cinemania/features/details/model/details_repository.dart';
-import 'package:cinemania/features/details/model/models/details_history.dart';
+import 'package:cinemania/features/details/model/models/detail_history.dart';
 import 'package:cinemania/features/details/model/models/movie.dart';
 import 'package:cinemania/features/details/model/models/person.dart';
 import 'package:cinemania/features/details/model/models/tv_show.dart';
@@ -24,16 +24,18 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
     on<DeleteLastHistoryElementPressed>(_onDeleteLastHistoryElementPressed);
   }
 
-  List<DetailsHistory> history = [];
+  List<DetailHistory> history = [];
 
   void _onAddToHistoryPressed(
     AddToHistoryPressed event,
     Emitter<DetailsState> emit,
   ) {
     history.add(
-      DetailsHistory(
+      DetailHistory(
         category: event.category,
         id: event.id,
+        scrollableListIndex: event.scrollableListIndex,
+        scrollableListCategory: event.scrollableListCategory,
       ),
     );
   }
@@ -54,7 +56,13 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
     emit(DetailsLoading());
     try {
       final Movie movie = await detailsRepository.fetchMovieData(id: event.id);
-      emit(DetailsSuccess(movie: movie));
+      emit(
+        DetailsSuccess(
+          movie: movie,
+          scrollableListCategory: event.scrollableListCategory,
+          scrollableListIndex: event.scrollableListIndex,
+        ),
+      );
     } catch (e) {
       emit(DetailsError(errorMessage: e.toString()));
     }
@@ -68,7 +76,13 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
     try {
       final TVShow tvShow =
           await detailsRepository.fetchTVShowData(id: event.id);
-      emit(DetailsSuccess(tvShow: tvShow));
+      emit(
+        DetailsSuccess(
+          tvShow: tvShow,
+          scrollableListCategory: event.scrollableListCategory,
+          scrollableListIndex: event.scrollableListIndex,
+        ),
+      );
     } catch (e) {
       emit(DetailsError(errorMessage: e.toString()));
     }
@@ -82,7 +96,13 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
     try {
       final Person person =
           await detailsRepository.fetchPersonData(id: event.id);
-      emit(DetailsSuccess(person: person));
+      emit(
+        DetailsSuccess(
+          person: person,
+          scrollableListCategory: event.scrollableListCategory,
+          scrollableListIndex: event.scrollableListIndex,
+        ),
+      );
     } catch (e) {
       emit(DetailsError(errorMessage: e.toString()));
     }
@@ -149,9 +169,9 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
     } else {
       final int hours = minutes ~/ 60;
       final int remainingMinutes = minutes % 60;
-      String formattedTime = '${hours}h';
+      String formattedTime = '${hours} h';
       if (remainingMinutes > 0) {
-        formattedTime += ' ${remainingMinutes}m';
+        formattedTime += ' ${remainingMinutes} min';
       }
       return formattedTime;
     }

@@ -23,7 +23,7 @@ class PersonalData extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.sizeOf(context).width * 0.5,
       child: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.fromLTRB(10, 5, 5, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -35,31 +35,31 @@ class PersonalData extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 15),
-            Row(
-              children: [
-                Text(
-                  'Born:',
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.secondary,
+            if (birthday != 'Unknown date')
+              Row(
+                children: [
+                  Text(
+                    'Born:',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
                   ),
-                ),
-                const SizedBox(width: 5),
-                Text(
-                  birthday,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.primary,
+                  const SizedBox(width: 5),
+                  Text(
+                    birthday,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
-                ),
-                const SizedBox(width: 5),
-                if (placeOfBirth != 'No data')
+                  const SizedBox(width: 5),
                   Text(
                     'in',
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
-              ],
-            ),
+                ],
+              ),
             if (placeOfBirth != 'No data')
               Text(
                 placeOfBirth,

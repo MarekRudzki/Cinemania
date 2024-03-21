@@ -25,14 +25,14 @@ class MovieInfo extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.sizeOf(context).width * 0.5,
       child: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.fromLTRB(10, 5, 5, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               title,
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 17,
                 color: Theme.of(context).colorScheme.primary,
               ),
             ),
@@ -42,29 +42,26 @@ class MovieInfo extends StatelessWidget {
                   const Icon(
                     Icons.star,
                     color: Colors.amber,
-                    size: 20,
+                    size: 19,
                   ),
                   const SizedBox(width: 4),
                   Text(
                     voteAverage.toStringAsFixed(1),
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.primary,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 15,
                     ),
                   ),
                   Text(
                     '/10',
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.primary,
-                      fontSize: 15,
                     ),
                   )
                 ],
               ),
             const SizedBox(height: 5),
-            if (releaseDate != 'No data')
-              Row(
+            if (releaseDate != 'No data' && releaseDate.isNotEmpty)
+              Wrap(
                 children: [
                   Text(
                     'Release:',
@@ -83,7 +80,7 @@ class MovieInfo extends StatelessWidget {
               ),
             const SizedBox(height: 5),
             if (runtime != 0)
-              Row(
+              Wrap(
                 children: [
                   Text(
                     'Runtime:',
@@ -104,7 +101,7 @@ class MovieInfo extends StatelessWidget {
               ),
             const SizedBox(height: 5),
             if (budget != 0)
-              Row(
+              Wrap(
                 children: [
                   Text(
                     'Budget:',
@@ -123,7 +120,7 @@ class MovieInfo extends StatelessWidget {
               ),
             const SizedBox(height: 5),
             if (revenue != 0)
-              Row(
+              Wrap(
                 children: [
                   Text(
                     'Revenue:',
@@ -140,7 +137,7 @@ class MovieInfo extends StatelessWidget {
                   ),
                 ],
               ),
-            const SizedBox(height: 25),
+            const SizedBox(height: 5),
           ],
         ),
       ),

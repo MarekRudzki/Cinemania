@@ -6,26 +6,46 @@ import 'package:cinemania/features/details/viewmodel/bloc/details_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class Filmography extends HookWidget {
   final List<PersonFilmography> filmography;
   final int sourceId;
+  final String scrollCategory;
+  final int scrollIndex;
 
   const Filmography({
     super.key,
     required this.filmography,
     required this.sourceId,
+    required this.scrollCategory,
+    required this.scrollIndex,
   });
 
   @override
   Widget build(BuildContext context) {
-    final currentCategory = useState('movie');
-    final controller = useScrollController();
+    final currentCategory = useState(scrollCategory);
+    final currentIndex = useState(scrollIndex);
+    final scrollController = ItemScrollController();
 
     final movies =
         filmography.where((entity) => entity.mediaType == 'movie').toList();
     final tvShows =
         filmography.where((entity) => entity.mediaType == 'tv').toList();
+
+    int getScrollIndex() {
+      int value = 0;
+      if (currentCategory.value == 'movie' &&
+          scrollCategory == 'movie' &&
+          scrollIndex != 0) {
+        value = scrollIndex - 1;
+      } else if (currentCategory.value == 'tv' &&
+          scrollCategory == 'tv' &&
+          scrollIndex != 0) {
+        value = scrollIndex - 1;
+      }
+      return value;
+    }
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -45,7 +65,8 @@ class Filmography extends HookWidget {
                 behavior: HitTestBehavior.opaque,
                 onTap: () {
                   currentCategory.value = 'movie';
-                  controller.jumpTo(0.0);
+                  currentIndex.value = 0;
+                  scrollController.jumpTo(index: 0);
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -75,7 +96,8 @@ class Filmography extends HookWidget {
                 behavior: HitTestBehavior.opaque,
                 onTap: () {
                   currentCategory.value = 'tv';
-                  controller.jumpTo(0.0);
+                  currentIndex.value = 0;
+                  scrollController.jumpTo(index: 0);
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -105,8 +127,9 @@ class Filmography extends HookWidget {
           const SizedBox(height: 10),
           SizedBox(
             height: MediaQuery.sizeOf(context).height * 0.34,
-            child: ListView.builder(
-              controller: controller,
+            child: ScrollablePositionedList.builder(
+              itemScrollController: scrollController,
+              initialScrollIndex: getScrollIndex(),
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               itemCount: currentCategory.value == 'movie'
@@ -123,27 +146,50 @@ class Filmography extends HookWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 3),
                   child: GestureDetector(
                     onTap: () {
-                      context.read<DetailsBloc>().add(AddToHistoryPressed(
-                          id: sourceId, category: Category.cast));
+                      context.read<DetailsBloc>().add(
+                            AddToHistoryPressed(
+                              id: sourceId,
+                              category: Category.cast,
+                              scrollableListIndex: index,
+                              scrollableListCategory:
+                                  currentCategory.value == 'movie'
+                                      ? 'movie'
+                                      : 'tv',
+                            ),
+                          );
 
                       if (currentCategory.value == 'movie') {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const DetailsScreen(
-                            category: Category.movies,
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const DetailsScreen(
+                              category: Category.movies,
+                            ),
                           ),
-                        ));
-                        context
-                            .read<DetailsBloc>()
-                            .add(FetchMovieDataPressed(id: entity.id));
+                        );
+
+                        context.read<DetailsBloc>().add(
+                              FetchMovieDataPressed(
+                                id: entity.id,
+                                scrollableListCategory: 'movie',
+                                scrollableListIndex: 0,
+                              ),
+                            );
                       } else {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const DetailsScreen(
-                            category: Category.tvShows,
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const DetailsScreen(
+                              category: Category.tvShows,
+                            ),
                           ),
-                        ));
-                        context
-                            .read<DetailsBloc>()
-                            .add(FetchTVShowDataPressed(id: entity.id));
+                        );
+
+                        context.read<DetailsBloc>().add(
+                              FetchTVShowDataPressed(
+                                id: entity.id,
+                                scrollableListCategory: 'tv',
+                                scrollableListIndex: index,
+                              ),
+                            );
                       }
                     },
                     child: Column(
