@@ -3,12 +3,16 @@ import 'dart:async';
 import 'package:cinemania/common/back_button_fun.dart';
 import 'package:cinemania/common/enums.dart';
 import 'package:cinemania/common/models/basic_model.dart';
+import 'package:cinemania/common/no_network_screen.dart';
 import 'package:cinemania/common/result_item.dart';
 import 'package:cinemania/features/genre/model/models/genre_page_model.dart';
 import 'package:cinemania/features/genre/viewmodel/bloc/genre_bloc.dart';
 import 'package:cinemania/utils/di.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+
+import 'package:cinemania/features/main/viewmodel/internet_connection_provider.dart';
 
 class GenreScreen extends StatefulWidget {
   final Category category;
@@ -71,104 +75,112 @@ class _GenreScreenState extends State<GenreScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: SafeArea(
-        child: Scaffold(
-          // ignore: deprecated_member_use
-          body: WillPopScope(
-            onWillPop: () async {
-              backButtonFun(context: context);
-              return true;
-            },
-            child: NestedScrollView(
-              headerSliverBuilder: (
-                BuildContext context,
-                bool innerBoxIsScrolled,
-              ) {
-                return [
-                  SliverAppBar(
-                    elevation: 5,
-                    backgroundColor: Theme.of(context).colorScheme.background,
-                    forceElevated: innerBoxIsScrolled,
-                    centerTitle: true,
-                    leading: IconButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      icon: Icon(
-                        Icons.arrow_back,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                    ),
-                    title: Text(
-                      widget.title,
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                    ),
-                  ),
-                ];
-              },
-              body: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: FractionalOffset.bottomCenter,
-                    colors: [
-                      Theme.of(context).colorScheme.background,
-                      Theme.of(context).colorScheme.onBackground,
-                    ],
-                  ),
-                ),
-                child: PagedGridView(
-                  showNewPageProgressIndicatorAsGridChild: false,
-                  pagingController: _pagingController,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisExtent: MediaQuery.sizeOf(context).height * 0.45,
-                  ),
-                  builderDelegate: PagedChildBuilderDelegate<BasicModel>(
-                    firstPageProgressIndicatorBuilder: (context) => Center(
-                      child: CircularProgressIndicator(
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                    ),
-                    newPageProgressIndicatorBuilder: (context) => Center(
-                      child: CircularProgressIndicator(
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                    ),
-                    noItemsFoundIndicatorBuilder: (context) => Column(
-                      children: [
-                        SizedBox(
-                          height: MediaQuery.sizeOf(context).height * 0.2,
-                        ),
-                        Text(
-                          'No items found.',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Theme.of(context).colorScheme.primary,
+    final _hasInternet =
+        context.watch<InternetConnectionProvider>().hasInternet;
+
+    return _hasInternet
+        ? DefaultTabController(
+            length: 2,
+            child: SafeArea(
+              child: Scaffold(
+                // ignore: deprecated_member_use
+                body: WillPopScope(
+                  onWillPop: () async {
+                    backButtonFun(context: context);
+                    return true;
+                  },
+                  child: NestedScrollView(
+                    headerSliverBuilder: (
+                      BuildContext context,
+                      bool innerBoxIsScrolled,
+                    ) {
+                      return [
+                        SliverAppBar(
+                          elevation: 5,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.background,
+                          forceElevated: innerBoxIsScrolled,
+                          centerTitle: true,
+                          leading: IconButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            icon: Icon(
+                              Icons.arrow_back,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                          ),
+                          title: Text(
+                            widget.title,
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
                           ),
                         ),
-                      ],
-                    ),
-                    itemBuilder: (context, item, i) {
-                      return ResultItem(
-                        category: widget.category,
-                        id: item.id,
-                        gender: item.gender,
-                        url: item.imageUrl,
-                        name: item.name,
-                      );
+                      ];
                     },
+                    body: Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: FractionalOffset.bottomCenter,
+                          colors: [
+                            Theme.of(context).colorScheme.background,
+                            Theme.of(context).colorScheme.onBackground,
+                          ],
+                        ),
+                      ),
+                      child: PagedGridView(
+                        showNewPageProgressIndicatorAsGridChild: false,
+                        pagingController: _pagingController,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisExtent:
+                              MediaQuery.sizeOf(context).height * 0.45,
+                        ),
+                        builderDelegate: PagedChildBuilderDelegate<BasicModel>(
+                          firstPageProgressIndicatorBuilder: (context) =>
+                              Center(
+                            child: CircularProgressIndicator(
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                          ),
+                          newPageProgressIndicatorBuilder: (context) => Center(
+                            child: CircularProgressIndicator(
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                          ),
+                          noItemsFoundIndicatorBuilder: (context) => Column(
+                            children: [
+                              SizedBox(
+                                height: MediaQuery.sizeOf(context).height * 0.2,
+                              ),
+                              Text(
+                                'No items found.',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                              ),
+                            ],
+                          ),
+                          itemBuilder: (context, item, i) {
+                            return ResultItem(
+                              category: widget.category,
+                              id: item.id,
+                              gender: item.gender,
+                              url: item.imageUrl,
+                              name: item.name,
+                            );
+                          },
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ),
-      ),
-    );
+          )
+        : const NoNetworkScreen();
   }
 }

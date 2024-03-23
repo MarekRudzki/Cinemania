@@ -29,7 +29,7 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   intl: ^0.19.0
   like_button: ^2.0.5
-  provider: ^6.1.1
+  provider: ^6.1.2
   readmore: ^2.2.0
   rxdart: ^0.27.7
   scrollable_positioned_list: ^0.3.8

@@ -1,6 +1,8 @@
+import 'package:cinemania/common/no_network_screen.dart';
 import 'package:cinemania/features/account/view/account_screen.dart';
 import 'package:cinemania/features/account/viewmodel/bloc/account_bloc.dart';
 import 'package:cinemania/features/home/view/home_screen.dart';
+import 'package:cinemania/features/main/viewmodel/internet_connection_provider.dart';
 import 'package:cinemania/features/search/view/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +14,9 @@ class MainScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _hasInternet =
+        context.watch<InternetConnectionProvider>().hasInternet;
+
     useEffect(() {
       context.read<AccountBloc>().saveUsernameFromFirebaseToHive();
       context.read<AccountBloc>().add(UserFavoritesRequested());
@@ -28,49 +33,51 @@ class MainScreen extends HookWidget {
 
     return PopScope(
       canPop: false,
-      child: SafeArea(
-        child: Scaffold(
-          body: pages[pageIndex.value],
-          bottomNavigationBar: GNav(
-            haptic: false,
-            selectedIndex: pageIndex.value,
-            gap: 10,
-            backgroundColor: Theme.of(context).colorScheme.background,
-            color: Theme.of(context).colorScheme.tertiary,
-            activeColor: const Color.fromRGBO(55, 164, 94, 1),
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 15,
-            ),
-            tabs: [
-              GButton(
-                icon: Icons.home,
-                text: 'Home',
-                onPressed: () {
-                  pageIndex.value = 0;
-                },
-                iconSize: 30,
+      child: _hasInternet
+          ? SafeArea(
+              child: Scaffold(
+                body: pages[pageIndex.value],
+                bottomNavigationBar: GNav(
+                  haptic: false,
+                  selectedIndex: pageIndex.value,
+                  gap: 10,
+                  backgroundColor: Theme.of(context).colorScheme.background,
+                  color: Theme.of(context).colorScheme.tertiary,
+                  activeColor: const Color.fromRGBO(55, 164, 94, 1),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 15,
+                  ),
+                  tabs: [
+                    GButton(
+                      icon: Icons.home,
+                      text: 'Home',
+                      onPressed: () {
+                        pageIndex.value = 0;
+                      },
+                      iconSize: 30,
+                    ),
+                    GButton(
+                      icon: Icons.search,
+                      text: 'Search',
+                      onPressed: () {
+                        pageIndex.value = 1;
+                      },
+                      iconSize: 30,
+                    ),
+                    GButton(
+                      icon: Icons.person,
+                      text: 'Account',
+                      onPressed: () {
+                        pageIndex.value = 2;
+                      },
+                      iconSize: 30,
+                    ),
+                  ],
+                ),
               ),
-              GButton(
-                icon: Icons.search,
-                text: 'Search',
-                onPressed: () {
-                  pageIndex.value = 1;
-                },
-                iconSize: 30,
-              ),
-              GButton(
-                icon: Icons.person,
-                text: 'Account',
-                onPressed: () {
-                  pageIndex.value = 2;
-                },
-                iconSize: 30,
-              ),
-            ],
-          ),
-        ),
-      ),
+            )
+          : const NoNetworkScreen(),
     );
   }
 }
