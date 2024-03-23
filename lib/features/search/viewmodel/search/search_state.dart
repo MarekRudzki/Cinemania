@@ -15,23 +15,17 @@ final class SearchLoading extends SearchState {}
 
 final class SearchSuccess extends SearchState {
   final Category category;
-  final List<BasicModel>? movies;
-  final List<BasicModel>? tvShows;
-  final List<BasicModel>? cast;
+  final List<BasicModel> titles;
 
   SearchSuccess({
     required this.category,
-    this.movies,
-    this.tvShows,
-    this.cast,
+    required this.titles,
   });
 
   @override
   List<Object> get props => [
         category,
-        movies ?? Object(),
-        tvShows ?? Object(),
-        cast ?? Object(),
+        titles,
       ];
 }
 

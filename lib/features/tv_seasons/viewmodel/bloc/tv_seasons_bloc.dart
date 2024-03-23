@@ -43,7 +43,7 @@ class TVSeasonsBloc extends Bloc<TVSeasonsEvent, TVSeasonsState> {
     } else {
       final int hours = minutes ~/ 60;
       final int remainingMinutes = minutes % 60;
-      String formattedTime = '${hours}h';
+      String formattedTime = '${hours} h';
       if (remainingMinutes > 0) {
         formattedTime += ' ${remainingMinutes} min';
       }

@@ -20,7 +20,7 @@ final class AccountSuccess extends AccountState {
 
   @override
   List<Object> get props => [
-        favorites ?? Object(),
+        favorites ?? Object,
       ];
 }
 

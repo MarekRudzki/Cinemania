@@ -28,9 +28,9 @@ final class DetailsSuccess extends DetailsState {
 
   @override
   List<Object> get props => [
-        movie ?? Object(),
-        tvShow ?? Object(),
-        person ?? Object(),
+        movie ?? Object,
+        tvShow ?? Object,
+        person ?? Object,
         scrollableListCategory,
         scrollableListIndex,
       ];

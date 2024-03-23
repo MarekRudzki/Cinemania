@@ -142,18 +142,20 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
     }
 
     final DateTime now = DateTime.now();
-    int age = now.year - birthdayFormatted.year;
-
-    if (now.month < birthdayFormatted.month ||
-        (now.month == birthdayFormatted.month &&
-            now.day < birthdayFormatted.day)) {
-      age--;
-    }
+    late int age;
 
     if (deathdayFormatted != null) {
+      age = deathdayFormatted.year - birthdayFormatted.year;
       if (deathdayFormatted.month < birthdayFormatted.month ||
           (deathdayFormatted.month == birthdayFormatted.month &&
               deathdayFormatted.day < birthdayFormatted.day)) {
+        age--;
+      }
+    } else {
+      age = now.year - birthdayFormatted.year;
+      if (now.month < birthdayFormatted.month ||
+          (now.month == birthdayFormatted.month &&
+              now.day < birthdayFormatted.day)) {
         age--;
       }
     }
@@ -165,7 +167,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
     required int minutes,
   }) {
     if (minutes < 60) {
-      return '${minutes}m';
+      return '${minutes} min';
     } else {
       final int hours = minutes ~/ 60;
       final int remainingMinutes = minutes % 60;
@@ -182,7 +184,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
   }) {
     final String result = number.toString();
     if (result.length <= 3) {
-      return result;
+      return '$result \$';
     }
 
     int separatorPosition = result.length % 3;

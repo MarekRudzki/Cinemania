@@ -38,7 +38,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         emit(
           SearchSuccess(
             category: Category.movies,
-            movies: movies,
+            titles: movies,
           ),
         );
       } else if (event.category == Category.tvShows) {
@@ -49,7 +49,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         emit(
           SearchSuccess(
             category: Category.tvShows,
-            tvShows: tvShows,
+            titles: tvShows,
           ),
         );
       } else {
@@ -60,7 +60,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         emit(
           SearchSuccess(
             category: Category.cast,
-            cast: cast,
+            titles: cast,
           ),
         );
       }
