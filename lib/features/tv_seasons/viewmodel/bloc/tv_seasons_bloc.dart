@@ -1,8 +1,11 @@
-import 'package:cinemania/features/tv_seasons/model/models/season.dart';
-import 'package:cinemania/features/tv_seasons/model/tv_seasons_repository.dart';
+// Package imports:
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+
+// Project imports:
+import 'package:cinemania/features/tv_seasons/model/models/season.dart';
+import 'package:cinemania/features/tv_seasons/model/tv_seasons_repository.dart';
 
 part 'tv_seasons_event.dart';
 part 'tv_seasons_state.dart';

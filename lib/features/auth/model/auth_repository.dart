@@ -1,8 +1,11 @@
+// Package imports:
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:injectable/injectable.dart';
+
+// Project imports:
 import 'package:cinemania/features/auth/model/datasources/local/auth_hive.dart';
 import 'package:cinemania/features/auth/model/datasources/remote/auth_auth.dart';
 import 'package:cinemania/features/auth/model/datasources/remote/auth_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:injectable/injectable.dart';
 
 @lazySingleton
 class AuthRepository {

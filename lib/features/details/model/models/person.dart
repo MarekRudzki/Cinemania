@@ -1,5 +1,8 @@
-import 'package:cinemania/features/details/model/models/person_filmography.dart';
+// Package imports:
 import 'package:equatable/equatable.dart';
+
+// Project imports:
+import 'package:cinemania/features/details/model/models/person_filmography.dart';
 
 class Person extends Equatable {
   final int id;

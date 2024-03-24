@@ -1,10 +1,22 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+// Package imports:
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:provider/provider.dart';
+
+// Project imports:
 import 'package:cinemania/config/custom_theme.dart';
+import 'package:cinemania/config/firebase_options.dart';
 import 'package:cinemania/features/account/viewmodel/bloc/account_bloc.dart';
 import 'package:cinemania/features/auth/view/auth_screen.dart';
-import 'package:cinemania/config/firebase_options.dart';
 import 'package:cinemania/features/auth/viewmodel/bloc/auth_bloc.dart';
-import 'package:cinemania/features/genre/viewmodel/bloc/genre_bloc.dart';
 import 'package:cinemania/features/details/viewmodel/bloc/details_bloc.dart';
+import 'package:cinemania/features/genre/viewmodel/bloc/genre_bloc.dart';
 import 'package:cinemania/features/home/viewmodel/bloc/home_bloc.dart';
 import 'package:cinemania/features/main/view/main_screen.dart';
 import 'package:cinemania/features/main/viewmodel/internet_connection_provider.dart';
@@ -12,13 +24,6 @@ import 'package:cinemania/features/search/viewmodel/pagination/pagination_bloc.d
 import 'package:cinemania/features/search/viewmodel/search/search_bloc.dart';
 import 'package:cinemania/features/tv_seasons/viewmodel/bloc/tv_seasons_bloc.dart';
 import 'package:cinemania/utils/di.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:hive_flutter/adapters.dart';
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 
 void main() async {
   await dotenv.load();

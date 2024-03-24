@@ -1,6 +1,9 @@
+// Package imports:
+import 'package:injectable/injectable.dart';
+
+// Project imports:
 import 'package:cinemania/features/tv_seasons/model/datasources/remote_datasources/tv_seasons_tmdb.dart';
 import 'package:cinemania/features/tv_seasons/model/models/season.dart';
-import 'package:injectable/injectable.dart';
 
 @lazySingleton
 class TVSeasonsRepository {

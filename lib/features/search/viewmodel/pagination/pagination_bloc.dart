@@ -1,13 +1,17 @@
+// Dart imports:
 import 'dart:async';
 
-import 'package:cinemania/common/models/basic_model.dart';
-import 'package:cinemania/features/search/model/models/search_page_model.dart';
-import 'package:cinemania/features/search/model/search_repository.dart';
-import 'package:cinemania/common/enums.dart';
+// Package imports:
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
+
+// Project imports:
+import 'package:cinemania/common/basic_model.dart';
+import 'package:cinemania/common/enums.dart';
+import 'package:cinemania/features/search/model/models/search_page_model.dart';
+import 'package:cinemania/features/search/model/search_repository.dart';
 
 part 'pagination_event.dart';
 part 'pagination_state.dart';

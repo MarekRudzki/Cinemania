@@ -1,16 +1,20 @@
+// Dart imports:
 import 'dart:async';
 
-import 'package:cinemania/common/enums.dart';
-import 'package:cinemania/common/models/basic_model.dart';
-import 'package:cinemania/common/models/genre.dart';
-import 'package:cinemania/features/account/model/models/favorite_model.dart';
-import 'package:cinemania/features/home/model/datasources/models/home_page_model.dart';
-import 'package:cinemania/features/home/model/home_repository.dart';
-import 'package:cinemania/features/home/viewmodel/random_dates_generator.dart';
+// Package imports:
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
+
+// Project imports:
+import 'package:cinemania/common/basic_model.dart';
+import 'package:cinemania/common/enums.dart';
+import 'package:cinemania/features/account/model/models/favorite_model.dart';
+import 'package:cinemania/features/genre/model/models/genre.dart';
+import 'package:cinemania/features/home/model/datasources/models/home_page_model.dart';
+import 'package:cinemania/features/home/model/home_repository.dart';
+import 'package:cinemania/features/home/viewmodel/random_dates_generator.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';

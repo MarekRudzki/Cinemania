@@ -1,3 +1,10 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import 'package:cinemania/common/enums.dart';
 import 'package:cinemania/features/account/model/models/favorite_model.dart';
 import 'package:cinemania/features/account/viewmodel/bloc/account_bloc.dart';
@@ -5,8 +12,6 @@ import 'package:cinemania/features/home/view/widgets/genres_tiles.dart';
 import 'package:cinemania/features/home/view/widgets/home_category_picker.dart';
 import 'package:cinemania/features/home/view/widgets/home_titles.dart';
 import 'package:cinemania/features/home/viewmodel/bloc/home_bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

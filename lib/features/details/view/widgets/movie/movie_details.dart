@@ -1,13 +1,16 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:cinemania/common/enums.dart';
 import 'package:cinemania/features/details/model/models/movie.dart';
+import 'package:cinemania/features/details/view/widgets/common/cast.dart';
 import 'package:cinemania/features/details/view/widgets/common/description.dart';
 import 'package:cinemania/features/details/view/widgets/common/genres.dart';
+import 'package:cinemania/features/details/view/widgets/common/photos.dart';
 import 'package:cinemania/features/details/view/widgets/common/primary_photo.dart';
-import 'package:cinemania/features/details/view/widgets/common/cast.dart';
 import 'package:cinemania/features/details/view/widgets/common/similar_titles.dart';
 import 'package:cinemania/features/details/view/widgets/movie/movie_info.dart';
-import 'package:cinemania/features/details/view/widgets/common/photos.dart';
-import 'package:flutter/material.dart';
 
 class MovieDetails extends StatelessWidget {
   final Movie movie;

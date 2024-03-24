@@ -1,5 +1,8 @@
-import 'package:cinemania/config/icons.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
+import 'package:cinemania/config/icons.dart';
 
 class FavoritePicker extends StatelessWidget {
   final void Function(String category) callback;

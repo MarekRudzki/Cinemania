@@ -1,7 +1,12 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import 'package:cinemania/features/account/viewmodel/bloc/account_bloc.dart';
 import 'package:cinemania/features/auth/view/auth_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Logout extends StatelessWidget {
   const Logout({super.key});
@@ -27,11 +32,12 @@ class Logout extends StatelessWidget {
       ),
       onTap: () {
         context.read<AccountBloc>().logout();
-        Navigator.of(context).push(
+        Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (context) => const AuthScreen(),
           ),
         );
+        Navigator.of(context).popUntil((route) => route.isFirst);
       },
     );
   }

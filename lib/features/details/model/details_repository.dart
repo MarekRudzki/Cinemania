@@ -1,8 +1,11 @@
+// Package imports:
+import 'package:injectable/injectable.dart';
+
+// Project imports:
 import 'package:cinemania/features/details/model/datasources/remote/details_tmdb.dart';
 import 'package:cinemania/features/details/model/models/movie.dart';
 import 'package:cinemania/features/details/model/models/person.dart';
 import 'package:cinemania/features/details/model/models/tv_show.dart';
-import 'package:injectable/injectable.dart';
 
 @lazySingleton
 class DetailsRepository {

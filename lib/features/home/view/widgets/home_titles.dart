@@ -1,12 +1,19 @@
+// Dart imports:
 import 'dart:async';
+
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+
+// Project imports:
+import 'package:cinemania/common/basic_model.dart';
 import 'package:cinemania/common/enums.dart';
-import 'package:cinemania/common/models/basic_model.dart';
 import 'package:cinemania/common/result_item.dart';
 import 'package:cinemania/features/home/model/datasources/models/home_page_model.dart';
 import 'package:cinemania/features/home/viewmodel/bloc/home_bloc.dart';
 import 'package:cinemania/utils/di.dart';
-import 'package:flutter/material.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class HomeTitles extends StatefulWidget {
   final Category category;

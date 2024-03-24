@@ -1,18 +1,23 @@
+// Dart imports:
 import 'dart:async';
 
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+
+// Project imports:
 import 'package:cinemania/common/back_button_fun.dart';
+import 'package:cinemania/common/basic_model.dart';
 import 'package:cinemania/common/enums.dart';
-import 'package:cinemania/common/models/basic_model.dart';
 import 'package:cinemania/common/no_network_screen.dart';
 import 'package:cinemania/common/result_item.dart';
 import 'package:cinemania/features/genre/model/models/genre_page_model.dart';
 import 'package:cinemania/features/genre/viewmodel/bloc/genre_bloc.dart';
-import 'package:cinemania/utils/di.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-
 import 'package:cinemania/features/main/viewmodel/internet_connection_provider.dart';
+import 'package:cinemania/utils/di.dart';
 
 class GenreScreen extends StatefulWidget {
   final Category category;

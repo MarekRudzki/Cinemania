@@ -1,9 +1,14 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import 'package:cinemania/common/enums.dart';
 import 'package:cinemania/features/details/view/widgets/common/custom_back_button.dart';
 import 'package:cinemania/features/details/view/widgets/common/favorite_button.dart';
 import 'package:cinemania/features/details/viewmodel/bloc/details_bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PrimaryPhoto extends StatelessWidget {
   final String photoUrl;
@@ -25,7 +30,6 @@ class PrimaryPhoto extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.sizeOf(context).width * 0.5,
-      height: MediaQuery.sizeOf(context).height * 0.37,
       child: photoUrl.contains('No data')
           ? Stack(
               children: [
@@ -34,7 +38,7 @@ class PrimaryPhoto extends StatelessWidget {
                         category: category,
                         gender: gender,
                       ),
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                 ),
                 Positioned(
                   bottom: 00,

@@ -1,8 +1,13 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import 'package:cinemania/common/enums.dart';
 import 'package:cinemania/features/details/model/models/detail_history.dart';
 import 'package:cinemania/features/details/viewmodel/bloc/details_bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 void backButtonFun({
   required BuildContext context,

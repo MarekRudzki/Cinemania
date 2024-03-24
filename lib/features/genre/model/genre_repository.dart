@@ -1,6 +1,9 @@
-import 'package:cinemania/common/models/basic_model.dart';
-import 'package:cinemania/features/genre/model/datasources/remote/genre_tmdb.dart';
+// Package imports:
 import 'package:injectable/injectable.dart';
+
+// Project imports:
+import 'package:cinemania/common/basic_model.dart';
+import 'package:cinemania/features/genre/model/datasources/remote/genre_tmdb.dart';
 
 @lazySingleton
 class GenreRepository {

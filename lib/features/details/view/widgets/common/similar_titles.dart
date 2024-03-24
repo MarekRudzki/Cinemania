@@ -1,11 +1,16 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+
+// Project imports:
+import 'package:cinemania/common/basic_model.dart';
 import 'package:cinemania/common/enums.dart';
-import 'package:cinemania/common/models/basic_model.dart';
 import 'package:cinemania/features/details/view/details_screen.dart';
 import 'package:cinemania/features/details/view/widgets/common/entity_photo.dart';
 import 'package:cinemania/features/details/viewmodel/bloc/details_bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class SimilarTitles extends StatelessWidget {
   final List<BasicModel>? movies;
@@ -38,7 +43,7 @@ class SimilarTitles extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           SizedBox(
-            height: MediaQuery.sizeOf(context).height * 0.34,
+            height: 240,
             child: BlocBuilder<DetailsBloc, DetailsState>(
               builder: (context, state) {
                 if (state is DetailsSuccess) {

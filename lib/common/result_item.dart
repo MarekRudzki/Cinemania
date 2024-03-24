@@ -1,9 +1,14 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
+import 'package:cinemania/common/enums.dart';
 import 'package:cinemania/features/details/view/details_screen.dart';
 import 'package:cinemania/features/details/viewmodel/bloc/details_bloc.dart';
 import 'package:cinemania/features/search/viewmodel/search/search_bloc.dart';
-import 'package:cinemania/common/enums.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ResultItem extends StatelessWidget {
   final Category category;

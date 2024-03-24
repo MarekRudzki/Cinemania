@@ -1,5 +1,8 @@
-import 'package:cinemania/common/enums.dart';
+// Package imports:
 import 'package:equatable/equatable.dart';
+
+// Project imports:
+import 'package:cinemania/common/enums.dart';
 
 class DetailHistory extends Equatable {
   final Category category;

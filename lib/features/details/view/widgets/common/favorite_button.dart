@@ -1,10 +1,15 @@
-import 'package:cinemania/common/enums.dart';
-import 'package:cinemania/features/account/model/models/favorite_model.dart';
-import 'package:cinemania/features/account/viewmodel/bloc/account_bloc.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_glow/flutter_glow.dart';
 import 'package:like_button/like_button.dart';
+
+// Project imports:
+import 'package:cinemania/common/enums.dart';
+import 'package:cinemania/features/account/model/models/favorite_model.dart';
+import 'package:cinemania/features/account/viewmodel/bloc/account_bloc.dart';
 
 class FavoriteButton extends StatelessWidget {
   final Category category;

@@ -1,9 +1,12 @@
-import 'package:cinemania/common/models/basic_model.dart';
-import 'package:cinemania/features/search/model/search_repository.dart';
-import 'package:cinemania/common/enums.dart';
+// Package imports:
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+
+// Project imports:
+import 'package:cinemania/common/basic_model.dart';
+import 'package:cinemania/common/enums.dart';
+import 'package:cinemania/features/search/model/search_repository.dart';
 
 part 'search_event.dart';
 part 'search_state.dart';

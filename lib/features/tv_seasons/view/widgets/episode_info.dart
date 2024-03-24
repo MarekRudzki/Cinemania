@@ -1,8 +1,13 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import 'package:cinemania/features/tv_seasons/model/models/episode.dart';
 import 'package:cinemania/features/tv_seasons/view/widgets/episode_photo.dart';
 import 'package:cinemania/features/tv_seasons/viewmodel/bloc/tv_seasons_bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EpisodeInfo extends StatelessWidget {
   final Episode episode;
@@ -86,7 +91,7 @@ class EpisodeInfo extends StatelessWidget {
               ),
             ),
           ),
-        const SizedBox(height: 15),
+        const SizedBox(height: 10),
       ],
     );
   }

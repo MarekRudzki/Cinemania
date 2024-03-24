@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_dynamic_calls
 
+// Package imports:
 import 'package:equatable/equatable.dart';
 
 class CastMember extends Equatable {

@@ -1,9 +1,12 @@
+// Package imports:
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+
+// Project imports:
 import 'package:cinemania/features/tv_seasons/model/datasources/remote_datasources/tv_seasons_tmdb.dart';
 import 'package:cinemania/features/tv_seasons/model/models/episode.dart';
 import 'package:cinemania/features/tv_seasons/model/models/season.dart';
 import 'package:cinemania/features/tv_seasons/model/tv_seasons_repository.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 
 class MockTVSeasonsTMDB extends Mock implements TVSeasonsTMDB {}
 

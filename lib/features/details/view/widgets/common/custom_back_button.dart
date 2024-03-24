@@ -1,7 +1,12 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import 'package:cinemania/common/back_button_fun.dart';
 import 'package:cinemania/features/account/viewmodel/bloc/account_bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomBackButton extends StatelessWidget {
   const CustomBackButton({super.key});

@@ -1,10 +1,15 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import 'package:cinemania/common/enums.dart';
-import 'package:cinemania/common/models/genre.dart';
+import 'package:cinemania/features/details/viewmodel/bloc/details_bloc.dart';
+import 'package:cinemania/features/genre/model/models/genre.dart';
 import 'package:cinemania/features/genre/view/genre_screen.dart';
 import 'package:cinemania/features/genre/viewmodel/bloc/genre_bloc.dart';
-import 'package:cinemania/features/details/viewmodel/bloc/details_bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Genres extends StatelessWidget {
   final List<Genre> genres;
@@ -24,7 +29,7 @@ class Genres extends StatelessWidget {
       padding: const EdgeInsets.only(top: 5),
       child: SizedBox(
         height: MediaQuery.sizeOf(context).height *
-            (genres.length > 2 ? 0.13 : 0.065),
+            (genres.length > 2 ? 0.15 : 0.075),
         width: MediaQuery.sizeOf(context).width * 0.45,
         child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

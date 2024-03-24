@@ -1,3 +1,4 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
 class LoginRegisterButton extends StatelessWidget {
@@ -19,18 +20,20 @@ class LoginRegisterButton extends StatelessWidget {
       },
       child: Container(
         width: MediaQuery.sizeOf(context).width * 0.40,
-        height: MediaQuery.sizeOf(context).height * 0.05,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: Theme.of(context).colorScheme.primary,
         ),
         child: Center(
-          child: Text(
-            isLoginView ? 'Log In' : 'Register',
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.background,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5),
+            child: Text(
+              isLoginView ? 'Log In' : 'Register',
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.background,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),

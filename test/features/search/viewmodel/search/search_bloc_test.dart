@@ -1,10 +1,13 @@
+// Package imports:
 import 'package:bloc_test/bloc_test.dart';
-import 'package:cinemania/common/enums.dart';
-import 'package:cinemania/common/models/basic_model.dart';
-import 'package:cinemania/features/search/model/search_repository.dart';
-import 'package:cinemania/features/search/viewmodel/search/search_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
+// Project imports:
+import 'package:cinemania/common/basic_model.dart';
+import 'package:cinemania/common/enums.dart';
+import 'package:cinemania/features/search/model/search_repository.dart';
+import 'package:cinemania/features/search/viewmodel/search/search_bloc.dart';
 
 class MockSearchRepository extends Mock implements SearchRepository {}
 

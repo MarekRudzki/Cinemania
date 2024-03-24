@@ -1,9 +1,12 @@
-import 'package:cinemania/common/models/basic_model.dart';
-import 'package:cinemania/common/models/genre.dart';
+// Package imports:
+import 'package:injectable/injectable.dart';
+
+// Project imports:
+import 'package:cinemania/common/basic_model.dart';
+import 'package:cinemania/features/genre/model/models/genre.dart';
 import 'package:cinemania/features/home/model/datasources/remote/home_auth.dart';
 import 'package:cinemania/features/home/model/datasources/remote/home_firestore.dart';
 import 'package:cinemania/features/home/model/datasources/remote/home_tmdb.dart';
-import 'package:injectable/injectable.dart';
 
 @lazySingleton
 class HomeRepository {

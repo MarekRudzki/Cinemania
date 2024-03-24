@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:readmore/readmore.dart';
 
 class Description extends StatelessWidget {
@@ -12,7 +15,7 @@ class Description extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
       child: ReadMoreText(
         description,
         colorClickableText: Colors.pink,

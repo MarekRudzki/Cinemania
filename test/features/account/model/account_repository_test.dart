@@ -1,11 +1,14 @@
+// Package imports:
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+
+// Project imports:
 import 'package:cinemania/common/enums.dart';
 import 'package:cinemania/features/account/model/account_repository.dart';
 import 'package:cinemania/features/account/model/datasources/local/account_hive.dart';
 import 'package:cinemania/features/account/model/datasources/remote/account_auth.dart';
 import 'package:cinemania/features/account/model/datasources/remote/account_firestore.dart';
 import 'package:cinemania/features/account/model/models/favorite_model.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 
 class MockAccountFirestore extends Mock implements AccountFirestore {}
 

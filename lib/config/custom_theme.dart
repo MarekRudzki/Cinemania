@@ -1,10 +1,11 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
 class CustomTheme {
   static ThemeData theme = ThemeData(
     colorScheme: ColorScheme.dark(
       primary: Colors.white,
-      secondary: const Color.fromARGB(255, 88, 84, 84),
+      secondary: const Color.fromARGB(255, 114, 109, 109),
       background: const Color.fromARGB(255, 23, 22, 24),
       onBackground: const Color.fromARGB(255, 50, 46, 51),
       error: Colors.red,

@@ -1,10 +1,13 @@
-import 'package:cinemania/features/auth/model/auth_repository.dart';
+// Package imports:
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
+
+// Project imports:
+import 'package:cinemania/features/auth/model/auth_repository.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';

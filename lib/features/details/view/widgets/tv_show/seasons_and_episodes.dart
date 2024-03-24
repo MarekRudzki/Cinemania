@@ -1,7 +1,12 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import 'package:cinemania/features/tv_seasons/view/tv_seasons_screen.dart';
 import 'package:cinemania/features/tv_seasons/viewmodel/bloc/tv_seasons_bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SeasonsAndEpisodes extends StatelessWidget {
   final int id;

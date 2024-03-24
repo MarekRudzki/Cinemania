@@ -1,7 +1,10 @@
-import 'package:cinemania/common/models/basic_model.dart';
-import 'package:cinemania/common/models/genre.dart';
-import 'package:cinemania/features/details/model/models/cast_member.dart';
+// Package imports:
 import 'package:equatable/equatable.dart';
+
+// Project imports:
+import 'package:cinemania/common/basic_model.dart';
+import 'package:cinemania/features/details/model/models/cast_member.dart';
+import 'package:cinemania/features/genre/model/models/genre.dart';
 
 class Movie extends Equatable {
   final int id;

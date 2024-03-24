@@ -1,12 +1,17 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+
+// Project imports:
 import 'package:cinemania/common/custom_snackbar.dart';
 import 'package:cinemania/common/no_network_screen.dart';
 import 'package:cinemania/features/main/viewmodel/internet_connection_provider.dart';
 import 'package:cinemania/features/tv_seasons/view/widgets/episode_info.dart';
 import 'package:cinemania/features/tv_seasons/view/widgets/season_picker.dart';
 import 'package:cinemania/features/tv_seasons/viewmodel/bloc/tv_seasons_bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 
 class TVSeasonsScreen extends HookWidget {
   final int seasonsNumber;
@@ -123,19 +128,24 @@ class TVSeasonsScreen extends HookWidget {
                                         if (index == 0)
                                           if (overview.isNotEmpty &&
                                               overview != 'No data')
-                                            Column(
-                                              children: [
-                                                Text(
-                                                  overview,
-                                                  textAlign: TextAlign.justify,
-                                                  style: TextStyle(
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .primary,
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.only(top: 5),
+                                              child: Column(
+                                                children: [
+                                                  Text(
+                                                    overview,
+                                                    textAlign:
+                                                        TextAlign.justify,
+                                                    style: TextStyle(
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .primary,
+                                                    ),
                                                   ),
-                                                ),
-                                                const SizedBox(height: 20),
-                                              ],
+                                                  const SizedBox(height: 20),
+                                                ],
+                                              ),
                                             ),
                                         EpisodeInfo(
                                           episode: state.season.episodes[index],

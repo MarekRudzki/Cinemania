@@ -1,3 +1,7 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:cinemania/common/enums.dart';
 import 'package:cinemania/features/details/model/models/tv_show.dart';
 import 'package:cinemania/features/details/view/widgets/common/cast.dart';
@@ -8,7 +12,6 @@ import 'package:cinemania/features/details/view/widgets/common/primary_photo.dar
 import 'package:cinemania/features/details/view/widgets/common/similar_titles.dart';
 import 'package:cinemania/features/details/view/widgets/tv_show/seasons_and_episodes.dart';
 import 'package:cinemania/features/details/view/widgets/tv_show/tv_show_info.dart';
-import 'package:flutter/material.dart';
 
 class TVShowDetails extends StatelessWidget {
   final TVShow tvShow;

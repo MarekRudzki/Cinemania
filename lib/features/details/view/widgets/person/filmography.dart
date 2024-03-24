@@ -1,12 +1,17 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+
+// Project imports:
 import 'package:cinemania/common/enums.dart';
 import 'package:cinemania/features/details/model/models/person_filmography.dart';
 import 'package:cinemania/features/details/view/details_screen.dart';
 import 'package:cinemania/features/details/view/widgets/common/entity_photo.dart';
 import 'package:cinemania/features/details/viewmodel/bloc/details_bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class Filmography extends HookWidget {
   final List<PersonFilmography> filmography;
@@ -48,7 +53,7 @@ class Filmography extends HookWidget {
     }
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
       child: Column(
         children: [
           Row(
@@ -126,7 +131,7 @@ class Filmography extends HookWidget {
           ),
           const SizedBox(height: 10),
           SizedBox(
-            height: MediaQuery.sizeOf(context).height * 0.34,
+            height: 240,
             child: ScrollablePositionedList.builder(
               itemScrollController: scrollController,
               initialScrollIndex: getScrollIndex(),
@@ -215,7 +220,7 @@ class Filmography extends HookWidget {
                             entity.title,
                             textAlign: TextAlign.center,
                             overflow: TextOverflow.ellipsis,
-                            maxLines: 3,
+                            maxLines: 2,
                             style: TextStyle(
                               color: Theme.of(context).colorScheme.primary,
                             ),

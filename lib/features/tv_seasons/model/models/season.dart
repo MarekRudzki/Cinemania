@@ -1,5 +1,8 @@
-import 'package:cinemania/features/tv_seasons/model/models/episode.dart';
+// Package imports:
 import 'package:equatable/equatable.dart';
+
+// Project imports:
+import 'package:cinemania/features/tv_seasons/model/models/episode.dart';
 
 class Season extends Equatable {
   final String overview;

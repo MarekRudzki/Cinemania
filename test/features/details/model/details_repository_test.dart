@@ -1,5 +1,9 @@
-import 'package:cinemania/common/models/basic_model.dart';
-import 'package:cinemania/common/models/genre.dart';
+// Package imports:
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+
+// Project imports:
+import 'package:cinemania/common/basic_model.dart';
 import 'package:cinemania/features/details/model/datasources/remote/details_tmdb.dart';
 import 'package:cinemania/features/details/model/details_repository.dart';
 import 'package:cinemania/features/details/model/models/cast_member.dart';
@@ -7,8 +11,7 @@ import 'package:cinemania/features/details/model/models/movie.dart';
 import 'package:cinemania/features/details/model/models/person.dart';
 import 'package:cinemania/features/details/model/models/person_filmography.dart';
 import 'package:cinemania/features/details/model/models/tv_show.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:cinemania/features/genre/model/models/genre.dart';
 
 class MockDetailsTMDB extends Mock implements DetailsTMDB {}
 

@@ -1,8 +1,11 @@
+// Package imports:
 import 'package:bloc_test/bloc_test.dart';
-import 'package:cinemania/features/auth/model/auth_repository.dart';
-import 'package:cinemania/features/auth/viewmodel/bloc/auth_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
+// Project imports:
+import 'package:cinemania/features/auth/model/auth_repository.dart';
+import 'package:cinemania/features/auth/viewmodel/bloc/auth_bloc.dart';
 
 class MockAuthRepository extends Mock implements AuthRepository {}
 

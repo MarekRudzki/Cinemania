@@ -1,13 +1,17 @@
+// Dart imports:
 import 'dart:async';
 
-import 'package:cinemania/common/enums.dart';
-import 'package:cinemania/common/models/basic_model.dart';
-import 'package:cinemania/features/genre/model/genre_repository.dart';
-import 'package:cinemania/features/genre/model/models/genre_page_model.dart';
+// Package imports:
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
+
+// Project imports:
+import 'package:cinemania/common/basic_model.dart';
+import 'package:cinemania/common/enums.dart';
+import 'package:cinemania/features/genre/model/genre_repository.dart';
+import 'package:cinemania/features/genre/model/models/genre_page_model.dart';
 
 part 'genre_event.dart';
 part 'genre_state.dart';

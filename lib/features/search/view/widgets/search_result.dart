@@ -1,13 +1,19 @@
+// Dart imports:
 import 'dart:async';
 
-import 'package:cinemania/common/models/basic_model.dart';
-import 'package:cinemania/features/search/model/models/search_page_model.dart';
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+
+// Project imports:
+import 'package:cinemania/common/basic_model.dart';
+import 'package:cinemania/common/enums.dart';
 import 'package:cinemania/common/result_item.dart';
+import 'package:cinemania/features/search/model/models/search_page_model.dart';
 import 'package:cinemania/features/search/viewmodel/pagination/pagination_bloc.dart';
 import 'package:cinemania/utils/di.dart';
-import 'package:cinemania/common/enums.dart';
-import 'package:flutter/material.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class SearchResult extends StatefulWidget {
   final String query;

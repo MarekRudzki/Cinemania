@@ -1,8 +1,13 @@
-import 'package:cinemania/common/enums.dart';
-import 'package:cinemania/features/search/viewmodel/search/search_bloc.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+
+// Project imports:
+import 'package:cinemania/common/enums.dart';
+import 'package:cinemania/features/search/viewmodel/search/search_bloc.dart';
 
 class SearchCategoryPicker extends HookWidget {
   final void Function() callback;

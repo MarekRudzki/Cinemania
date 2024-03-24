@@ -1,9 +1,14 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import 'package:cinemania/common/enums.dart';
-import 'package:cinemania/common/models/genre.dart';
+import 'package:cinemania/features/genre/model/models/genre.dart';
 import 'package:cinemania/features/genre/view/genre_screen.dart';
 import 'package:cinemania/features/genre/viewmodel/bloc/genre_bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GenresTiles extends StatelessWidget {
   final Category category;

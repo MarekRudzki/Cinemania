@@ -1,13 +1,16 @@
+// Package imports:
+import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
+import 'package:intl/intl.dart';
+
+// Project imports:
 import 'package:cinemania/common/enums.dart';
 import 'package:cinemania/features/details/model/details_repository.dart';
 import 'package:cinemania/features/details/model/models/detail_history.dart';
 import 'package:cinemania/features/details/model/models/movie.dart';
 import 'package:cinemania/features/details/model/models/person.dart';
 import 'package:cinemania/features/details/model/models/tv_show.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
-import 'package:intl/intl.dart';
 
 part 'details_event.dart';
 part 'details_state.dart';

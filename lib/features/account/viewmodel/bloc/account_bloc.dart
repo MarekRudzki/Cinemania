@@ -1,9 +1,12 @@
-import 'package:cinemania/common/enums.dart';
-import 'package:cinemania/features/account/model/account_repository.dart';
-import 'package:cinemania/features/account/model/models/favorite_model.dart';
+// Package imports:
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+
+// Project imports:
+import 'package:cinemania/common/enums.dart';
+import 'package:cinemania/features/account/model/account_repository.dart';
+import 'package:cinemania/features/account/model/models/favorite_model.dart';
 
 part 'account_event.dart';
 part 'account_state.dart';

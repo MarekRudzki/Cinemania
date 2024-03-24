@@ -1,10 +1,13 @@
+// Package imports:
 import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+
+// Project imports:
 import 'package:cinemania/features/tv_seasons/model/models/episode.dart';
 import 'package:cinemania/features/tv_seasons/model/models/season.dart';
 import 'package:cinemania/features/tv_seasons/model/tv_seasons_repository.dart';
 import 'package:cinemania/features/tv_seasons/viewmodel/bloc/tv_seasons_bloc.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 
 class MockTVSeasonsRepository extends Mock implements TVSeasonsRepository {}
 

@@ -1,10 +1,13 @@
+// Package imports:
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+
+// Project imports:
 import 'package:cinemania/features/auth/model/auth_repository.dart';
 import 'package:cinemania/features/auth/model/datasources/local/auth_hive.dart';
 import 'package:cinemania/features/auth/model/datasources/remote/auth_auth.dart';
 import 'package:cinemania/features/auth/model/datasources/remote/auth_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 
 class MockAuthFirestore extends Mock implements AuthFirestore {}
 

@@ -1,10 +1,13 @@
+// Package imports:
 import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+
+// Project imports:
 import 'package:cinemania/common/enums.dart';
 import 'package:cinemania/features/account/model/account_repository.dart';
 import 'package:cinemania/features/account/model/models/favorite_model.dart';
 import 'package:cinemania/features/account/viewmodel/bloc/account_bloc.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 
 class MockAccountRepository extends Mock implements AccountRepository {}
 

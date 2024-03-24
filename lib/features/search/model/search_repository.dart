@@ -1,8 +1,11 @@
 // ignore_for_file: avoid_dynamic_calls
 
-import 'package:cinemania/common/models/basic_model.dart';
-import 'package:cinemania/features/search/model/datasources/remote/search_tmdb.dart';
+// Package imports:
 import 'package:injectable/injectable.dart';
+
+// Project imports:
+import 'package:cinemania/common/basic_model.dart';
+import 'package:cinemania/features/search/model/datasources/remote/search_tmdb.dart';
 
 @lazySingleton
 class SearchRepository {

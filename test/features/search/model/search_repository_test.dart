@@ -1,8 +1,11 @@
-import 'package:cinemania/common/models/basic_model.dart';
-import 'package:cinemania/features/search/model/datasources/remote/search_tmdb.dart';
-import 'package:cinemania/features/search/model/search_repository.dart';
+// Package imports:
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
+// Project imports:
+import 'package:cinemania/common/basic_model.dart';
+import 'package:cinemania/features/search/model/datasources/remote/search_tmdb.dart';
+import 'package:cinemania/features/search/model/search_repository.dart';
 
 class MockSearchTMDB extends Mock implements SearchTMDB {}
 

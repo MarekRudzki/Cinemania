@@ -1,11 +1,16 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+
+// Project imports:
 import 'package:cinemania/common/enums.dart';
 import 'package:cinemania/features/details/model/models/cast_member.dart';
 import 'package:cinemania/features/details/view/details_screen.dart';
 import 'package:cinemania/features/details/view/widgets/common/entity_photo.dart';
 import 'package:cinemania/features/details/viewmodel/bloc/details_bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class Cast extends StatelessWidget {
   final List<CastMember> cast;
@@ -35,7 +40,7 @@ class Cast extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           SizedBox(
-            height: MediaQuery.sizeOf(context).height * 0.42,
+            height: MediaQuery.sizeOf(context).height * 0.4,
             child: BlocBuilder<DetailsBloc, DetailsState>(
               builder: (context, state) {
                 if (state is DetailsSuccess) {
@@ -105,7 +110,7 @@ class Cast extends StatelessWidget {
                                       person.name,
                                       textAlign: TextAlign.center,
                                       overflow: TextOverflow.ellipsis,
-                                      maxLines: 3,
+                                      maxLines: 2,
                                       style: TextStyle(
                                         color: Theme.of(context)
                                             .colorScheme

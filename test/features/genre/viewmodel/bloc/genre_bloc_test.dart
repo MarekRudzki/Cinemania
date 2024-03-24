@@ -1,10 +1,13 @@
+// Package imports:
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+
+// Project imports:
+import 'package:cinemania/common/basic_model.dart';
 import 'package:cinemania/common/enums.dart';
-import 'package:cinemania/common/models/basic_model.dart';
 import 'package:cinemania/features/genre/model/genre_repository.dart';
 import 'package:cinemania/features/genre/model/models/genre_page_model.dart';
 import 'package:cinemania/features/genre/viewmodel/bloc/genre_bloc.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 
 class MockGenreRepository extends Mock implements GenreRepository {}
 
