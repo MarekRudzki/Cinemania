@@ -80,7 +80,7 @@ class _SearchResultState extends State<SearchResult> {
       pagingController: _pagingController,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        mainAxisExtent: MediaQuery.sizeOf(context).height * 0.45,
+        mainAxisExtent: MediaQuery.sizeOf(context).height * 0.455,
       ),
       builderDelegate: PagedChildBuilderDelegate<BasicModel>(
         firstPageProgressIndicatorBuilder: (context) => Center(

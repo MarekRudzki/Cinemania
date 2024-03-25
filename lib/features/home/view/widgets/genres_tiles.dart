@@ -65,11 +65,14 @@ class GenresTiles extends StatelessWidget {
               ),
             ),
             child: Center(
-              child: Text(
-                genres[index].name,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  genres[index].name,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 ),
               ),
             ),

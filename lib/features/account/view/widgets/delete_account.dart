@@ -141,7 +141,16 @@ class DeleteAccount extends HookWidget {
                                 CustomTextField(
                                   controller: passwordController,
                                   labelText: 'Current password',
+                                  inputAction: TextInputAction.done,
                                   icon: Icons.key,
+                                  callback: () {
+                                    context.read<AccountBloc>().add(
+                                          DeleteAccountPressed(
+                                            password:
+                                                passwordController.text.trim(),
+                                          ),
+                                        );
+                                  },
                                 ),
                               ],
                             );

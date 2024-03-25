@@ -40,7 +40,7 @@ class Cast extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           SizedBox(
-            height: MediaQuery.sizeOf(context).height * 0.4,
+            height: MediaQuery.sizeOf(context).height * 0.42,
             child: BlocBuilder<DetailsBloc, DetailsState>(
               builder: (context, state) {
                 if (state is DetailsSuccess) {

@@ -145,7 +145,20 @@ class ChangePassword extends HookWidget {
                                 CustomTextField(
                                   controller: newPasswordController,
                                   labelText: 'New password',
+                                  inputAction: TextInputAction.done,
                                   icon: Icons.key,
+                                  callback: () {
+                                    context.read<AccountBloc>().add(
+                                          ChangePasswordPressed(
+                                            currentPassword:
+                                                currentPasswordController.text
+                                                    .trim(),
+                                            newPassword: newPasswordController
+                                                .text
+                                                .trim(),
+                                          ),
+                                        );
+                                  },
                                 ),
                               ],
                             );

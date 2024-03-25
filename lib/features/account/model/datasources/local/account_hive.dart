@@ -8,7 +8,6 @@ class AccountHive {
 
   Future<void> deleteUser() async {
     await _userBox.delete('uid');
-    await _userBox.delete('username');
   }
 
   Future<void> changeUsername({

@@ -138,7 +138,16 @@ class ChangeUsername extends HookWidget {
                                 CustomTextField(
                                   controller: usernameController,
                                   labelText: 'New username',
+                                  inputAction: TextInputAction.done,
                                   icon: Icons.person,
+                                  callback: () {
+                                    context.read<AccountBloc>().add(
+                                          ChangeUsernamePressed(
+                                            username:
+                                                usernameController.text.trim(),
+                                          ),
+                                        );
+                                  },
                                 ),
                               ],
                             );

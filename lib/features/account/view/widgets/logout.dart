@@ -30,14 +30,18 @@ class Logout extends StatelessWidget {
           ),
         ],
       ),
-      onTap: () {
-        context.read<AccountBloc>().logout();
+      onTap: () async {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (context) => const AuthScreen(),
           ),
         );
-        Navigator.of(context).popUntil((route) => route.isFirst);
+
+        await context.read<AccountBloc>().logout();
+
+        if (context.mounted) {
+          Navigator.of(context).popUntil((route) => route.isFirst);
+        }
       },
     );
   }

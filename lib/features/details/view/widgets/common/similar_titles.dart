@@ -123,7 +123,7 @@ class SimilarTitles extends StatelessWidget {
                                       : tvShows![index].name,
                                   textAlign: TextAlign.center,
                                   overflow: TextOverflow.ellipsis,
-                                  maxLines: 3,
+                                  maxLines: 2,
                                   style: TextStyle(
                                     color:
                                         Theme.of(context).colorScheme.primary,

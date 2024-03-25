@@ -149,7 +149,16 @@ class PasswordReset extends HookWidget {
                                     CustomTextField(
                                       controller: emailController,
                                       labelText: 'Input your email',
+                                      inputAction: TextInputAction.done,
                                       icon: Icons.person,
+                                      callback: () {
+                                        context.read<AuthBloc>().add(
+                                              PasswordResetPressed(
+                                                passwordResetEmail:
+                                                    emailController.text.trim(),
+                                              ),
+                                            );
+                                      },
                                     ),
                                   ],
                                 );

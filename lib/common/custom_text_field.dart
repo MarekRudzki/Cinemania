@@ -5,18 +5,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class CustomTextField extends HookWidget {
+  final TextEditingController controller;
+  final String labelText;
+  final IconData icon;
+  final TextInputAction inputAction;
+  final void Function()? callback;
+
   const CustomTextField({
     super.key,
     required this.controller,
     required this.labelText,
     required this.icon,
     this.inputAction = TextInputAction.next,
+    this.callback,
   });
-
-  final TextEditingController controller;
-  final String labelText;
-  final IconData icon;
-  final TextInputAction inputAction;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,11 @@ class CustomTextField extends HookWidget {
             controller: controller,
             textInputAction: inputAction,
             cursorColor: Theme.of(context).colorScheme.primary,
+            onSubmitted: (_) {
+              if (callback != null) {
+                callback!();
+              }
+            },
             keyboardType: labelText == 'Enter your email'
                 ? TextInputType.emailAddress
                 : TextInputType.text,

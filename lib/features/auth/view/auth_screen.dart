@@ -25,6 +25,24 @@ class AuthScreen extends HookWidget {
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
 
+    void loginRegisterFunction() {
+      if (isLoginView.value) {
+        context.read<AuthBloc>().add(
+              LoginButtonPressed(
+                email: emailController.text.trim(),
+                password: passwordController.text.trim(),
+              ),
+            );
+      } else {
+        context.read<AuthBloc>().add(
+              RegisterButtonPressed(
+                email: emailController.text.trim(),
+                password: passwordController.text.trim(),
+              ),
+            );
+      }
+    }
+
     return PopScope(
       canPop: false,
       child: SafeArea(
@@ -115,6 +133,9 @@ class AuthScreen extends HookWidget {
                                   labelText: 'Enter your password',
                                   inputAction: TextInputAction.done,
                                   icon: Icons.key,
+                                  callback: () {
+                                    loginRegisterFunction();
+                                  },
                                 ),
                               ],
                             ),
@@ -130,23 +151,7 @@ class AuthScreen extends HookWidget {
                           LoginRegisterButton(
                             isLoginView: isLoginView.value,
                             onTap: () {
-                              if (isLoginView.value) {
-                                context.read<AuthBloc>().add(
-                                      LoginButtonPressed(
-                                        email: emailController.text.trim(),
-                                        password:
-                                            passwordController.text.trim(),
-                                      ),
-                                    );
-                              } else {
-                                context.read<AuthBloc>().add(
-                                      RegisterButtonPressed(
-                                        email: emailController.text.trim(),
-                                        password:
-                                            passwordController.text.trim(),
-                                      ),
-                                    );
-                              }
+                              loginRegisterFunction();
                             },
                           ),
                           CustomDivider(constraints: constraints),
