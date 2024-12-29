@@ -8,102 +8,108 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:get_it/get_it.dart' as _i1;
-import 'package:injectable/injectable.dart' as _i2;
+import 'package:get_it/get_it.dart' as _i174;
+import 'package:injectable/injectable.dart' as _i526;
 
-import '../features/account/model/account_repository.dart' as _i6;
-import '../features/account/model/datasources/local/account_hive.dart' as _i5;
-import '../features/account/model/datasources/remote/account_auth.dart' as _i3;
+import '../features/account/model/account_repository.dart' as _i113;
+import '../features/account/model/datasources/local/account_hive.dart' as _i12;
+import '../features/account/model/datasources/remote/account_auth.dart'
+    as _i649;
 import '../features/account/model/datasources/remote/account_firestore.dart'
-    as _i4;
-import '../features/account/viewmodel/bloc/account_bloc.dart' as _i18;
-import '../features/auth/model/auth_repository.dart' as _i10;
-import '../features/auth/model/datasources/local/auth_hive.dart' as _i9;
-import '../features/auth/model/datasources/remote/auth_auth.dart' as _i7;
-import '../features/auth/model/datasources/remote/auth_firestore.dart' as _i8;
-import '../features/auth/viewmodel/bloc/auth_bloc.dart' as _i19;
-import '../features/details/model/datasources/remote/details_tmdb.dart' as _i11;
-import '../features/details/model/details_repository.dart' as _i20;
-import '../features/details/viewmodel/bloc/details_bloc.dart' as _i25;
-import '../features/genre/model/datasources/remote/genre_tmdb.dart' as _i12;
-import '../features/genre/model/genre_repository.dart' as _i21;
-import '../features/genre/viewmodel/bloc/genre_bloc.dart' as _i26;
-import '../features/home/model/datasources/remote/home_auth.dart' as _i13;
-import '../features/home/model/datasources/remote/home_firestore.dart' as _i14;
-import '../features/home/model/datasources/remote/home_tmdb.dart' as _i15;
-import '../features/home/model/home_repository.dart' as _i22;
-import '../features/home/viewmodel/bloc/home_bloc.dart' as _i27;
-import '../features/search/model/datasources/remote/search_tmdb.dart' as _i16;
-import '../features/search/model/search_repository.dart' as _i23;
-import '../features/search/viewmodel/pagination/pagination_bloc.dart' as _i28;
-import '../features/search/viewmodel/search/search_bloc.dart' as _i29;
+    as _i375;
+import '../features/account/viewmodel/bloc/account_bloc.dart' as _i91;
+import '../features/auth/model/auth_repository.dart' as _i70;
+import '../features/auth/model/datasources/local/auth_hive.dart' as _i425;
+import '../features/auth/model/datasources/remote/auth_auth.dart' as _i586;
+import '../features/auth/model/datasources/remote/auth_firestore.dart' as _i723;
+import '../features/auth/viewmodel/bloc/auth_bloc.dart' as _i627;
+import '../features/details/model/datasources/remote/details_tmdb.dart'
+    as _i572;
+import '../features/details/model/details_repository.dart' as _i84;
+import '../features/details/viewmodel/bloc/details_bloc.dart' as _i65;
+import '../features/genre/model/datasources/remote/genre_tmdb.dart' as _i1072;
+import '../features/genre/model/genre_repository.dart' as _i256;
+import '../features/genre/viewmodel/bloc/genre_bloc.dart' as _i1073;
+import '../features/home/model/datasources/remote/home_auth.dart' as _i556;
+import '../features/home/model/datasources/remote/home_firestore.dart' as _i124;
+import '../features/home/model/datasources/remote/home_tmdb.dart' as _i604;
+import '../features/home/model/home_repository.dart' as _i207;
+import '../features/home/viewmodel/bloc/home_bloc.dart' as _i55;
+import '../features/search/model/datasources/local/search_hive.dart' as _i681;
+import '../features/search/model/datasources/remote/search_tmdb.dart' as _i553;
+import '../features/search/model/search_repository.dart' as _i365;
+import '../features/search/viewmodel/pagination/pagination_bloc.dart' as _i567;
+import '../features/search/viewmodel/search/search_bloc.dart' as _i233;
 import '../features/tv_seasons/model/datasources/remote_datasources/tv_seasons_tmdb.dart'
-    as _i17;
-import '../features/tv_seasons/model/tv_seasons_repository.dart' as _i24;
-import '../features/tv_seasons/viewmodel/bloc/tv_seasons_bloc.dart' as _i30;
+    as _i539;
+import '../features/tv_seasons/model/tv_seasons_repository.dart' as _i1072;
+import '../features/tv_seasons/viewmodel/bloc/tv_seasons_bloc.dart' as _i95;
 
-extension GetItInjectableX on _i1.GetIt {
+extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
-  _i1.GetIt init({
+  _i174.GetIt init({
     String? environment,
-    _i2.EnvironmentFilter? environmentFilter,
+    _i526.EnvironmentFilter? environmentFilter,
   }) {
-    final gh = _i2.GetItHelper(
+    final gh = _i526.GetItHelper(
       this,
       environment,
       environmentFilter,
     );
-    gh.lazySingleton<_i3.AccountAuth>(() => _i3.AccountAuth());
-    gh.lazySingleton<_i4.AccountFirestore>(() => _i4.AccountFirestore());
-    gh.lazySingleton<_i5.AccountHive>(() => _i5.AccountHive());
-    gh.lazySingleton<_i6.AccountRepository>(() => _i6.AccountRepository(
-          accountFirestore: gh<_i4.AccountFirestore>(),
-          accountAuth: gh<_i3.AccountAuth>(),
-          accountHive: gh<_i5.AccountHive>(),
+    gh.lazySingleton<_i12.AccountHive>(() => _i12.AccountHive());
+    gh.lazySingleton<_i649.AccountAuth>(() => _i649.AccountAuth());
+    gh.lazySingleton<_i375.AccountFirestore>(() => _i375.AccountFirestore());
+    gh.lazySingleton<_i425.AuthHive>(() => _i425.AuthHive());
+    gh.lazySingleton<_i586.AuthAuth>(() => _i586.AuthAuth());
+    gh.lazySingleton<_i723.AuthFirestore>(() => _i723.AuthFirestore());
+    gh.lazySingleton<_i572.DetailsTMDB>(() => _i572.DetailsTMDB());
+    gh.lazySingleton<_i1072.GenreTMDB>(() => _i1072.GenreTMDB());
+    gh.lazySingleton<_i556.HomeAuth>(() => _i556.HomeAuth());
+    gh.lazySingleton<_i124.HomeFirestore>(() => _i124.HomeFirestore());
+    gh.lazySingleton<_i604.HomeTMDB>(() => _i604.HomeTMDB());
+    gh.lazySingleton<_i681.SearchHive>(() => _i681.SearchHive());
+    gh.lazySingleton<_i553.SearchTMDB>(() => _i553.SearchTMDB());
+    gh.lazySingleton<_i539.TVSeasonsTMDB>(() => _i539.TVSeasonsTMDB());
+    gh.lazySingleton<_i113.AccountRepository>(() => _i113.AccountRepository(
+          accountFirestore: gh<_i375.AccountFirestore>(),
+          accountAuth: gh<_i649.AccountAuth>(),
+          accountHive: gh<_i12.AccountHive>(),
         ));
-    gh.lazySingleton<_i7.AuthAuth>(() => _i7.AuthAuth());
-    gh.lazySingleton<_i8.AuthFirestore>(() => _i8.AuthFirestore());
-    gh.lazySingleton<_i9.AuthHive>(() => _i9.AuthHive());
-    gh.lazySingleton<_i10.AuthRepository>(() => _i10.AuthRepository(
-          authFirestore: gh<_i8.AuthFirestore>(),
-          authAuth: gh<_i7.AuthAuth>(),
-          authHive: gh<_i9.AuthHive>(),
+    gh.lazySingleton<_i1072.TVSeasonsRepository>(
+        () => _i1072.TVSeasonsRepository(tmdb: gh<_i539.TVSeasonsTMDB>()));
+    gh.factory<_i91.AccountBloc>(() =>
+        _i91.AccountBloc(accountRepository: gh<_i113.AccountRepository>()));
+    gh.lazySingleton<_i256.GenreRepository>(
+        () => _i256.GenreRepository(genreTMDB: gh<_i1072.GenreTMDB>()));
+    gh.lazySingleton<_i207.HomeRepository>(() => _i207.HomeRepository(
+          homeTMDB: gh<_i604.HomeTMDB>(),
+          homeFirestore: gh<_i124.HomeFirestore>(),
+          homeAuth: gh<_i556.HomeAuth>(),
         ));
-    gh.lazySingleton<_i11.DetailsTMDB>(() => _i11.DetailsTMDB());
-    gh.lazySingleton<_i12.GenreTMDB>(() => _i12.GenreTMDB());
-    gh.lazySingleton<_i13.HomeAuth>(() => _i13.HomeAuth());
-    gh.lazySingleton<_i14.HomeFirestore>(() => _i14.HomeFirestore());
-    gh.lazySingleton<_i15.HomeTMDB>(() => _i15.HomeTMDB());
-    gh.lazySingleton<_i16.SearchTMDB>(() => _i16.SearchTMDB());
-    gh.lazySingleton<_i17.TVSeasonsTMDB>(() => _i17.TVSeasonsTMDB());
-    gh.factory<_i18.AccountBloc>(
-        () => _i18.AccountBloc(accountRepository: gh<_i6.AccountRepository>()));
-    gh.factory<_i19.AuthBloc>(
-        () => _i19.AuthBloc(authRepository: gh<_i10.AuthRepository>()));
-    gh.lazySingleton<_i20.DetailsRepository>(
-        () => _i20.DetailsRepository(detailsTMDB: gh<_i11.DetailsTMDB>()));
-    gh.lazySingleton<_i21.GenreRepository>(
-        () => _i21.GenreRepository(genreTMDB: gh<_i12.GenreTMDB>()));
-    gh.lazySingleton<_i22.HomeRepository>(() => _i22.HomeRepository(
-          homeTMDB: gh<_i15.HomeTMDB>(),
-          homeFirestore: gh<_i14.HomeFirestore>(),
-          homeAuth: gh<_i13.HomeAuth>(),
+    gh.lazySingleton<_i70.AuthRepository>(() => _i70.AuthRepository(
+          authFirestore: gh<_i723.AuthFirestore>(),
+          authAuth: gh<_i586.AuthAuth>(),
+          authHive: gh<_i425.AuthHive>(),
         ));
-    gh.lazySingleton<_i23.SearchRepository>(
-        () => _i23.SearchRepository(searchTMDB: gh<_i16.SearchTMDB>()));
-    gh.lazySingleton<_i24.TVSeasonsRepository>(
-        () => _i24.TVSeasonsRepository(tmdb: gh<_i17.TVSeasonsTMDB>()));
-    gh.factory<_i25.DetailsBloc>(
-        () => _i25.DetailsBloc(gh<_i20.DetailsRepository>()));
-    gh.factory<_i26.GenreBloc>(
-        () => _i26.GenreBloc(gh<_i21.GenreRepository>()));
-    gh.factory<_i27.HomeBloc>(() => _i27.HomeBloc(gh<_i22.HomeRepository>()));
-    gh.factory<_i28.PaginationBloc>(
-        () => _i28.PaginationBloc(gh<_i23.SearchRepository>()));
-    gh.factory<_i29.SearchBloc>(
-        () => _i29.SearchBloc(gh<_i23.SearchRepository>()));
-    gh.factory<_i30.TVSeasonsBloc>(
-        () => _i30.TVSeasonsBloc(gh<_i24.TVSeasonsRepository>()));
+    gh.factory<_i627.AuthBloc>(
+        () => _i627.AuthBloc(authRepository: gh<_i70.AuthRepository>()));
+    gh.lazySingleton<_i365.SearchRepository>(() => _i365.SearchRepository(
+          searchTMDB: gh<_i553.SearchTMDB>(),
+          searchHive: gh<_i681.SearchHive>(),
+        ));
+    gh.factory<_i1073.GenreBloc>(
+        () => _i1073.GenreBloc(gh<_i256.GenreRepository>()));
+    gh.lazySingleton<_i84.DetailsRepository>(
+        () => _i84.DetailsRepository(detailsTMDB: gh<_i572.DetailsTMDB>()));
+    gh.factory<_i95.TVSeasonsBloc>(
+        () => _i95.TVSeasonsBloc(gh<_i1072.TVSeasonsRepository>()));
+    gh.factory<_i567.PaginationBloc>(
+        () => _i567.PaginationBloc(gh<_i365.SearchRepository>()));
+    gh.factory<_i233.SearchBloc>(
+        () => _i233.SearchBloc(gh<_i365.SearchRepository>()));
+    gh.factory<_i55.HomeBloc>(() => _i55.HomeBloc(gh<_i207.HomeRepository>()));
+    gh.factory<_i65.DetailsBloc>(
+        () => _i65.DetailsBloc(gh<_i84.DetailsRepository>()));
     return this;
   }
 }

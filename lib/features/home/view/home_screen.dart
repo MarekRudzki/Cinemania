@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
             return [
               SliverAppBar(
                 elevation: 5,
-                backgroundColor: Theme.of(context).colorScheme.background,
+                backgroundColor: Theme.of(context).colorScheme.surface,
                 bottom: PreferredSize(
                   preferredSize: const Size.fromHeight(75),
                   child: Center(
@@ -56,8 +56,8 @@ class HomeScreen extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: FractionalOffset.bottomCenter,
                 colors: [
-                  Theme.of(context).colorScheme.background,
-                  Theme.of(context).colorScheme.onBackground,
+                  Theme.of(context).colorScheme.surface,
+                  Theme.of(context).colorScheme.onSurface,
                 ],
               ),
             ),

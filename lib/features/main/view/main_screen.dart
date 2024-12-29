@@ -46,7 +46,7 @@ class MainScreen extends HookWidget {
                   haptic: false,
                   selectedIndex: pageIndex.value,
                   gap: 10,
-                  backgroundColor: Theme.of(context).colorScheme.background,
+                  backgroundColor: Theme.of(context).colorScheme.surface,
                   color: Theme.of(context).colorScheme.tertiary,
                   activeColor: const Color.fromRGBO(55, 164, 94, 1),
                   padding: const EdgeInsets.symmetric(

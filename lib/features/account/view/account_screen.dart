@@ -59,7 +59,7 @@ class AccountScreen extends HookWidget {
               SliverAppBar(
                 automaticallyImplyLeading: false,
                 elevation: 5,
-                backgroundColor: Theme.of(context).colorScheme.background,
+                backgroundColor: Theme.of(context).colorScheme.surface,
                 centerTitle: true,
                 title: Text(
                   context.watch<AccountBloc>().getUsername(),
@@ -71,7 +71,7 @@ class AccountScreen extends HookWidget {
                 actions: [
                   PopupMenuButton(
                     iconColor: Theme.of(context).colorScheme.primary,
-                    color: Theme.of(context).colorScheme.onBackground,
+                    color: Theme.of(context).colorScheme.onSurface,
                     itemBuilder: (context) {
                       return [
                         const PopupMenuItem(
@@ -118,8 +118,8 @@ class AccountScreen extends HookWidget {
                 begin: Alignment.topCenter,
                 end: FractionalOffset.bottomCenter,
                 colors: [
-                  Theme.of(context).colorScheme.background,
-                  Theme.of(context).colorScheme.onBackground,
+                  Theme.of(context).colorScheme.surface,
+                  Theme.of(context).colorScheme.onSurface,
                 ],
               ),
             ),

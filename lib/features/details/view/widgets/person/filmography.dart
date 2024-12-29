@@ -87,7 +87,7 @@ class Filmography extends HookWidget {
                       'Movies',
                       style: TextStyle(
                         color: currentCategory.value == 'movie'
-                            ? Theme.of(context).colorScheme.background
+                            ? Theme.of(context).colorScheme.surface
                             : Theme.of(context).colorScheme.primary,
                         fontWeight: FontWeight.w500,
                         fontSize: 15,
@@ -118,7 +118,7 @@ class Filmography extends HookWidget {
                       'TV Shows',
                       style: TextStyle(
                         color: currentCategory.value == 'tv'
-                            ? Theme.of(context).colorScheme.background
+                            ? Theme.of(context).colorScheme.surface
                             : Theme.of(context).colorScheme.primary,
                         fontWeight: FontWeight.w500,
                         fontSize: 15,

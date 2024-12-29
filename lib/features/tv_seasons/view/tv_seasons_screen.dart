@@ -44,8 +44,7 @@ class TVSeasonsScreen extends HookWidget {
                     return [
                       SliverAppBar(
                         elevation: 5,
-                        backgroundColor:
-                            Theme.of(context).colorScheme.background,
+                        backgroundColor: Theme.of(context).colorScheme.surface,
                         centerTitle: true,
                         title: Text(
                           showTitle,
@@ -91,8 +90,8 @@ class TVSeasonsScreen extends HookWidget {
                         begin: Alignment.topCenter,
                         end: FractionalOffset.bottomCenter,
                         colors: [
-                          Theme.of(context).colorScheme.background,
-                          Theme.of(context).colorScheme.onBackground,
+                          Theme.of(context).colorScheme.surface,
+                          Theme.of(context).colorScheme.onSurface,
                         ],
                       ),
                     ),

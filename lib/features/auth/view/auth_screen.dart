@@ -52,8 +52,8 @@ class AuthScreen extends HookWidget {
               begin: Alignment.topCenter,
               end: FractionalOffset.bottomCenter,
               colors: [
-                Theme.of(context).colorScheme.background,
-                Theme.of(context).colorScheme.onBackground,
+                Theme.of(context).colorScheme.surface,
+                Theme.of(context).colorScheme.onSurface,
               ],
             ),
           ),

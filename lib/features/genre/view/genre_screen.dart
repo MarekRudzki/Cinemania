@@ -103,7 +103,7 @@ class _GenreScreenState extends State<GenreScreen> {
                         SliverAppBar(
                           elevation: 5,
                           backgroundColor:
-                              Theme.of(context).colorScheme.background,
+                              Theme.of(context).colorScheme.surface,
                           forceElevated: innerBoxIsScrolled,
                           centerTitle: true,
                           leading: IconButton(
@@ -130,8 +130,8 @@ class _GenreScreenState extends State<GenreScreen> {
                           begin: Alignment.topCenter,
                           end: FractionalOffset.bottomCenter,
                           colors: [
-                            Theme.of(context).colorScheme.background,
-                            Theme.of(context).colorScheme.onBackground,
+                            Theme.of(context).colorScheme.surface,
+                            Theme.of(context).colorScheme.onSurface,
                           ],
                         ),
                       ),

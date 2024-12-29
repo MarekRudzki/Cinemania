@@ -30,7 +30,7 @@ class LoginRegisterButton extends StatelessWidget {
             child: Text(
               isLoginView ? 'Log In' : 'Register',
               style: TextStyle(
-                color: Theme.of(context).colorScheme.background,
+                color: Theme.of(context).colorScheme.surface,
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),

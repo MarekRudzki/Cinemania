@@ -6,8 +6,8 @@ class CustomTheme {
     colorScheme: ColorScheme.dark(
       primary: Colors.white,
       secondary: const Color.fromARGB(255, 114, 109, 109),
-      background: const Color.fromARGB(255, 23, 22, 24),
-      onBackground: const Color.fromARGB(255, 50, 46, 51),
+      surface: const Color.fromARGB(255, 23, 22, 24),
+      onSurface: const Color.fromARGB(255, 50, 46, 51),
       error: Colors.red,
       scrim: Colors.grey.shade600,
       onPrimary: const Color.fromRGBO(55, 164, 94, 1),
