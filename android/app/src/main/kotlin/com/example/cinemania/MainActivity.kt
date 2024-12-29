@@ -1,6 +1,5 @@
-package com.marekrudzki.cinemania
+package com.example.cinemania
 
 import io.flutter.embedding.android.FlutterActivity
 
-class MainActivity: FlutterActivity() {
-}
+class MainActivity: FlutterActivity()

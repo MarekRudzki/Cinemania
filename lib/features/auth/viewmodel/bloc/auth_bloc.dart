@@ -133,7 +133,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final LoginResult loginResult = await FacebookAuth.instance.login();
 
       final OAuthCredential facebookAuthCredential =
-          FacebookAuthProvider.credential(loginResult.accessToken!.token);
+          FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
 
       final userData = await FacebookAuth.instance.getUserData();
 

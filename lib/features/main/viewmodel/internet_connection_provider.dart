@@ -14,7 +14,7 @@ class InternetConnectionProvider extends ChangeNotifier {
   }
 
   void startInternetListener() {
-    InternetConnectionChecker().onStatusChange.listen((status) {
+    InternetConnectionChecker.instance.onStatusChange.listen((status) {
       if (status == InternetConnectionStatus.connected) {
         _hasInternet = true;
         notifyListeners();

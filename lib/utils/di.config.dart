@@ -8,15 +8,14 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-
-// Package imports:
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-// Project imports:
 import '../features/account/model/account_repository.dart' as _i6;
 import '../features/account/model/datasources/local/account_hive.dart' as _i5;
 import '../features/account/model/datasources/remote/account_auth.dart' as _i3;
+import '../features/account/model/datasources/remote/account_firestore.dart'
+    as _i4;
 import '../features/account/viewmodel/bloc/account_bloc.dart' as _i18;
 import '../features/auth/model/auth_repository.dart' as _i10;
 import '../features/auth/model/datasources/local/auth_hive.dart' as _i9;
@@ -38,13 +37,10 @@ import '../features/search/model/datasources/remote/search_tmdb.dart' as _i16;
 import '../features/search/model/search_repository.dart' as _i23;
 import '../features/search/viewmodel/pagination/pagination_bloc.dart' as _i28;
 import '../features/search/viewmodel/search/search_bloc.dart' as _i29;
-import '../features/tv_seasons/model/tv_seasons_repository.dart' as _i24;
-import '../features/tv_seasons/viewmodel/bloc/tv_seasons_bloc.dart' as _i30;
-
-import '../features/account/model/datasources/remote/account_firestore.dart'
-    as _i4;
 import '../features/tv_seasons/model/datasources/remote_datasources/tv_seasons_tmdb.dart'
     as _i17;
+import '../features/tv_seasons/model/tv_seasons_repository.dart' as _i24;
+import '../features/tv_seasons/viewmodel/bloc/tv_seasons_bloc.dart' as _i30;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt

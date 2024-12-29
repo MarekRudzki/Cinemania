@@ -7,40 +7,40 @@ environment:
   sdk: '>=3.2.3 <4.0.0'
 
 dependencies:
-  cloud_firestore: ^4.15.5
+  cloud_firestore: ^5.6.0
   dio: ^5.4.1
   equatable: ^2.0.5
-  firebase_auth: ^4.17.4
-  firebase_core: ^2.25.4
+  firebase_auth: ^5.3.4
+  firebase_core: ^3.9.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.4
   flutter_dotenv: ^5.1.0
-  flutter_facebook_auth: ^6.1.1
+  flutter_facebook_auth: ^7.1.1
   flutter_glow: ^0.3.0
   flutter_hooks: ^0.20.5
-  get_it: ^7.6.7
+  get_it: ^8.0.3
   google_nav_bar: ^5.0.6
   google_sign_in: ^6.2.1
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   infinite_scroll_pagination: ^4.0.0
   injectable: ^2.3.2
-  internet_connection_checker: ^1.0.0+1
-  intl: ^0.19.0
+  internet_connection_checker: ^3.0.1
+  intl: ^0.20.1
   like_button: ^2.0.5
   provider: ^6.1.2
-  readmore: ^2.2.0
-  rxdart: ^0.27.7
+  readmore: ^3.0.0
+  rxdart: ^0.28.0
   scrollable_positioned_list: ^0.3.8
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^5.0.0
   build_runner: ^2.4.8
   injectable_generator: ^2.4.1
-  flutter_launcher_icons: ^0.13.1
+  flutter_launcher_icons: ^0.14.2
   flutter_native_splash: ^2.3.10
   mocktail: ^1.0.3
   bloc_test: ^9.1.6
