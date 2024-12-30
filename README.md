@@ -51,7 +51,10 @@ An application developed using the excellent TMDB API. The user logs into the ap
 <img src="https://github.com/MarekRudzki/Cinemania/assets/102899533/c2b89f12-0aa5-4613-ab08-b4e504db8b92" hspace="10" width=25% height=25%>
 <img src="https://github.com/MarekRudzki/Cinemania/assets/102899533/795eed74-f7f8-4816-8c6e-b249b90a9d87" hspace="10" width=25% height=25%>
 <img src="https://github.com/MarekRudzki/Cinemania/assets/102899533/6201ab31-2376-4d29-81dd-d75330edc59e" hspace="10" width=25% height=25%>
+<p>
+<img src="https://github.com/user-attachments/assets/19a36b2f-db60-4b84-b13c-2635dbfd9bc0" hspace="10" width=25% height=25%>
 </p>
+
 
 https://github.com/MarekRudzki/Cinemania/assets/102899533/b6b2d41b-4d73-458e-afcf-e7b2574b0859
 
@@ -59,8 +62,8 @@ https://github.com/MarekRudzki/Cinemania/assets/102899533/697a6ce1-a067-4f36-97c
 
 ## Technologies
 Project was created with:
-* Flutter version: 3.19.4
-* Dart version: 3.3.2
+* Flutter version: 3.27.1
+* Dart version: 3.6.0
 
 ## How to run
 1. Copy repository link.
@@ -92,7 +95,7 @@ Project was created with:
 ### <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="30"> About Me
 
 
-I am a Flutter enthusiast from Poland.
+I am a Flutter developer from Poland.
 - :telescope: Started my Flutter journey in March 2022.
 - :book: Learning new Flutter related stuff every day.
 - :computer: In my free time, I love to read books and play video games.
