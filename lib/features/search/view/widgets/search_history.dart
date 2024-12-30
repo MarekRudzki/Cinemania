@@ -26,13 +26,15 @@ class SearchHistory extends HookWidget {
     return BlocBuilder<SearchBloc, SearchState>(
       builder: (context, state) {
         if (state is UserSearches) {
-          return Column(
+          return ListView(
             children: [
-              Text(
-                'Search History',
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Theme.of(context).colorScheme.primary,
+              Center(
+                child: Text(
+                  'Search History',
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 ),
               ),
               Divider(
