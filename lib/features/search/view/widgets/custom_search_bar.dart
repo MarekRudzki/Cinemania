@@ -10,18 +10,27 @@ import 'package:cinemania/features/search/view/widgets/search_category_picker.da
 import 'package:cinemania/features/search/viewmodel/search/search_bloc.dart';
 
 class CustomSearchBar extends HookWidget {
-  const CustomSearchBar({super.key});
+  final TextEditingController searchController;
+
+  const CustomSearchBar({
+    super.key,
+    required this.searchController,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final searchController = useTextEditingController(
-        text: context.watch<SearchBloc>().searchQuery.replaceAll('-', ' '));
     final currentCategory = context.watch<SearchBloc>().currentCategory;
 
     return Padding(
       padding: const EdgeInsets.all(12),
       child: Column(
         children: [
+          SearchCategoryPicker(
+            callback: () {
+              searchController.clear();
+            },
+          ),
+          const SizedBox(height: 10),
           Row(
             children: [
               Expanded(
@@ -34,21 +43,42 @@ class CustomSearchBar extends HookWidget {
                     ),
                   ),
                   child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 2),
+                    padding: const EdgeInsets.only(
+                      left: 15,
+                      top: 2,
+                      bottom: 2,
+                    ),
                     child: TextField(
                       textCapitalization: TextCapitalization.words,
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.background,
+                        color: Theme.of(context).colorScheme.surface,
                       ),
-                      cursorColor: Theme.of(context).colorScheme.background,
+                      textAlign: TextAlign.left,
+                      cursorColor: Theme.of(context).colorScheme.surface,
                       controller: searchController,
                       decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.only(top: 14),
                         hintText: 'Search...',
                         hintStyle: TextStyle(
-                          color: Theme.of(context).colorScheme.onBackground,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .surface
+                              .withAlpha(150),
                         ),
                         border: InputBorder.none,
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            searchController.clear();
+                            context.read<SearchBloc>().add(ResetSearch());
+                            context
+                                .read<SearchBloc>()
+                                .add(GetUserSearchesPressed());
+                          },
+                          icon: Icon(
+                            Icons.close,
+                            color: Theme.of(context).colorScheme.surface,
+                          ),
+                        ),
                       ),
                       onSubmitted: (value) {
                         FocusScope.of(context).unfocus();
@@ -86,18 +116,12 @@ class CustomSearchBar extends HookWidget {
                     },
                     icon: Icon(
                       Icons.search,
-                      color: Theme.of(context).colorScheme.background,
+                      color: Theme.of(context).colorScheme.surface,
                     ),
                   ),
                 ),
               ),
             ],
-          ),
-          const SizedBox(height: 10),
-          SearchCategoryPicker(
-            callback: () {
-              searchController.clear();
-            },
           ),
         ],
       ),

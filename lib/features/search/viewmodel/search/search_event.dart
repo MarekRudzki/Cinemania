@@ -25,6 +25,8 @@ class SearchPressed extends SearchEvent {
 
 class ResetSearch extends SearchEvent {}
 
+class GetUserSearchesPressed extends SearchEvent {}
+
 class ChangeCategoryPressed extends SearchEvent {
   final Category category;
 

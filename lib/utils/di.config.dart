@@ -8,23 +8,20 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
+// Package imports:
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+// Project imports:
 import '../features/account/model/account_repository.dart' as _i113;
 import '../features/account/model/datasources/local/account_hive.dart' as _i12;
-import '../features/account/model/datasources/remote/account_auth.dart'
-    as _i649;
-import '../features/account/model/datasources/remote/account_firestore.dart'
-    as _i375;
 import '../features/account/viewmodel/bloc/account_bloc.dart' as _i91;
 import '../features/auth/model/auth_repository.dart' as _i70;
 import '../features/auth/model/datasources/local/auth_hive.dart' as _i425;
 import '../features/auth/model/datasources/remote/auth_auth.dart' as _i586;
 import '../features/auth/model/datasources/remote/auth_firestore.dart' as _i723;
 import '../features/auth/viewmodel/bloc/auth_bloc.dart' as _i627;
-import '../features/details/model/datasources/remote/details_tmdb.dart'
-    as _i572;
 import '../features/details/model/details_repository.dart' as _i84;
 import '../features/details/viewmodel/bloc/details_bloc.dart' as _i65;
 import '../features/genre/model/datasources/remote/genre_tmdb.dart' as _i1072;
@@ -35,15 +32,23 @@ import '../features/home/model/datasources/remote/home_firestore.dart' as _i124;
 import '../features/home/model/datasources/remote/home_tmdb.dart' as _i604;
 import '../features/home/model/home_repository.dart' as _i207;
 import '../features/home/viewmodel/bloc/home_bloc.dart' as _i55;
-import '../features/search/model/datasources/local/search_hive.dart' as _i681;
 import '../features/search/model/datasources/remote/search_tmdb.dart' as _i553;
 import '../features/search/model/search_repository.dart' as _i365;
 import '../features/search/viewmodel/pagination/pagination_bloc.dart' as _i567;
 import '../features/search/viewmodel/search/search_bloc.dart' as _i233;
-import '../features/tv_seasons/model/datasources/remote_datasources/tv_seasons_tmdb.dart'
-    as _i539;
 import '../features/tv_seasons/model/tv_seasons_repository.dart' as _i1072;
 import '../features/tv_seasons/viewmodel/bloc/tv_seasons_bloc.dart' as _i95;
+
+import '../features/account/model/datasources/remote/account_auth.dart'
+    as _i649;
+import '../features/account/model/datasources/remote/account_firestore.dart'
+    as _i375;
+import '../features/details/model/datasources/remote/details_tmdb.dart'
+    as _i572;
+import '../features/search/model/datasources/remote/search_firestore.dart'
+    as _i569;
+import '../features/tv_seasons/model/datasources/remote_datasources/tv_seasons_tmdb.dart'
+    as _i539;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -67,9 +72,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i556.HomeAuth>(() => _i556.HomeAuth());
     gh.lazySingleton<_i124.HomeFirestore>(() => _i124.HomeFirestore());
     gh.lazySingleton<_i604.HomeTMDB>(() => _i604.HomeTMDB());
-    gh.lazySingleton<_i681.SearchHive>(() => _i681.SearchHive());
     gh.lazySingleton<_i553.SearchTMDB>(() => _i553.SearchTMDB());
     gh.lazySingleton<_i539.TVSeasonsTMDB>(() => _i539.TVSeasonsTMDB());
+    gh.lazySingleton<_i569.SearchFirestore>(() => _i569.SearchFirestore());
     gh.lazySingleton<_i113.AccountRepository>(() => _i113.AccountRepository(
           accountFirestore: gh<_i375.AccountFirestore>(),
           accountAuth: gh<_i649.AccountAuth>(),
@@ -91,12 +96,13 @@ extension GetItInjectableX on _i174.GetIt {
           authAuth: gh<_i586.AuthAuth>(),
           authHive: gh<_i425.AuthHive>(),
         ));
-    gh.factory<_i627.AuthBloc>(
-        () => _i627.AuthBloc(authRepository: gh<_i70.AuthRepository>()));
     gh.lazySingleton<_i365.SearchRepository>(() => _i365.SearchRepository(
           searchTMDB: gh<_i553.SearchTMDB>(),
-          searchHive: gh<_i681.SearchHive>(),
+          accountAuth: gh<_i649.AccountAuth>(),
+          searchFirestore: gh<_i569.SearchFirestore>(),
         ));
+    gh.factory<_i627.AuthBloc>(
+        () => _i627.AuthBloc(authRepository: gh<_i70.AuthRepository>()));
     gh.factory<_i1073.GenreBloc>(
         () => _i1073.GenreBloc(gh<_i256.GenreRepository>()));
     gh.lazySingleton<_i84.DetailsRepository>(

@@ -4,18 +4,34 @@ import 'package:mocktail/mocktail.dart';
 
 // Project imports:
 import 'package:cinemania/common/basic_model.dart';
+import 'package:cinemania/common/enums.dart';
+import 'package:cinemania/features/account/model/datasources/remote/account_auth.dart';
+import 'package:cinemania/features/search/model/datasources/remote/search_firestore.dart';
 import 'package:cinemania/features/search/model/datasources/remote/search_tmdb.dart';
+import 'package:cinemania/features/search/model/models/search_history_entry.dart';
 import 'package:cinemania/features/search/model/search_repository.dart';
 
 class MockSearchTMDB extends Mock implements SearchTMDB {}
 
+class MockSearchFirestore extends Mock implements SearchFirestore {}
+
+class MockAccountAuth extends Mock implements AccountAuth {}
+
 void main() {
   late SearchRepository sut;
   late SearchTMDB tmdb;
+  late SearchFirestore searchFirestore;
+  late AccountAuth accountAuth;
 
   setUp(() {
     tmdb = MockSearchTMDB();
-    sut = SearchRepository(searchTMDB: tmdb);
+    searchFirestore = MockSearchFirestore();
+    accountAuth = MockAccountAuth();
+    sut = SearchRepository(
+      searchTMDB: tmdb,
+      accountAuth: accountAuth,
+      searchFirestore: searchFirestore,
+    );
   });
 
   test(
@@ -104,6 +120,33 @@ void main() {
 
       expect(
         cast,
+        [testModel],
+      );
+    },
+  );
+
+  test(
+    'should fetch user searches',
+    () async {
+      final Map<String, dynamic> testJson = {
+        'text': 'Interstellar',
+        'category': 'Category.movies',
+      };
+
+      final SearchHistoryEntry testModel = SearchHistoryEntry(
+        text: 'Interstellar',
+        category: Category.movies,
+      );
+
+      when(() => accountAuth.getUid()).thenReturn('uid');
+
+      when(() => searchFirestore.getUserSearches(uid: 'uid'))
+          .thenAnswer((_) async => [testJson]);
+
+      final searches = await sut.getUserSearches();
+
+      expect(
+        searches,
         [testModel],
       );
     },

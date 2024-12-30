@@ -5,14 +5,21 @@ import 'package:injectable/injectable.dart';
 
 // Project imports:
 import 'package:cinemania/common/basic_model.dart';
+import 'package:cinemania/features/account/model/datasources/remote/account_auth.dart';
+import 'package:cinemania/features/search/model/datasources/remote/search_firestore.dart';
 import 'package:cinemania/features/search/model/datasources/remote/search_tmdb.dart';
+import 'package:cinemania/features/search/model/models/search_history_entry.dart';
 
 @lazySingleton
 class SearchRepository {
   final SearchTMDB searchTMDB;
+  final SearchFirestore searchFirestore;
+  final AccountAuth accountAuth;
 
   SearchRepository({
     required this.searchTMDB,
+    required this.accountAuth,
+    required this.searchFirestore,
   });
 
   Future<List<BasicModel>> fetchMovies({
@@ -90,5 +97,33 @@ class SearchRepository {
     } on Exception {
       rethrow;
     }
+  }
+
+  Future<List<SearchHistoryEntry>> getUserSearches() async {
+    try {
+      final List<SearchHistoryEntry> searchList = [];
+      final searches = await searchFirestore.getUserSearches(
+        uid: accountAuth.getUid(),
+      );
+      if (searches.isNotEmpty) {
+        for (final search in searches) {
+          searchList
+              .add(SearchHistoryEntry.fromJson(search as Map<String, dynamic>));
+        }
+      }
+
+      return searchList;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> addSearchToHistory({
+    required SearchHistoryEntry searchEntry,
+  }) async {
+    await searchFirestore.addSearchToHistory(
+      searchEntry: searchEntry,
+      uid: accountAuth.getUid(),
+    );
   }
 }

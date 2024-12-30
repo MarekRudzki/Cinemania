@@ -13,6 +13,7 @@ import 'package:cinemania/features/account/viewmodel/bloc/account_bloc.dart';
 import 'package:cinemania/features/home/view/home_screen.dart';
 import 'package:cinemania/features/main/viewmodel/internet_connection_provider.dart';
 import 'package:cinemania/features/search/view/search_screen.dart';
+import 'package:cinemania/features/search/viewmodel/search/search_bloc.dart';
 
 class MainScreen extends HookWidget {
   const MainScreen({super.key});
@@ -67,6 +68,9 @@ class MainScreen extends HookWidget {
                       text: 'Search',
                       onPressed: () {
                         pageIndex.value = 1;
+                        context
+                            .read<SearchBloc>()
+                            .add(GetUserSearchesPressed());
                       },
                       iconSize: 30,
                     ),

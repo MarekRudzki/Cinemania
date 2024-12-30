@@ -6,6 +6,7 @@ import 'package:mocktail/mocktail.dart';
 // Project imports:
 import 'package:cinemania/common/basic_model.dart';
 import 'package:cinemania/common/enums.dart';
+import 'package:cinemania/features/search/model/models/search_history_entry.dart';
 import 'package:cinemania/features/search/model/search_repository.dart';
 import 'package:cinemania/features/search/viewmodel/search/search_bloc.dart';
 
@@ -138,4 +139,24 @@ void main() {
       );
     }
   });
+
+  blocTest<SearchBloc, SearchState>(
+    'emits [SearchLoading] and [UserSearches] when GetUserSearchesPressed is added.',
+    build: () {
+      final List<SearchHistoryEntry> searches = [
+        SearchHistoryEntry(text: 'Test', category: Category.movies),
+      ];
+
+      when(() => searchRepository.getUserSearches())
+          .thenAnswer((_) async => searches);
+      return sut;
+    },
+    act: (bloc) => bloc.add(GetUserSearchesPressed()),
+    expect: () => [
+      SearchLoading(),
+      UserSearches(searches: [
+        SearchHistoryEntry(text: 'Test', category: Category.movies),
+      ]),
+    ],
+  );
 }

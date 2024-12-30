@@ -41,3 +41,16 @@ final class SearchError extends SearchState {
         errorMessage,
       ];
 }
+
+final class UserSearches extends SearchState {
+  final List<SearchHistoryEntry> searches;
+
+  UserSearches({
+    required this.searches,
+  });
+
+  @override
+  List<Object> get props => [
+        searches,
+      ];
+}

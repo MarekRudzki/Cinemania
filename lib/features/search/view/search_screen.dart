@@ -7,6 +7,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 // Project imports:
 import 'package:cinemania/features/search/view/widgets/custom_search_bar.dart';
+import 'package:cinemania/features/search/view/widgets/search_history.dart';
 import 'package:cinemania/features/search/view/widgets/search_result.dart';
 import 'package:cinemania/features/search/viewmodel/search/search_bloc.dart';
 
@@ -15,6 +16,9 @@ class SearchScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final searchController = useTextEditingController(
+        text: context.watch<SearchBloc>().searchQuery.replaceAll('-', ' '));
+
     final bool isScrollable =
         context.watch<SearchBloc>().searchQuery.isNotEmpty ||
             context.watch<SearchBloc>().searchQuery != '';
@@ -33,13 +37,14 @@ class SearchScreen extends HookWidget {
             return [
               SliverAppBar(
                 elevation: 5,
-                backgroundColor: Theme.of(context).colorScheme.background,
-                bottom: const PreferredSize(
-                  preferredSize: Size.fromHeight(95),
+                backgroundColor: Theme.of(context).colorScheme.surface,
+                bottom: PreferredSize(
+                  preferredSize: const Size.fromHeight(95),
                   child: Center(
                     child: Padding(
-                      padding: EdgeInsets.only(bottom: 10),
-                      child: CustomSearchBar(),
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child:
+                          CustomSearchBar(searchController: searchController),
                     ),
                   ),
                 ),
@@ -52,8 +57,8 @@ class SearchScreen extends HookWidget {
                 begin: Alignment.topCenter,
                 end: FractionalOffset.bottomCenter,
                 colors: [
-                  Theme.of(context).colorScheme.background,
-                  Theme.of(context).colorScheme.onBackground,
+                  Theme.of(context).colorScheme.surface,
+                  Theme.of(context).colorScheme.onSurface,
                 ],
               ),
             ),
@@ -70,7 +75,11 @@ class SearchScreen extends HookWidget {
                     category: state.category,
                   );
                 } else {
-                  return const SizedBox.shrink();
+                  return SearchHistory(
+                    callback: (text) {
+                      searchController.text = text.replaceAll('-', ' ');
+                    },
+                  );
                 }
               },
             ),

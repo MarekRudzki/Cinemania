@@ -6,6 +6,7 @@ import 'package:injectable/injectable.dart';
 // Project imports:
 import 'package:cinemania/common/basic_model.dart';
 import 'package:cinemania/common/enums.dart';
+import 'package:cinemania/features/search/model/models/search_history_entry.dart';
 import 'package:cinemania/features/search/model/search_repository.dart';
 
 part 'search_event.dart';
@@ -14,10 +15,12 @@ part 'search_state.dart';
 @injectable
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
   final SearchRepository searchRepository;
+
   SearchBloc(this.searchRepository) : super(SearchInitial()) {
     on<SearchPressed>(_onSearchPressed);
     on<ResetSearch>(_onResetSearch);
     on<ChangeCategoryPressed>(_onChangeCategoryPressed);
+    on<GetUserSearchesPressed>(_onGetUserSearches);
   }
   Category currentCategory = Category.movies;
   String searchQuery = '';
@@ -33,6 +36,10 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     searchQuery = query;
     emit(SearchLoading());
     try {
+      await searchRepository.addSearchToHistory(
+        searchEntry: SearchHistoryEntry(text: query, category: event.category),
+      );
+
       if (event.category == Category.movies) {
         final movies = await searchRepository.fetchMovies(
           query: query,
@@ -104,6 +111,23 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       } else {
         return 'assets/unknown_nonbinary.png';
       }
+    }
+  }
+
+  Future<void> _onGetUserSearches(
+    GetUserSearchesPressed event,
+    Emitter<SearchState> emit,
+  ) async {
+    searchQuery = '';
+    emit(SearchLoading());
+    try {
+      final searches = await searchRepository.getUserSearches();
+
+      emit(UserSearches(
+        searches: searches,
+      ));
+    } catch (error) {
+      emit(SearchError(errorMessage: error.toString()));
     }
   }
 }

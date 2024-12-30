@@ -29,79 +29,103 @@ class SearchCategoryPicker extends HookWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () {
-                  animationController.animateTo(0.toDouble());
-                  context
-                      .read<SearchBloc>()
-                      .add(ChangeCategoryPressed(category: Category.movies));
+          child: SizedBox(
+            height: 33,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () {
+                      animationController.animateTo(0.toDouble());
+                      context.read<SearchBloc>().add(
+                          ChangeCategoryPressed(category: Category.movies));
 
-                  context.read<SearchBloc>().add(ResetSearch());
-                  callback();
-                },
-                child: Text(
-                  'Movie',
-                  style: TextStyle(
-                    color: currentCategory == Category.movies
-                        ? Theme.of(context).colorScheme.primary
-                        : Theme.of(context).colorScheme.secondary,
-                    fontSize: currentCategory == Category.movies ? 15 : 14,
-                  ),
-                ),
-              ),
-              GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () {
-                  animationController.animateTo(1.toDouble());
-                  context
-                      .read<SearchBloc>()
-                      .add(ChangeCategoryPressed(category: Category.tvShows));
-
-                  context.read<SearchBloc>().add(ResetSearch());
-                  callback();
-                },
-                child: Text(
-                  'TV Show',
-                  style: TextStyle(
-                    color: currentCategory == Category.tvShows
-                        ? Theme.of(context).colorScheme.primary
-                        : Theme.of(context).colorScheme.secondary,
-                    fontSize: currentCategory == Category.tvShows ? 15 : 14,
-                  ),
-                ),
-              ),
-              GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () {
-                  animationController.animateTo(2.toDouble());
-                  context
-                      .read<SearchBloc>()
-                      .add(ChangeCategoryPressed(category: Category.cast));
-
-                  context.read<SearchBloc>().add(ResetSearch());
-                  callback();
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: Text(
-                    'Person',
-                    style: TextStyle(
-                      color: currentCategory == Category.cast
-                          ? Theme.of(context).colorScheme.primary
-                          : Theme.of(context).colorScheme.secondary,
-                      fontSize: currentCategory == Category.cast ? 15 : 14,
+                      context.read<SearchBloc>().add(ResetSearch());
+                      callback();
+                      context.read<SearchBloc>().add(GetUserSearchesPressed());
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 35),
+                      child: Center(
+                        child: Text(
+                          'Movie',
+                          style: TextStyle(
+                            color: currentCategory == Category.movies
+                                ? Theme.of(context).colorScheme.primary
+                                : Theme.of(context).colorScheme.secondary,
+                            fontSize:
+                                currentCategory == Category.movies ? 15 : 14,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+                Expanded(
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () {
+                      animationController.animateTo(1.toDouble());
+                      context.read<SearchBloc>().add(
+                          ChangeCategoryPressed(category: Category.tvShows));
+
+                      context.read<SearchBloc>().add(ResetSearch());
+                      callback();
+                      context.read<SearchBloc>().add(GetUserSearchesPressed());
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Center(
+                        child: Text(
+                          'TV Show',
+                          style: TextStyle(
+                            color: currentCategory == Category.tvShows
+                                ? Theme.of(context).colorScheme.primary
+                                : Theme.of(context).colorScheme.secondary,
+                            fontSize:
+                                currentCategory == Category.tvShows ? 15 : 14,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () {
+                      animationController.animateTo(2.toDouble());
+                      context
+                          .read<SearchBloc>()
+                          .add(ChangeCategoryPressed(category: Category.cast));
+
+                      context.read<SearchBloc>().add(ResetSearch());
+                      callback();
+                      context.read<SearchBloc>().add(GetUserSearchesPressed());
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 35),
+                      child: Center(
+                        child: Text(
+                          'Person',
+                          style: TextStyle(
+                            color: currentCategory == Category.cast
+                                ? Theme.of(context).colorScheme.primary
+                                : Theme.of(context).colorScheme.secondary,
+                            fontSize:
+                                currentCategory == Category.cast ? 15 : 14,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
-        const SizedBox(height: 5),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: AnimatedContainer(
